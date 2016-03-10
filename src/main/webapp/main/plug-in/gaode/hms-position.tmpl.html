@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="col-md-3">
+	    <button type="button" class="btn btn-success hms-select select" ng-model="position._proObj" data-animation="am-flip-x" bs-options="p as p.proName for p in proList" bs-select ng-change="proChange()" placeholder="省" max-length-html="个被选中" allText="全部" noneText="省" ng-disabled="!proList.length" compare-key="code">
+	    </button>
+	</div>
+	<div class="col-md-3">
+	    <button type="button" class="btn btn-success hms-select select" ng-model="position._cityObj" data-animation="am-flip-x" bs-options="c as c.cityName for c in cityList" bs-select ng-change="cityChange()" placeholder="市" max-length-html="个被选中" allText="全部" noneText="市" ng-disabled="!cityList.length" compare-key="code">
+	    </button>
+	</div>
+	<div class="col-md-3">
+	    <button type="button" class="btn btn-success hms-select select" ng-model="position._disObj" data-animation="am-flip-x" bs-options="d as d.disName for d in distList" bs-select ng-change="disChange()" placeholder="县/区" max-length-html="个被选中" allText="全部" noneText="县/区" ng-disabled="!distList.length" compare-key="code">
+	    </button>
+    </div>
+    <div class="col-md-3">
+	    <button type="button" class="btn btn-success hms-select select" ng-model="position._areaObj" data-animation="am-flip-x" bs-options="a as a.name for a in areaList" bs-select ng-change="areaChange()" placeholder="商圈" max-length-html="个被选中" allText="全部" noneText="商圈" ng-disabled="!areaList.length" compare-key="areacode">
+	    </button>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-12">
+	    <div id="a-map-con" style="position: relative;">
+			<iframe id="a-map" ng-src="{{gaodeApiHtml}}"></iframe>
+			<i id="map_loading_loading" class="map_loading fa fa-spinner fa-pulse fa-3x" style="position: absolute;top: 50%;left: 50%;margin-top: -20px;margin-left: -20px;"></i>
+			<div id="map_loading_back" style="position: absolute;top:0;left:0;width:100%;height:100%;background-color:#F9CD30;opacity:0.3"></div>
+		</div>
+	</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-md-12">
+    	<input type="text" class="map_address form-control hms-input" name="detailAddr" ng-model="position.detailAddr" maxlength="100" placeholder="酒店详细地址" />
+    	<span>坐标：</span><span ng-bind="position.longitude"></span>&nbsp;<span ng-bind="position.latitude"></span>
+    </div>
+</div>

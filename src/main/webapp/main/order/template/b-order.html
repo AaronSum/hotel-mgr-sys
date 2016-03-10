@@ -1,0 +1,98 @@
+<div ng-app="orderApp" ng-controller="BOrderController" id="zaixianzhifu">	
+	<div class="col-md-2">
+		<div class="list-group" style="margin-top: 40px;" hms-Affix>
+			<a ng-repeat="(key, item) in navItems" ng-click="goToAnchor(key)" class="list-group-item">{{item.displayName}}</a>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<div hms-Affix>
+		<ul class="nav nav-tabs hms-body-nav">
+		  <li role="presentation" ng-repeat="(key, item) in navOrders" ng-class="{'active':active.top==key}"><a  ng-click="setActive(key,'top')">{{item.displayName}}</a></li>
+		</ul>			
+		<div class="input-group col-md-3" style="position:absolute;top:10px;right:15px;">
+			<input type="text" class="form-control" ng-model="search.key" placeholder="订单号" ng-keyup="search.enter($event)" ng-focus="search.focus()" ng-blur="search.blur()">
+		 	<a class="btn btn-link" type="button" ng-click="search.del()" ng-if="search.key" style="position:absolute;top:0px;right:32px;z-index:999;"><i class="fa fa-times text-danger"></i></a>
+			<span class="input-group-btn">
+			 	<button class="btn btn-primary" type="button" ng-click="search.doAct()"><span class="glyphicon glyphicon-search"></span></button>
+			</span>
+		</div>
+		</div>
+		<!-- sub view -->
+		 <div class="hms-order-view">
+			<div class="page-header" style="border-bottom: 1px solid #D2D2D2;margin:0px;padding:0px;">
+		  		<h5>眯客预订&nbsp;&nbsp;&nbsp;&nbsp;在线支付</h5>
+			</div>
+			<div class="clearfix">
+				<div class="table-responsive">
+					 <table class="table hms-table">
+					 	<thead>
+					 		<tr>
+					 			<th class="text-center">序号</th>
+					 			<th class="text-center" ng-repeat="item in columns" width="{{item.width}}">{{item.displayName}}</th>
+					 			<th class="text-center">操作</th>
+					 		</tr>
+					 	</thead>
+					 	<tbody>
+					 		<tr ng-repeat="row in rowsData">
+					 			<td class="text-center">
+					 				{{pageCount*(currentPage-1)+($index+1)}}
+					 			</td>
+					 			<td class="text-center" ng-repeat="item in columns" width="{{item.width}}">{{row[item.field]}}</td>
+					 			<td class="text-center">
+					 				<button class="btn btn-danger btn-xs" ng-click="showMoreInfo(row.otaOrderId)" title="更多订单信息">更多</button>
+					 				<button class="btn btn-danger btn-xs" ng-if="row.orderStatus == 120 && row.spreadUser == user.id" ng-click="doModify(row)">修改</button>
+					 			</td>
+					 		</tr>
+					 		<tr ng-if="!rowsData || rowsData.length==0">
+					 			<td class="text-center" colspan="{{columns.length+2}}">
+					 				暂无订单数据
+					 			</td>
+					 		</tr>
+					 	</tbody>
+					 </table>
+				</div>
+				<span class="hms-page-total pull-right">共{{totalItems}}条</span>
+				<button class="hms-page-gobtn btn btn-default pull-right" ng-click="pageGo()">go</button>
+				<input class="hms-page-goinput pull-right" type="text" ng-model="currentGoPage" ng-enter="pageGo()"/>
+				<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="totalItems" ng-model="currentPage" items-per-page="pageCount" max-size="maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+			</div>
+			<div id="qiantaizhifu" class="page-header" style="border-bottom: 1px solid #D2D2D2;margin:0px;padding:0px;">
+		  		<h5>眯客预订&nbsp;&nbsp;&nbsp;&nbsp;前台支付</h5>
+			</div>
+			<div class="clearfix">
+				<div class="table-responsive">
+					 <table class="table hms-table">
+					 	<thead>
+					 		<tr>
+					 			<th class="text-center">序号</th>
+					 			<th class="text-center" ng-repeat="item in columns" width="{{item.width}}">{{item.displayName}}</th>
+					 			<th class="text-center">操作</th>
+					 		</tr>
+					 	</thead>
+					 	<tbody>
+					 		<tr ng-repeat="row in rowsDataQiantai">
+					 			<td class="text-center">
+					 				{{pageCountQiantai*(currentPageQiantai-1)+($index+1)}}
+					 			</td>
+					 			<td class="text-center" ng-repeat="item in columns" width="{{item.width}}">{{row[item.field]}}</td>
+					 			<td class="text-center">
+					 				<button class="btn btn-danger btn-xs" ng-click="showMoreInfo(row.otaOrderId)" title="更多订单信息">更多</button>
+					 				<button class="btn btn-danger btn-xs" ng-if="row.orderStatus == 120 && row.spreadUser == user.id" ng-click="doModify(row)">修改</button>
+					 			</td>
+					 		</tr>
+					 		<tr ng-if="!rowsDataQiantai || rowsDataQiantai.length==0">
+					 			<td class="text-center" colspan="{{columns.length+2}}">
+					 				暂无订单数据
+					 			</td>
+					 		</tr>
+					 	</tbody>
+					 </table>
+				</div>
+				<span class="hms-page-total pull-right">共{{totalItemsQiantai}}条</span>
+				<button class="hms-page-gobtn btn btn-default pull-right" ng-click="pageGoQiantai()">go</button>
+				<input class="hms-page-goinput pull-right" type="text" ng-model="currentGoPageQiantai" ng-enter="pageGoQiantai()"/>
+				<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="totalItemsQiantai" ng-model="currentPageQiantai" items-per-page="pageCountQiantai" max-size="maxSizeQiantai" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPagesQiantai" ng-change="pageChangedQiantai()"></pagination>
+			</div>
+		</div>
+	</div>
+</div>

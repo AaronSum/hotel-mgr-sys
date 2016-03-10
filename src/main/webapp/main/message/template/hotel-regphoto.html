@@ -1,0 +1,73 @@
+<div ng-controller="hotelRegPhotoController">
+	<div class="memo-contrainer-bottom" hms-Affix>
+		<div class="row">
+			<div class="col-md-6">
+				<h3 class="title">营业执照及身份证</h3>
+			</div>
+			<div class="col-md-offset-3 col-md-3">
+				<div class="btn btn-success  btn-danger" ng-show="!readOnly" ng-click="save(true)">
+					<i class="glyphicon glyphicon-save"></i>
+					保存
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<p class="col-md-12">请上传营业执照或身份证照片</p>
+			<div class="col-md-offset-1 col-md-11 memo-contrainer">
+				<p class="memo">营业执照</p>
+				<div class="row">
+					<div class="col-md-4">
+						<hms-upload image="licenseImg"></hms-upload>
+					</div>
+				</div>
+				<div class="row">
+					<div class="pull-left col-md-4" ng-repeat=" preview in licenseImg.previews  track by $index">
+						<div class="img-preview-hotel">
+							<img ng-show="preview" ng-src="{{preview}}" hms-imgload/>
+							<div class="fileUpload_delete_btn">
+								<button class="btn btn-success radius-3" ng-show="preview" ng-click="delHotelRegPic(licenseImg, licenseImg.keys[$index])">删除</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="memo">身份证正面</p>
+				<div class="row">
+					<div class="col-md-4">
+						<hms-upload image="idCardFrontImg"></hms-upload>
+					</div>
+				</div>
+				<div class="row">
+					<div class="pull-left col-md-4" ng-repeat=" preview in idCardFrontImg.previews  track by $index">
+						<div class="img-preview-hotel">
+							<img ng-show="preview" ng-src="{{preview}}" hms-imgload/>
+							<div class="fileUpload_delete_btn">
+								<button class="btn btn-success radius-3" ng-show="preview" ng-click="delHotelRegPic(idCardFrontImg, idCardFrontImg.keys[$index])">删除</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<p class="memo">身份证背面</p>
+				<div class="row">
+					<div class="col-md-4">
+						<hms-upload image="idCardBackImg"></hms-upload>
+					</div>
+				</div>
+				<div class="row">
+					<div class="pull-left col-md-4" ng-repeat=" preview in idCardBackImg.previews track by $index">
+						<div class="img-preview-hotel">
+							<img ng-show="preview" ng-src="{{preview}}" hms-imgload/>
+							<div class="fileUpload_delete_btn">
+								<button class="btn btn-success radius-3" ng-show="preview" ng-click="delHotelRegPic(idCardBackImg, idCardBackImg.keys[$index])">删除</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

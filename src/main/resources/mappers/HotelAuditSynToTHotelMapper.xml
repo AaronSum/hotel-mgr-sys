@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.hms.mapper.HotelAuditSynToTHotelMapper">
+	<select id="findRoomtypeByIds" resultType="HmsERoomtypeInfoModel">
+		select id,roomtypeid,minarea,maxarea,pics,bedtype,bedsize from e_roomtype_info where roomtypeid in
+		<foreach collection="list" item="hmsTRoomtypeModels" open="(" separator="," close=")">
+			#{hmsTRoomtypeModels.id}
+		</foreach>
+	</select>
+
+    <delete id="deleteTs" parameterType="long">
+        delete from t_roomtype_info where roomtypeid in
+		<foreach collection="list" item="hmsTRoomtypeModels" open="(" separator="," close=")">
+		    #{hmsTRoomtypeModels.id}
+	    </foreach>
+    </delete>
+
+	<select id="findTRoomTypeModels" resultType="HmsEBasePriceModel">
+	select id, roomTypeId, price, subprice, subper, updateTime from e_baseprice where roomTypeId in
+	<foreach collection="list" item="hmsTRoomtypeModels" open="(" separator="," close=")">
+		#{hmsTRoomtypeModels.id}
+	</foreach>
+	</select>
+	
+	<insert id="addTRoomtypeInfos">
+		insert into t_roomtype_info(roomtypeid, minarea, maxarea, pics,bedtype,bedsize)   
+    values  
+    <foreach collection="list" item="hmsrttModels" index="index" separator="," >  
+        (#{hmsrttModels.roomTypeId},#{hmsrttModels.minArea},#{hmsrttModels.maxArea},#{hmsrttModels.pics},#{hmsrttModels.bedType},#{hmsrttModels.bedSize})  
+    </foreach>
+	</insert>
+	
+	<update id="updateTPrices"  parameterType="java.util.List">
+          <foreach collection="list" item="hmspriceModels" index="index" open="" close="" separator=";">
+                update t_baseprice set 
+                <set>
+                     price=#{hmspriceModels.price},
+                     subprice=#{hmspriceModels.subprice},
+                     subper=#{hmspriceModels.subper},
+                     updateTime=#{hmspriceModels.updateTime}
+                </set>
+                 where roomTypeId=#{hmspriceModels.id}
+         </foreach>
+    </update>
+    
+    <insert id="addTBasePrices">
+		insert into t_baseprice(roomTypeId,price,subprice,subper,updateTime) values 
+    	<foreach collection="list" item="hmspriceModels" index="index" separator="," > 
+       		 (#{hmspriceModels.roomTypeId},#{hmspriceModels.price},#{hmspriceModels.subprice},#{hmspriceModels.subper},#{hmspriceModels.updateTime}) 
+    	</foreach>
+	</insert>
+	
+	<delete id="deleteTByRoomtypeId" parameterType="long">
+        delete from t_roomtype_facility where roomtypeid in
+		<foreach collection="list" item="hmsTRoomtypeModels" open="(" separator="," close=")">
+		    #{hmsTRoomtypeModels.id}
+	    </foreach>
+    </delete>
+    
+    <insert id="addTRoomtypeFacilitys">
+    	insert into t_roomtype_facility (roomtypeid, facId) values
+    	<foreach collection="list" item="hmsTRtFacModels" index="index" separator="," > 
+			(#{hmsTRtFacModels.roomTypeId}, #{hmsTRtFacModels.facId})
+    	</foreach>
+    </insert>
+    <!--
+	<delete id="deleteTHotelFacilities" parameterType="long"> 
+		delete from t_hotel_facility where hotelId = #{hotelId}
+	</delete>
+	-->
+
+   <select id="findRoomtypeFacilityById" resultType="HmsERoomtypeFacilityModel">
+	    select id,roomtypeid,facId from e_roomtype_facility where roomtypeid in 
+		<foreach collection="list" item="hmsTRoomtypeModels" open="(" separator="," close=")">
+			#{hmsTRoomtypeModels.id}
+		</foreach>
+	</select>
+
+	<update id="updateBedNum">
+	     update t_roomtype set 
+		<foreach collection="list" item="hmspriceModels" index="index" open="" close="" separator=";">
+                bedNum=#{bedNums.bedNum}
+         </foreach>
+         <foreach collection="">
+          where  id=#{roomTypeIds.id}
+         </foreach>
+	</update>
+	
+	<insert id="insertTHotelFacilities">
+		insert into t_hotel_facility (hotelId, facId) values 
+		<foreach collection="facIds" item="item" index="index" separator="," > 
+			(#{eHotelId}, #{item})
+    	</foreach>
+	</insert>
+	
+	<select id="findAllTBasePriceByIds" resultType="HmsTBasePriceModel">
+		select id, roomTypeId, price, subprice, subper, updateTime from t_baseprice where roomTypeId in
+		<foreach collection="list" item="hmsTRoomtypeModels" open="(" separator="," close=")">
+		 #{hmsTRoomtypeModels.id}
+		</foreach>
+	</select>
+	<!-- HmsRoomtypeController -->
+	<insert id="add">
+    	insert into t_roomtype_facility (roomtypeid, facId) values
+    	<foreach collection="facIds" item="item" index="index" separator="," > 
+			(#{roomTypeId}, #{item})
+    	</foreach>
+    </insert>
+	
+	<delete id="delete">
+		delete from e_roomtype_facility where roomtypeid = #{roomTypeId} and facId in
+		<foreach collection="facIds" item="item" open="(" separator="," close=")">
+		    #{item}
+	    </foreach>
+    </delete>
+
+	<!--HmsEPriceController -->
+	<select id="findPriceByRoomTypeId" resultType="HmsEPriceModel">
+	    select id,roomTypeId,timeId,price,subprice,subper,orderindex,updateTime from t_price where roomTypeId in 
+		<foreach collection="list" item="tRoomTypeList" open="(" separator="," close=")">
+			#{tRoomTypeList.id}
+		</foreach>
+	</select>
+	
+	<select id="findTpriceByIds" resultType="HmsEPriceTimeModel">
+		select id,name,cron,addcron,subcron,hotelid,Updatetime,Begintime,Endtime from t_pricetime where id in
+		<foreach collection="list" item="pricelist" open="(" separator="," close=")">
+			#{pricelist.timeId}
+		</foreach>
+	</select>
+
+</mapper>

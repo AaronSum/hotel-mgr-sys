@@ -1,0 +1,76 @@
+<div class="hms-user-add-view">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form class="form-horizontal">
+						  <div class="form-group">
+						    <label for="phoneNo" class="col-md-2 control-label">手机号码：</label>
+						    <div class="col-md-10">
+						      <input type="text" class="form-control" id="phoneNo" placeholder="手机号码" maxlength="11" size="11" required ng-model="saveUserObj.phoneNo">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="verifyCode" class="col-md-2 control-label">验证码：</label>
+						    <div class="col-md-7">
+						      <input type="number" class="form-control" id="verifyCode" placeholder="验证码" required ng-model="saveUserObj.verifyCode">
+						    </div>
+						    <div class="col-md-offset-1 col-md-2">
+						     <button type="button" class="btn btn-success" ng-click="sendVerifyCode()" ng-disabled="sendVerifyCodeFlag">获取验证码({{sendVerifyCodeTime}})</button>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="password" class="col-md-2 control-label">密码：</label>
+						    <div class="col-md-10">
+						      <input type="text" class="form-control" id="password" placeholder="密码" required ng-model="saveUserObj.password">
+						    </div>
+						  </div>
+						  <div class="form-group" ng-if="RULE_CODE=='A'">
+						    <label for="name" class="col-md-2 control-label">昵称：</label>
+						    <div class="col-md-10">
+						      <input type="text" class="form-control" id="name" placeholder="昵称" required ng-model="saveUserObj.name">
+						    </div>
+						  </div>
+						   <!-- <div class="form-group">
+						    <div class="col-md-offset-2 col-md-2">
+						      酒店名称
+						    </div>
+						    <div class="col-md-2">
+						      权限管理
+						    </div>
+						  </div>
+						  <div class="form-group">
+						  	<div class="col-md-offset-2 col-md-4">
+						  		<div class="btn-group btn-radio-group" data-toggle="buttons">
+						  		  <label class="btn btn-success active">
+								    <input type="radio" name="options" id="option1" autocomplete="on" checked>前台
+								  </label>
+								  <label class="btn btn-success">
+								    <input type="radio" name="options" id="option2" autocomplete="off">老板
+								  </label>
+								</div>
+						  	</div>
+						  </div>-->
+						  <div class="form-group" ng-if="RULE_CODE=='A'">
+					  		<label for="name" class="col-md-2 control-label">绑定二维码：</label>
+						    <div class="col-md-10">
+							    <button type="button" class="btn btn-success hms-select select modify-select" ng-model="saveUserObj.qrcodeTag" data-animation="am-flip-x" bs-options="qrcode.tag as qrcode.tag for qrcode in availableQrcodeList" bs-select placeholder="---请选择---" max-length-html="个被选中" allText="全部" noneText="无">
+							    </button>
+						    </div>
+						  </div>
+						  <div class="form-group submit-btn">
+						    <div class="col-md-offset-4 col-md-2">
+						      <button type="reset" class="btn btn-default" ng-click="addBack()">取消</button>
+						    </div>
+						    <div class="col-md-2">
+						      <button type="button" class="btn btn-success" ng-click="saveUserData()">确定</button>
+						    </div>
+						  </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

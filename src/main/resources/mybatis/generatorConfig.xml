@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="ots" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
+		<plugin type="org.duoku.groom.mybatis.plugin.PaginationPlugin" />  
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/ots" userId="root" password="hdy" /> -->
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://10.4.24.11:3306/ots" userId="smlt-writer" password="j9bcyZ5U5LQp7xxEomsu" /> -->
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://10.4.17.242:3306/ots" userId="ota2developer" password="www.imike.com" />-->
+			<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.0.34:3306/ots" userId="root" password="imike@2015" />
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.0.11:3306/ots" userId="root" password="imike@2015" /> -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.mk.hms.model" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.mk.hms.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		 <!--<table tableName="h_user" domainObjectName="User">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_group" domainObjectName="Group">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="e_hotel" domainObjectName="EHotel">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="hotelname" property="hotelName"></columnOverride>
+			<columnOverride column="hotelcontactname" property="hotelContactName"></columnOverride>
+			<columnOverride column="regtime" property="regTime"></columnOverride>
+			<columnOverride column="disid" property="disId"></columnOverride>
+			<columnOverride column="detailaddr" property="detailAddr"></columnOverride>
+			<columnOverride column="opentime" property="openTime"></columnOverride>
+			<columnOverride column="repairtime" property="repairTime"></columnOverride>
+			<columnOverride column="roomnum" property="roomNum"></columnOverride>
+			<columnOverride column="businesslicensefront" property="businessLicenseFront"></columnOverride>
+			<columnOverride column="businesslicenseback" property="businessLicenseBack"></columnOverride>
+			<columnOverride column="reasontime" property="reasonTime"></columnOverride>
+			<columnOverride column="updatetime" property="updateTime"></columnOverride>
+			<columnOverride column="pricestate" property="priceState"></columnOverride>
+			<columnOverride column="pricereason" property="priceReason"></columnOverride>
+			<columnOverride column="pmsstatus" property="pmsStatus"></columnOverride>
+			<columnOverride column="pmsuser" property="pmsUser"></columnOverride>
+			<columnOverride column="idcardfront" property="idCardFront"></columnOverride>
+			<columnOverride column="idcardback" property="idCardBack"></columnOverride>
+			<columnOverride column="retentiontime" property="retentionTime"></columnOverride>
+			<columnOverride column="defaultleavetime" property="defaultLeaveTime"></columnOverride>
+			<columnOverride column="isnewpms" property="isNewPms"></columnOverride>
+			<columnOverride column="isnewpms" property="isNewPms"></columnOverride>
+			<columnOverride column="isthreshold" property="isThreshold"></columnOverride>
+		</table>
+		<table tableName="h_role" domainObjectName="Role">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_group_hotel" domainObjectName="GroupHotel">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_user_role" domainObjectName="UserRole">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="e_hotelbussinesszone" domainObjectName="EHotelBussinesszone">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="businessZoneId" property="businessZoneId"></columnOverride>
+			<columnOverride column="hotelId" property="hotelId"></columnOverride>
+		</table>
+		<table tableName="t_hotelbussinesszone" domainObjectName="THotelBussinesszone">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="businessZoneId" property="businessZoneId"></columnOverride>
+			<columnOverride column="hotelId" property="hotelId"></columnOverride>
+		</table>
+		<table tableName="t_businesszone" domainObjectName="TBussinesszone">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="businessZoneType" property="businessZoneType"></columnOverride>
+		</table>
+		<table tableName="h_operate_log" domainObjectName="OperateLog">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_qrcode" domainObjectName="Qrcode">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="m_user" domainObjectName="MUser">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="m_role_user" domainObjectName="MRoleUser">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_hotel" domainObjectName="THotel">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_bill_confirm_check" domainObjectName="BillConfirmCheck">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_bill_check_info" domainObjectName="BillCheckInfo">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_bill_orders" domainObjectName="BillOrders">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="hotelId" property="hotelId"></columnOverride>
+			<columnOverride column="orderId" property="orderId"></columnOverride>
+			<columnOverride column="orderType" property="orderType"></columnOverride>
+			<columnOverride column="roomTypeName" property="roomTypeName"></columnOverride>
+			<columnOverride column="roomNo" property="roomNo"></columnOverride>
+			<columnOverride column="beginTime" property="beginTime"></columnOverride>
+			<columnOverride column="endTime" property="endTime"></columnOverride>
+			<columnOverride column="dayNumber" property="dayNumber"></columnOverride>
+			<columnOverride column="allCost" property="allCost"></columnOverride>
+			<columnOverride column="userCost" property="userCost"></columnOverride>
+			<columnOverride column="cutCost" property="cutCost"></columnOverride>
+			<columnOverride column="hotelGive" property="hotelGive"></columnOverride>
+			<columnOverride column="otherGive" property="otherGive"></columnOverride>
+			<columnOverride column="serviceCost" property="serviceCost"></columnOverride>
+			<columnOverride column="createTime" property="createTime"></columnOverride>
+			<columnOverride column="Invalidreason" property="Invalidreason"></columnOverride>
+		</table>
+		<table tableName="bms_hotel_bill_split" domainObjectName="HotelBillSplit">
+			<generatedKey column="ID" sqlStatement="MySql" identity="true" />
+			<columnOverride column="ID" property="id"></columnOverride>
+			<columnOverride column="BILL_ID" property="billId"></columnOverride>
+			<columnOverride column="PAY_OBJECT" property="payObject"></columnOverride>
+			<columnOverride column="NAME" property="name"></columnOverride>
+			<columnOverride column="ACCOUNT" property="account"></columnOverride>
+			<columnOverride column="MONEY_AMOUNT" property="moneyAmount"></columnOverride>
+			<columnOverride column="BANK" property="bank"></columnOverride>
+			<columnOverride column="BANKBRANCH" property="bankBranch"></columnOverride>
+			<columnOverride column="TRANSFERTYPE" property="transferType"></columnOverride>
+			<columnOverride column="CREATETIME" property="createTime"></columnOverride>
+		</table>
+		<table tableName="t_province" domainObjectName="Province">
+			<generatedKey column="ProID" sqlStatement="MySql" identity="true" />
+			<columnOverride column="ProID" property="proId"></columnOverride>
+			<columnOverride column="Code" property="code"></columnOverride>
+			<columnOverride column="ProName" property="proName"></columnOverride>
+			<columnOverride column="ProSort" property="proSort"></columnOverride>
+			<columnOverride column="ProRemark" property="proRemark"></columnOverride>
+		</table>
+		<table tableName="t_city" domainObjectName="City">
+			<generatedKey column="cityid" sqlStatement="MySql" identity="true" />
+			<columnOverride column="cityid" property="cityId"></columnOverride>
+			<columnOverride column="Code" property="code"></columnOverride>
+			<columnOverride column="CityName" property="cityName"></columnOverride>
+			<columnOverride column="ProID" property="proID"></columnOverride>
+			<columnOverride column="CitySort" property="citySort"></columnOverride>
+		</table>
+		<table tableName="t_district" domainObjectName="District">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="Code" property="code"></columnOverride>
+			<columnOverride column="DisName" property="disName"></columnOverride>
+			<columnOverride column="CityID" property="cityID"></columnOverride>
+			<columnOverride column="DisSort" property="disSort"></columnOverride>
+		</table>
+		<table tableName="m_role_user" domainObjectName="MRoleUser">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_roomtype" domainObjectName="RoomType">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="ehotelid" property="ehotelId"></columnOverride>
+			<columnOverride column="thotelId" property="thotelId"></columnOverride>
+			<columnOverride column="bedNum" property="bedNum"></columnOverride>
+			<columnOverride column="roomNum" property="roomNum"></columnOverride>
+		</table>
+		<table tableName="e_baseprice" domainObjectName="EBasePrice">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="roomTypeId" property="roomTypeId"></columnOverride>
+			<columnOverride column="updateTime" property="updateTime"></columnOverride>
+		</table>
+		<table tableName="t_price" domainObjectName="TPrice">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="roomtypeid" property="roomTypeId"></columnOverride>
+			<columnOverride column="timeid" property="timeId"></columnOverride>
+			<columnOverride column="orderindex" property="orderIndex"></columnOverride>
+			<columnOverride column="updatetime" property="updateTime"></columnOverride>
+		</table>
+		<table tableName="t_pricetime" domainObjectName="TPriceTime">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="hotelid" property="hotelId"></columnOverride>
+			<columnOverride column="addcron" property="addCron"></columnOverride>
+			<columnOverride column="subcron" property="subCron"></columnOverride>
+			<columnOverride column="Updatetime" property="updateTime"></columnOverride>
+			<columnOverride column="Begintime" property="beginTime"></columnOverride>
+			<columnOverride column="Endtime" property="endTime"></columnOverride>
+		</table>
+		<table tableName="t_hotel_operate_log" domainObjectName="HotelOperateLog">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="e_instant_message" domainObjectName="InstantMessage">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="createtime" property="createTime"></columnOverride>
+			<columnOverride column="updatetime" property="updateTime"></columnOverride>
+			<columnOverride column="username" property="userName"></columnOverride>
+			<columnOverride column="userid" property="userId"></columnOverride>
+			<columnOverride column="isnew" property="isNew"></columnOverride>
+			<columnOverride column="hotelid" property="hotelId"></columnOverride>
+		</table>
+		<table tableName="e_roomtype_info" domainObjectName="ERoomtypeInfo">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="roomtypeid" property="roomTypeId"></columnOverride>
+			<columnOverride column="minarea" property="minArea"></columnOverride>
+			<columnOverride column="maxarea" property="maxArea"></columnOverride>
+			<columnOverride column="bedtype" property="bedType"></columnOverride>
+			<columnOverride column="bedsize" property="bedSize"></columnOverride>
+		</table>
+		<table tableName="t_roomtype_info" domainObjectName="TRoomtypeInfo">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="roomtypeid" property="roomTypeId"></columnOverride>
+			<columnOverride column="minarea" property="minArea"></columnOverride>
+			<columnOverride column="maxarea" property="maxArea"></columnOverride>
+			<columnOverride column="bedtype" property="bedType"></columnOverride>
+			<columnOverride column="bedsize" property="bedSize"></columnOverride>
+		</table>
+		<table tableName="t_facility" domainObjectName="Facility">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="facName" property="facName"></columnOverride>
+			<columnOverride column="facType" property="facType"></columnOverride>
+			<columnOverride column="facSort" property="facSort"></columnOverride>
+		</table>
+
+		<table tableName="h_shopping_ware_category" domainObjectName="WareCategory">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_cart" domainObjectName="Cart">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_cart_detail" domainObjectName="CartDetail">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="e_roomtype_facility" domainObjectName="ERoomtypeFacility">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="roomTypeId" property="roomTypeId"></columnOverride>
+			<columnOverride column="facId" property="facId"></columnOverride>
+		</table>
+		<table tableName="t_hotel_bank" domainObjectName="HotelBank">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="hotelId" property="hotelId"></columnOverride>
+			<columnOverride column="bankBranch" property="bankBranch"></columnOverride>
+			<columnOverride column="transferType" property="transferType"></columnOverride>
+		</table>
+		<table tableName="t_hotel_bank_log" domainObjectName="HotelBankLog">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="hotelId" property="hotelId"></columnOverride>
+			<columnOverride column="userCode" property="userCode"></columnOverride>
+			<columnOverride column="userName" property="userName"></columnOverride>
+			<columnOverride column="oldVal" property="oldVal"></columnOverride>
+			<columnOverride column="newVal" property="newVal"></columnOverride>
+			<columnOverride column="createTime" property="createTime"></columnOverride>
+		</table>
+		
+		<table tableName="h_shopping_order_detail" domainObjectName="OrderDetail">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_ware" domainObjectName="WareShopping">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+	
+		<table tableName="h_shopping_order" domainObjectName="OrderShopping">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		
+		<table tableName="h_shopping_ware_attr" domainObjectName="WareAttr">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_ware_promotion" domainObjectName="WarePromotion">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		
+		<table tableName="h_shopping_ware_freight" domainObjectName="WareFreight">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_hotel" domainObjectName="HmsShoppingHotel">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_ware" domainObjectName="WareShopping">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_ware_promotion_mapping" domainObjectName="WarePromotionMapping">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		
+			<table tableName="h_shopping_ware_image" domainObjectName="WareImage">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_ware" domainObjectName="WareShopping">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_order_detail" domainObjectName="OrderDetail">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="h_shopping_order" domainObjectName="OrderShopping">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="hotelId" property="hotelId"></columnOverride>
+			<columnOverride column="facId" property="facId"></columnOverride>
+		</table>
+		<table tableName="t_hotel" domainObjectName="THotel">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="hotelName" property="hotelName"></columnOverride>
+			<columnOverride column="hotelContactName" property="hotelContactName"></columnOverride>
+			<columnOverride column="regTime" property="regTime"></columnOverride>
+			<columnOverride column="disId" property="disId"></columnOverride>
+			<columnOverride column="detailAddr" property="detailAddr"></columnOverride>
+			<columnOverride column="openTime" property="openTime"></columnOverride>
+			<columnOverride column="repairTime" property="repairTime"></columnOverride>
+			<columnOverride column="roomNum" property="roomNum"></columnOverride>
+			<columnOverride column="businessLicenseFront" property="businessLicenseFront"></columnOverride>
+			<columnOverride column="businessLicenseBack" property="businessLicenseBack"></columnOverride>
+			<columnOverride column="idCardFront" property="idCardFront"></columnOverride>
+			<columnOverride column="idCardBack" property="idCardBack"></columnOverride>
+			<columnOverride column="retentionTime" property="retentionTime"></columnOverride>
+			<columnOverride column="defaultLeaveTime" property="defaultLeaveTime"></columnOverride>
+			<columnOverride column="onLine" property="onLine"></columnOverride>
+			<columnOverride column="isNewPms" property="isNewPms"></columnOverride>
+			<columnOverride column="isThreshold" property="isThreshold"></columnOverride>
+		</table>-->
+		<table tableName="h_aop_log" domainObjectName="AopLog">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<!-- <table tableName="u_member" domainObjectName="UMember">
+			<generatedKey column="mid" sqlStatement="MySql" identity="true" />
+		</table> -->
+	</context>
+</generatorConfiguration>

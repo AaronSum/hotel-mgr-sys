@@ -1,0 +1,116 @@
+<div ng-controller="ratesModifyController">
+	<div class="container-fluid hms-rates-view"  style="max-width:800px;padding-bottom:20px;">
+		<div>
+			<div class="pull-left">
+				<h3 class="title">{{roomType.name}}房价设置( <small>{{basePrice | currency : '&yen;'}}</small> )</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-1 col-md-11">
+				<p class="memo">时间</p>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="input-group pull-left">
+	    					<input type="text" class="form-control" ng-model="beginTime" data-date-format="yyyy-MM-dd" data-date-type="string" data-autoclose="1" bs-datepicker />
+	    					<span class="input-group-addon">至</span>
+	    					<input type="text" class="form-control" ng-model="endTime" data-date-format="yyyy-MM-dd" data-date-type="string" data-autoclose="1" bs-datepicker />
+						</div>
+					</div>
+				</div>
+				<br />
+				<hr />
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<div class="pull-left"><p class="memo">星期</p></div>
+					    <div class="btn-group pull-right">
+					        <label class="btn btn-primary hms-home-radio" ng-model="selectWeekType" btn-radio="'all'">全</label>
+					        <label class="btn btn-primary hms-home-radio" ng-model="selectWeekType" btn-radio="'workday'">工作日</label>
+					        <label class="btn btn-primary hms-home-radio" ng-model="selectWeekType" btn-radio="'weekend'">周末</label>
+					    </div>
+					</div>
+					<div class="col-md-2" ng-repeat="day in weeks">
+						<input id="{{day.id}}" type="checkbox" ng-model="day.checked">
+						<label for="{{day.id}}">{{day.name}}</label>
+					</div>
+				</div>
+				<h />
+				<br />
+				<hr />
+				<br />
+				<p></p>
+				<form class="form-horizontal" name="roomPriceForm">				
+				  	<div class="form-group">
+						<div class="col-md-3">
+							<div class="hms-radio">
+								<input name="price" id="rad_price" type="radio" ng-model="priceType" value='price'>
+								<label for="rad_price"></label>
+							</div>
+						</div>
+						<div class="col-md-3">							
+							<div class="input-group">
+							    <input type="number" class="form-control hms-input" id="price" ng-model="price.price" ng-disabled="priceType!='price'" required>
+	 							<span class="input-group-addon">元</span>
+ 							</div>					
+						</div>
+				  	</div>
+					<div class="form-group">
+						<div class="col-md-1">
+							<div class="hms-radio">
+								<input name="price" id="rad_subper" type="radio" ng-model="priceType" value='subper' >
+								<label for="rad_subper"></label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<small>下浮</small>				
+						</div>
+						<div class="col-md-3">
+							<div class="input-group">
+							    <input type="number" class="form-control hms-input" id="subper" ng-model="price.subper" ng-disabled="priceType!='subper'" required>		
+	 							<span class="input-group-addon">%</span>
+ 							</div>				
+						</div>
+						<div class="col-md-3" ng-show="priceType=='subper'">
+							<h4>{{subperPrice | currency:'' }}<small>  元</small></h4>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-1">
+							<div class="hms-radio">
+								<input name="price" id="rad_subprice" type="radio" ng-model="priceType" value='subprice'>
+								<label for="rad_subprice"></label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<small>下浮</small>				
+						</div>
+						<div class="col-md-3">
+							<div class="input-group">
+							    <input type="number" class="form-control hms-input" id="subprice" ng-model="price.subprice" ng-disabled="priceType!='subprice'" required>
+	 							<span class="input-group-addon">元</span>								
+							</div>				
+						</div>
+						<div class="col-md-3" ng-show="priceType=='subprice'">
+							<h4>{{subperPrice | currency:'' }}<small>  元</small></h4>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-offset-1 col-md-11 memo-contrainer-bottom">
+				<div class="row">
+					<div class="col-md-offset-6 col-md-3">
+						<div class="btn btn-default" ng-click="cancel()">
+							取消
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="btn btn-success" ng-click="save()">
+							<i class="glyphicon glyphicon-save"></i>
+							确定
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

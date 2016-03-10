@@ -1,0 +1,83 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel-body">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<div class="col-md-4">
+						            房型：
+							<button type="button" class="btn btn-success hms-select select room-setting-select" 
+							         ng-model="roomSettingSelectObj.roomtypeid" data-animation="am-flip-x" 
+							         bs-options="node.id as node.name for node in roomTypes" 
+							         bs-select placeholder="请选择">
+						    </button>
+						</div>
+						<div class="col-md-4">
+						            床型：
+							  <input type="type" class="form-control hms-input room-setting-input"
+							         ng-model="roomSettingSelectObj.bedtypename">
+						</div>
+						<div class="col-md-1">
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-success room-setting-button"
+								ng-click="selectRoomTypeListBefore()">查&nbsp;&nbsp;询</button>
+							<button type="button" class="btn btn-success"
+								ng-click="settingRoom()">房间设置</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table hms-table border-top" style="color:#585353;">
+				<thead>
+					<tr>
+						<th class="text-center" style="width:5%;">
+							<input type="checkbox" ng-model="checkBoxAll.allTick" ng-change="afterAllTick()"/>
+						</th>
+						<th class="text-center" style="width:7%;">
+							 序号
+						</th>
+						<th class="text-center" ng-repeat="item in columns"  width="{{item.width}}" ng-bind="item.displayName"></th>
+						<th class="text-center">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="roomType in roomTypeList">
+						<!--选择框-->
+						<th class="text-center">
+							<label>
+								<input type="checkbox" ng-model="roomType.tick" ng-change="afterTick()"/>
+							</label>
+							<input type="hidden" ng-model="roomType.roomtypeid" ng-bind="roomType.roomTypeId"/>
+						</th>
+						<th class="text-center">
+							<label style="font-weight:400;">
+								{{($index+1) + (page.currentPage-1) * 10}}
+							</label>
+							<input type="hidden" ng-model="roomType.roomtypeid" ng-bind="roomType.roomTypeId"/>
+						</th>
+						<th class="text-center" ng-bind="roomType.roomtypename"></th>
+						<th class="text-center" ng-bind="roomType.roomno"></th>
+						<th class="text-center" ng-bind="roomType.bedtypename"></th>
+						<th class="text-center" ng-bind="roomType.isset">
+						</th>
+                         <!--查看详情 -->
+						<th class="text-center">
+							<button class="btn room-setting-detail-button btn-xs" ng-click="selectRoom(roomType)" title="房间详细信息">详情</button>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+			<span class="hms-page-total pull-right">共{{page.totalItems}}条</span>
+			<button class="hms-page-gobtn btn btn-default pull-right" ng-click="pageGoQiantai()">go</button>
+			<input class="hms-page-goinput pull-right" type="text" ng-model="page.currentGoPage" ng-enter="pageGoQiantai()"/>
+			<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="page.totalItems" ng-model="page.currentPage" items-per-page="page.pageCount" max-size="maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="page.numPages" ng-change="pageChanged()"></pagination>
+		</div>
+	</div>
+	
+</div>

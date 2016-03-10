@@ -1,0 +1,50 @@
+<style type="text/css">
+	.room-setting-select{
+	    width: 170px;
+	}
+	.room-setting-button{
+	    width: 82px;
+	}
+	.room-setting-input{
+	    width: 170px;
+    	display: inline;
+	}
+	.room-setting-detail-input{
+	    width: 230px;
+    	display: inline;
+	}
+	.room-setting-detail-stair{
+		padding-left: 10px;
+	    text-align: left;
+	}
+	.room-setting-detail{
+		padding-left: 0px;
+	}
+	.room-setting-detail-position {
+		border:1px solid #5CB85C;
+		padding-bottom: 13px;
+    	padding-top: 10px;
+	}
+	.room-setting-detail-button {
+		color: #fff;
+	    background-color: #449d44;
+	    border-color: #398439;
+	}
+ 
+</style>
+<div ng-controller="roomSetingController">
+	<div class="memo-contrainer-bottom">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 class="title">房间管理</h3>
+			</div>
+			<div class="col-md-offset-3 col-md-3">
+				<div class="btn btn-success  btn-danger" ng-show="!readOnly" ng-click="saveRoomSettingList()">
+					<i class="glyphicon glyphicon-save"></i>保存
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ui-view="select" ng-show="{1: true}[isActive]"></div>
+	<div ui-view="setting" ng-show="{2: true}[isActive]"></div>
+</div>

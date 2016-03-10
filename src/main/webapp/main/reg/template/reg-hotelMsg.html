@@ -1,0 +1,107 @@
+<!-- Second Step -->
+<div class="container-fluid" style="-webkit-user-select: none;">
+	<!-- Head -->
+	<div class="row">
+		<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+			<img src="{{hotel.MIKE_PNG}}" />
+			<a ng-click="hotel.logout()" style="position:absolute;top:10px;right:50px">安全退出</a>
+			<a ng-click="hotel.enterHome()" style="position:absolute;top:10px;right:120px">主页</a>
+		</div>
+	</div>
+	<!-- Content -->
+	<div class="row content">
+		<!-- left -->
+		<div class="col-lg-6 col-lg-offset-2 col-md-7 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+			<!-- Form -->
+			<form id="hotel-form" class="form-inline" name="myfrom"  novalidate>
+				<div class="reg_midder row">
+						
+					<div id="hotel-name-con" class="form-group has-feedback col-md-6" ng-class="{'has-error':hotel.hotelNameMsg,'has-success':!hotel.hotelNameMsg && hotel.hotelName}">
+					    <label class="control-label"><span class="txt-full"></span><span class="txt-full"></span>酒店名称</label>
+					    <input type="text" id="hotel-name" class="form-control radius-3" placeholder="请输入真实酒店名" ng-model="hotel.hotelName" ng-blur="hotel.hotelNameCheck()">
+					    <p class="hotel-warn" ng-bind="hotel.hotelNameMsg"></p>
+					</div>
+
+					<div id="manager-name-con" class="form-group has-feedback col-md-6" ng-class="{'has-error':hotel.managerNameMsg,'has-success':!hotel.managerNameMsg && hotel.managerName}">
+					    <label class="control-label"><span class="txt-full"></span><span class="txt-full"></span><span class="txt-full"></span>联系人</label>
+					    <input type="text" id="manager-name" class="form-control radius-3" placeholder="请输入真实姓名，以保障我们后续服务" ng-model="hotel.managerName" ng-blur="hotel.managerNameCheck()">
+						<p class="hotel-warn" ng-bind="hotel.managerNameMsg"></p>
+					</div>
+
+					<div id="hotel-phone-con" class="form-group has-feedback col-md-6" ng-class="{'has-error':hotel.hotelPhoneMsg,'has-success':!hotel.hotelPhoneMsg && hotel.hotelPhone}">
+					    <label class="control-label">酒店联系电话</label>
+					    <input type="text" id="hotel-phone" class="form-control radius-3" placeholder="请输入真实电话，以保障我们后续服务" ng-model="hotel.hotelPhone" ng-blur="hotel.hotelPhoneCheck()">
+						<p class="hotel-warn" ng-bind="hotel.hotelPhoneMsg"></p>
+					</div>
+
+					<div id="pms-code-con" class="form-group has-feedback col-md-6" ng-class="{'has-error':hotel.pmsCodeMsg,'has-success':!hotel.pmsCodeMsg && hotel.pmsCode}">
+					    <label class="control-label">销售人员账号</label>
+					    <input type="text" id="pms-code" class="form-control radius-3" placeholder="请输入销售人员账号" ng-model="hotel.pmsCode" ng-blur="hotel.pmsCodeCheck()">
+					    <p class="hotel-warn" ng-bind="hotel.pmsCodeMsg"></p>
+					</div>
+
+					<div id="qt-phone-con" class="form-group has-feedback col-md-6" ng-class="{'has-error':hotel.qtPhoneMsg,'has-success':!hotel.qtPhoneMsg && hotel.qtPhone}">
+					    <label class="control-label"><span class="txt-full"></span><span class="txt-full"></span>前台电话</label>
+					    <input type="text" id="qt-phone" class="form-control radius-3" ng-model="hotel.qtPhone" ng-blur="hotel.qtPhoneCheck()">
+						<p class="hotel-warn" ng-bind="hotel.qtPhoneMsg"></p>
+					</div>
+
+					<div id="hotel-select-con" class="col-md-12" append-source>
+						<!-- <div style="padding-left: 88px;">
+						    <button type="button" class="btn btn-default" ng-model="hotel.province" data-animation="am-flip-x" bs-options="p as p.proName for p in hotel.provinces" bs-select ng-change="hotel.proChange()" placeholder="请选择" max-length-html="个被选中" allText="全部" noneText="无" ng-disabled="!hotel.provinces.length" compare-key="code">
+						    </button>
+						    <label>省</label>
+
+						    <button type="button" class="btn btn-default" ng-model="hotel.city" data-animation="am-flip-x" bs-options="c as c.cityName for c in hotel.cities" bs-select ng-change="hotel.cityChange()" placeholder="请选择" max-length-html="个被选中" allText="全部" noneText="无" ng-disabled="!hotel.cities.length" compare-key="code">
+						    </button>
+						    <label>市</label >
+
+						    <button type="button" class="btn btn-default" ng-model="hotel.district" data-animation="am-flip-x" bs-options="d as d.disName for d in hotel.districts" bs-select ng-change="hotel.disChange()" placeholder="请选择" max-length-html="个被选中" allText="全部" noneText="无" ng-disabled="!hotel.districts.length" compare-key="code">
+						    </button>
+						    <label>县/区</label>
+
+							<span class="txt-full"></span>
+							<label>商圈</label>
+						    <button type="button" class="btn btn-default" ng-model="hotel.area" data-animation="am-flip-x" bs-options="d as d.name for d in hotel.areas" bs-select ng-change="hotel.areaChange()" placeholder="请选择" max-length-html="个被选中" allText="全部" noneText="无" ng-disabled="!hotel.areas.length" compare-key="areacode">
+						    </button>
+
+							<br/><br/>
+							<div id="a-map-con">
+								<iframe id="a-map" ng-src="{{hotel.A_MAP}}"></iframe>
+							</div>
+						</div> -->
+						<div hms-position data="position"></div>
+						<p class="" ng-bind="hotel.positionMsg" style="color: #BB4442;font-weight: bold;"></p>
+					</div>
+
+					<div id="open-time-con" class="form-group has-feedback col-md-6" ng-class="{'has-error':hotel.openTimeMsg,'has-success':!hotel.openTimeMsg && hotel.openTime}">
+						<label class="memo"><span class="txt-full"></span><span class="txt-full"></span>开业时间</label>
+	    				<input type="text" class="form-control" ng-model="hotel.openTime" data-date-format="yyyy-MM-dd" data-date-type="string" data-autoclose="1" bs-datepicker placeholder="请选择" ng-blur="hotel.openTimeCheck()"/>
+	    				<p class="hotel-warn" ng-bind="hotel.openTimeMsg"></p>
+					</div>
+
+					<div id="repair-time-con" class="form-group has-feedback col-md-6" ng-class="{'has-error':hotel.repairTimeMsg,'has-success':!hotel.repairTimeMsg && hotel.repairTime}">
+						<label class="memo"><span class="txt-full"></span><span class="txt-full"></span>装修时间</label>
+	    				<input type="text" class="form-control" ng-model="hotel.repairTime" data-date-format="yyyy-MM-dd" data-date-type="string" data-autoclose="1" bs-datepicker placeholder="请选择最近装修时间" ng-blur="hotel.repairTimeCheck()"/>
+	    				<p class="hotel-warn" ng-bind="hotel.repairTimeMsg"></p>
+					</div>
+
+					<div id="hotel-introduction-con" class="form-group has-feedback col-md-12" ng-class="{'has-error':hotel.introductionMsg,'has-success':!hotel.introductionMsg && hotel.introduction}">
+					    <label class="control-label"><span class="txt-full"></span><span class="txt-full"></span>酒店介绍</label>
+					    <textarea rows="6" placeholder="请输入酒店简介(500字以内)" class="form-control info-textarea radius-3" ng-model="hotel.introduction" maxlength="500"></textarea>
+						<p class="hotel-warn" ng-bind="hotel.introductionMsg"></p>
+					</div>
+
+					<div class="col-md-12 button submit-btn-con text-center" style="padding-bottom: 100px;">
+						<button type="submit" check="completeButton" class="reg-btn btn btn-success radius-3" style="background-color: #2cd593;" ng-click="hotel.submit()">完成</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- right -->
+		<!-- Image:phone -->
+		<div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-4 col-sm-offset-2 col-xs-0 hidden-xs">
+			<img class="reg-phone" src="{{hotel.PHONE}}" />
+		</div>
+	</div>
+</div>

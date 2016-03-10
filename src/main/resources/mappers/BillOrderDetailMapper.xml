@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.hms.mapper.BillOrderDetailMapper">
+	<resultMap id="billOrderDetail" type="com.mk.hms.model.BillOrderDetail">
+	    <result property="id" column="id" />
+        <result property="hotelId" column="hotel_id" />
+        <result property="hotelName" column="hotel_name" />
+        <result property="orderId" column="order_id" />
+        <result property="orderType" column="order_type" />
+        <result property="beginTime" column="begin_time" />
+        <result property="endTime" column="end_time" />
+        <result property="totalPrice" column="total_price" />
+        <result property="serviceCost" column="service_cost" />
+        <result property="ruleCode" column="rule_code" />
+        <result property="spreadUser" column="spread_user" />
+        <result property="invalidReason" column="invalid_reason" />
+        <result property="checkinTime" column="checkin_time" />
+        <result property="prepaymentDiscount" column="prepayment_discount" />
+        <result property="toPayDiscount" column="to_pay_discount" />
+        <result property="orderCreateTime" column="order_create_time" />
+        <result property="billTime" column="bill_time" />
+        <result property="settlementPrice" column="settlement_price" />
+        <result property="userCost" column="user_cost" />
+        <result property="availableMoney" column="available_money" />
+        <result property="ticketMoney" column="ticket_money" />
+        <result property="wechatPayMoney" column="wechat_pay_money" />
+        <result property="aliPayMoney" column="ali_pay_money" />
+        <result property="promoId" column="promo_id" />
+        <result property="billOrderWeekId" column="b_bill_order_week_id" />
+        <result property="cityCode" column="city_code" />
+        <result property="cityName" column="city_name" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <result property="roomTypeName" column="room_type_name" />
+        <result property="roomNo" column="room_no" />
+        <result property="dayNumber" column="day_number" />
+	</resultMap>
+
+    <sql id="Base_Column_List" >
+        id,hotel_id, hotel_name, order_id, order_type,begin_time, end_time, total_price, service_cost,
+        rule_code, spread_user, invalid_reason, checkin_time, prepayment_discount, to_pay_discount,
+        order_create_time, bill_time, settlement_price, user_cost, available_money, ticket_money,
+        wechat_pay_money, ali_pay_money, promo_id, b_bill_order_week_id, city_code, city_name,
+        create_time, update_time,room_type_name,room_no,day_number
+    </sql>
+
+    <select id="queryByBillOrderWeekId" resultMap="billOrderDetail" parameterType="java.util.HashMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+         FROM  b_bill_order_detail
+        where b_bill_order_week_id = ${billOrderWeekId}
+        order by begin_time desc
+        <if test="limitStart != null and limitStart&gt;-1">
+            limit ${limitStart} , ${limitSize}
+        </if>
+    </select>
+
+    <select id="countByBillOrderWeekId" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        SELECT COUNT(*)
+        FROM  b_bill_order_detail
+        where b_bill_order_week_id = ${billOrderWeekId}
+    </select>
+</mapper>

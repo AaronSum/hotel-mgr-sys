@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>UTF-8</Encoding>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="stdout" />
+	</root>
+
+	<logger name="jdbc.connection" additivity="false" level="ERROR">
+		<appender-ref ref="stdout" />
+	</logger>
+	<logger name="jdbc.resultset" additivity="false" level="ERROR">
+		<appender-ref ref="stdout" />
+	</logger>
+	<logger name="jdbc.audit" additivity="false" level="WARN">
+		<appender-ref ref="stdout" />
+	</logger>
+	<logger name="jdbc.sqlonly" additivity="false" level="WARN">
+		<appender-ref ref="stdout" />
+	</logger>
+	<logger name="jdbc.sqltiming" additivity="false" level="ERROR">
+		<appender-ref ref="stdout" />
+	</logger>
+
+	<logger name="org.springframework.beans" additivity="false" level="WARN">
+		<appender-ref ref="stdout" />
+	</logger>
+
+	<!--生产环境下com.mk.hms包不包括子包(websocket、mapper包)，设置为DEBUG级别输出，便于定位问题-->
+	<logger name="com.mk.hms" additivity="false" level="DEBUG">
+		<appender-ref ref="stdout"/>
+	</logger>
+	<!--关闭websocket日志输出-->
+	<logger name="com.mk.hms.websocket" additivity="false" level="WARN">
+		<appender-ref ref="stdout" />
+	</logger>
+	<!--生产环境下mapper包日志设置为INFO级别输出-->
+	<logger name="com.mk.hms.mapper" additivity="false" level="DEBUG">
+		<appender-ref ref="stdout"/>
+	</logger>
+
+</configuration>  

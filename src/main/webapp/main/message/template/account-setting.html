@@ -1,0 +1,25 @@
+<div ng-controller="AccountSettingController">
+	<div class="memo-contrainer-bottom" hms-Affix>
+		<div class="row">
+			<div class="col-md-6">
+			<h3 class="title">账期设置</h3>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-11">
+				<p class="memo">结算方式<small class="text-danger">（结算方式调整后次月生效）</small></p>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+					  <div class="checkbox">
+					    <label>
+					      <input type="checkbox" ng-checked="isThreshold=='T'" ng-click="setThreshold()"  ng-disabled="!isHold"> 是否阈值结算<small class="text-danger" ng-if="!isHold">（该地区目前还不能设置阈值结算）</small>
+					    </label>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

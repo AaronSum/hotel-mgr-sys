@@ -1,0 +1,791 @@
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.btn-group-lg > .btn {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+.btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.btn-group-xs > .btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.dl-horizontal dd:before,
+.dl-horizontal dd:after,
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after,
+.form-horizontal .form-group:before,
+.form-horizontal .form-group:after,
+.btn-toolbar:before,
+.btn-toolbar:after,
+.btn-group-vertical > .btn-group:before,
+.btn-group-vertical > .btn-group:after,
+.nav:before,
+.nav:after,
+.navbar:before,
+.navbar:after,
+.navbar-header:before,
+.navbar-header:after,
+.navbar-collapse:before,
+.navbar-collapse:after,
+.pager:before,
+.pager:after,
+.panel-body:before,
+.panel-body:after,
+.modal-footer:before,
+.modal-footer:after {
+  content: " ";
+  display: table;
+}
+.dl-horizontal dd:after,
+.container:after,
+.container-fluid:after,
+.row:after,
+.form-horizontal .form-group:after,
+.btn-toolbar:after,
+.btn-group-vertical > .btn-group:after,
+.nav:after,
+.navbar:after,
+.navbar-header:after,
+.navbar-collapse:after,
+.pager:after,
+.panel-body:after,
+.modal-footer:after {
+  clear: both;
+}
+.modal.disabled {
+  animation: noop !important;
+}
+.modal.disabled.am-fade-and-slide-top .modal-dialog {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+  animation-name: fadeAndSlideFromTop;
+}
+.modal.disabled.am-fade-and-slide-top.ng-enter .modal-dialog {
+  visibility: hidden;
+  animation-name: fadeAndSlideFromTop;
+}
+.modal.disabled.am-fade-and-slide-top.ng-enter-active .modal-dialog,
+.modal.disabled.am-fade-and-slide-top.ng-leave-active .modal-dialog {
+  visibility: visible;
+}
+.modal.disabled.am-fade-and-slide-top.ng-leave .modal-dialog {
+  animation-name: fadeAndSlideToTop;
+}
+.modal.disabled.am-fade-and-scale .modal-dialog {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: backwards;
+  animation-name: fadeAndScaleIn;
+}
+.modal.disabled.am-fade-and-scale.ng-enter .modal-dialog {
+  visibility: hidden;
+  animation-name: fadeAndScaleIn;
+}
+.modal.disabled.am-fade-and-scale.ng-enter-active .modal-dialog,
+.modal.disabled.am-fade-and-scale.ng-leave-active .modal-dialog {
+  visibility: visible;
+}
+.modal.disabled.am-fade-and-scale.ng-leave .modal-dialog {
+  animation-name: fadeAndScaleOut;
+}
+@keyframes noop {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/*
+ * Examples
+ *
+ * Isolated sections of example content for each component or feature. Usually
+ * followed by a code snippet.
+ */
+.bs-example {
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 0 -15px 15px;
+  background-color: #fafafa;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05);
+  border-color: #e5e5e5 #eee #eee;
+  border-style: solid;
+  border-width: 1px 0;
+}
+/* Echo out a label for the example */
+.bs-example:after {
+  content: "Example";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+/* Tweak display of the code snippets when following an example */
+.bs-example + .highlight {
+  margin: -15px -15px 15px;
+  border-radius: 0;
+  border-width: 0 0 1px;
+}
+/* Make the examples and snippets not full-width */
+@media (min-width: 768px) {
+  .bs-example {
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #fff;
+    border-width: 1px;
+    border-color: #ddd;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+  }
+  .bs-example + .highlight {
+    margin-top: -16px;
+    margin-left: 0;
+    margin-right: 0;
+    border-width: 1px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+}
+/* Undo width of container */
+.bs-example .container {
+  width: auto;
+}
+/* Tweak content of examples for optimum awesome */
+.bs-example > p:last-child,
+.bs-example > ul:last-child,
+.bs-example > ol:last-child,
+.bs-example > blockquote:last-child,
+.bs-example > .form-control:last-child,
+.bs-example > .table:last-child,
+.bs-example > .navbar:last-child,
+.bs-example > .jumbotron:last-child,
+.bs-example > .alert:last-child,
+.bs-example > .panel:last-child,
+.bs-example > .list-group:last-child,
+.bs-example > .well:last-child,
+.bs-example > .progress:last-child,
+.bs-example > .table-responsive:last-child > .table {
+  margin-bottom: 0;
+}
+.bs-example > p > .close {
+  float: none;
+}
+.bs-example .nav-tabs {
+  margin-bottom: 15px;
+}
+/*
+ * Footer
+ *
+ * Separated section of content at the bottom of all pages, save the homepage.
+ */
+.bs-footer {
+  padding-top: 40px;
+  padding-bottom: 30px;
+  margin-top: 100px;
+  color: #787878;
+  text-align: center;
+  border-top: 1px solid #e6e6e6;
+}
+.footer-links {
+  margin: 10px 0;
+  padding-left: 0;
+}
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footer-links li:first-child {
+  padding-left: 0;
+}
+@media (min-width: 768px) {
+  .bs-footer {
+    text-align: left;
+  }
+  .bs-footer p {
+    margin-bottom: 0;
+  }
+}
+/*
+ * Footer
+ *
+ * Separated section of content at the bottom of all pages, save the homepage.
+ */
+/*
+ * Homepage
+ *
+ * Tweaks to the custom homepage and the masthead (main jumbotron).
+ */
+/* Masthead (headings and download button) */
+.bs-masthead {
+  position: relative;
+  padding: 30px 15px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+.bs-masthead h1 {
+  font-size: 50px;
+  line-height: 1;
+  color: #ffffff;
+}
+.bs-masthead .btn-outline-inverse {
+  margin: 10px;
+}
+/* Links to project-level content like the repo, Expo, etc */
+.bs-masthead-links {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 0 15px;
+  list-style: none;
+  text-align: center;
+}
+.bs-masthead-links li {
+  display: inline;
+}
+.bs-masthead-links li + li {
+  margin-left: 20px;
+}
+.bs-masthead-links a {
+  color: #ffffff;
+}
+@media (min-width: 768px) {
+  .bs-masthead {
+    text-align: left;
+    padding-top: 140px;
+    padding-bottom: 140px;
+  }
+  .bs-masthead h1 {
+    font-size: 100px;
+  }
+  .bs-masthead .lead {
+    margin-right: 25%;
+    font-size: 30px;
+  }
+  .bs-masthead .btn-outline-inverse {
+    width: auto;
+    margin: 20px 5px 20px 0;
+    padding: 18px 24px;
+    font-size: 21px;
+  }
+  .bs-masthead-links {
+    padding: 0;
+    text-align: left;
+  }
+}
+.bs-docs-nav {
+  border-color: #a33f3e;
+  background-color: #b94846;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+.bs-docs-nav .navbar-collapse {
+  border-color: #a33f3e;
+}
+.bs-docs-nav .navbar-brand {
+  color: #fff;
+}
+.bs-docs-nav .navbar-nav > li > a {
+  -webkit-transition: color 0.15s linear;
+  -o-transition: color 0.15s linear;
+  transition: color 0.15s linear;
+  color: #f9f1f1;
+}
+.bs-docs-nav .navbar-nav > li > a:hover {
+  color: #fff;
+}
+.bs-docs-nav .navbar-nav > .active > a,
+.bs-docs-nav .navbar-nav > .active > a:hover {
+  background-color: #a33f3e;
+  color: #fff;
+}
+.bs-docs-nav .navbar-toggle {
+  border-color: #b94846;
+}
+.bs-docs-nav .navbar-toggle:hover {
+  border-color: #a33f3e;
+  background-color: #a33f3e;
+}
+@media (max-width: 991px) {
+  .navbar-toggle {
+    margin-left: 15px;
+    display: block !important;
+    float: left;
+  }
+}
+/*
+ * Callout for 2.3.2 docs
+ *
+ * Only appears below page headers (not on the homepage). The homepage gets its
+ * own link with the masthead links.
+ */
+.bs-old-docs {
+  padding: 15px 20px;
+  color: #787878;
+  background-color: #fafafa;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #e6e6e6;
+}
+.bs-old-docs strong {
+  color: #545454;
+}
+/*
+ * Side navigation
+ *
+ * Scrollspy and affixed enhanced navigation to highlight sections and secondary
+ * sections of docs content.
+ */
+/* By default it's not affixed in mobile views, so undo that */
+@media (max-width: 991px) {
+  .bs-sidebar.affix {
+    position: static !important;
+  }
+}
+/* First level of nav */
+.bs-sidenav {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 124px;
+}
+/* All levels of nav */
+.bs-sidebar .nav > li > a {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #999999;
+  padding: 4px 15px;
+  text-align: right;
+}
+.bs-sidebar .nav > li > a:hover,
+.bs-sidebar .nav > li > a:focus {
+  padding-right: 14px;
+  color: #b94846;
+  text-decoration: none;
+  background-color: transparent;
+  border-right: 1px solid #b94846;
+}
+.bs-sidebar .nav > .active > a,
+.bs-sidebar .nav > .active:hover > a,
+.bs-sidebar .nav > .active:focus > a {
+  padding-right: 13px;
+  font-weight: bold;
+  color: #b94846;
+  background-color: transparent;
+  border-right: 2px solid #b94846;
+}
+/* Nav: second level (shown on .active) */
+.bs-sidebar .nav .nav {
+  display: none;
+  /* Hide by default, but at >768px, show it */
+  padding-bottom: 10px;
+}
+.bs-sidebar .nav .nav > li > a {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 30px;
+  font-size: 12px;
+  font-weight: normal;
+}
+.bs-sidebar .nav .nav > li > a:hover,
+.bs-sidebar .nav .nav > li > a:focus {
+  padding-right: 29px;
+}
+.bs-sidebar .nav .nav > .active > a,
+.bs-sidebar .nav .nav > .active:hover > a,
+.bs-sidebar .nav .nav > .active:focus > a {
+  font-weight: 500;
+  padding-right: 28px;
+}
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+  .bs-sidebar .nav > .active > ul {
+    display: block;
+  }
+  .bs-sidebar.affix-bottom .bs-sidenav,
+  .bs-sidebar.affix .bs-sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1200px) {
+  /* Widen the fixed sidebar again */
+  .bs-sidebar {
+    margin-right: 30px;
+  }
+}
+.am-fade.aside-backdrop,
+.am-fade.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.bs-docs-aside {
+  min-width: 200px;
+}
+/*
+ * Docs sections
+ *
+ * Content blocks for each component or feature.
+ */
+/* Space things out */
+/* Janky fix for preventing navbar from overlapping */
+h1[id] {
+  padding-top: 80px;
+  margin-top: -45px;
+}
+h2[id] {
+  padding-top: 60px;
+  margin-top: -45px;
+}
+/*
+ * Page headers
+ *
+ * Jumbotron-esque headers at the top of every page that's not the homepage.
+ */
+/* Page headers */
+.bs-header {
+  padding: 30px 15px 40px;
+  /* side padding builds on .container 15px, so 30px */
+  font-size: 16px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+.bs-header h1 {
+  color: #ffffff;
+}
+.bs-header p {
+  font-weight: 300;
+  line-height: 1.5;
+}
+.bs-header .container {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .bs-header {
+    font-size: 21px;
+    text-align: left;
+  }
+  .bs-header h1 {
+    font-size: 60px;
+    line-height: 1;
+  }
+}
+@media (min-width: 992px) {
+  .bs-header h1,
+  .bs-header p {
+    margin-right: 300px;
+  }
+}
+/*
+ * Code snippets
+ *
+ * Generated via Pygments and Jekyll, these are snippets of HTML, CSS, and JS.
+ */
+.highlight {
+  display: none;
+  /* hidden by default, until >480px */
+  padding: 9px 14px;
+  margin-bottom: 14px;
+  background-color: #f6f6f8;
+  border: 1px solid #e2e2e9;
+  border-radius: 4px;
+}
+.highlight pre {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  border: 0;
+  white-space: nowrap;
+}
+.highlight pre code {
+  font-size: inherit;
+  color: #333333;
+  /* Effectively the base text color */
+}
+.highlight pre .lineno {
+  display: inline-block;
+  width: 22px;
+  padding-right: 5px;
+  margin-right: 10px;
+  text-align: right;
+  color: #bebec5;
+}
+/* Show code snippets when we have the space */
+@media (min-width: 481px) {
+  .highlight {
+    display: block;
+  }
+}
+input.ng-dirty.ng-invalid,
+textarea.ng-dirty.ng-invalid,
+select.ng-dirty.ng-invalid {
+  color: #b94a48;
+  border-color: #ee5f5b;
+}
+input.ng-dirty.ng-invalid:focus,
+textarea.ng-dirty.ng-invalid:focus,
+select.ng-dirty.ng-invalid:focus {
+  border-color: #e9322d;
+  -webkit-box-shadow: 0 0 6px #f8b9b7;
+  box-shadow: 0 0 6px #f8b9b7;
+}
+input:focus.ng-pristine.ng-invalid,
+textarea:focus.ng-pristine.ng-invalid,
+select:focus.ng-pristine.ng-invalid {
+  color: #555555;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear .2s, box-shadow linear .2s;
+  -o-transition: border linear .2s, box-shadow linear .2s;
+  transition: border linear .2s, box-shadow linear .2s;
+}
+input:focus.ng-pristine.ng-invalid:focus,
+textarea:focus.ng-pristine.ng-invalid:focus,
+select:focus.ng-pristine.ng-invalid:focus {
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+}
+[tabindex="-1"] {
+  outline: none;
+}
+a[ng-click] {
+  cursor: pointer;
+}
+body .modal {
+  overflow-y: hidden;
+}
+body.modal-open {
+  overflow-y: visible !important;
+}
+.lt-ie9 .bs-sidebar {
+  display: none !important;
+}
+.btn[bs-select] {
+  outline: none;
+}
+.modal-backdrop {
+  z-index: 1040;
+  bottom: 0px;
+}
+.datepicker.dropdown-menu {
+  width: 250px;
+  height: 270px;
+}
+.datepicker.dropdown-menu button {
+  outline: none;
+  border: 0px;
+}
+.datepicker.dropdown-menu tbody {
+  height: 180px;
+}
+.datepicker.dropdown-menu tbody button {
+  padding: 6px;
+}
+.datepicker.dropdown-menu.datepicker-mode-1 tbody button,
+.datepicker.dropdown-menu.datepicker-mode-2 tbody button {
+  height: 65px;
+}
+.timepicker.dropdown-menu {
+  padding: 0 4px;
+}
+.timepicker.dropdown-menu button {
+  outline: none;
+  border: 0px;
+}
+.timepicker.dropdown-menu tbody button {
+  padding: 6px;
+}
+.select.dropdown-menu.select-multiple li {
+  position: relative;
+}
+.select.dropdown-menu.select-multiple li > i {
+  color: white;
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+.select.dropdown-menu.select-multiple li.active > i {
+  display: block;
+}
+body {
+  /*position: relative;*/
+  /* For scrollyspy */
+  /*padding-top: 50px;*/
+  /* Account for fixed navbar */
+}
+/* Tweak display of the code snippets when following an example */
+.bs-example-scope {
+  font-size: 85%;
+}
+.bs-example-scope + .bs-example {
+  margin: -15px -15px 15px;
+}
+.bs-example-scope + .bs-example + .highlight > pre {
+  border-radius: 0 0 4px 4px;
+}
+.aside.bs-docs-aside .aside-header {
+  background: #b94846;
+}
+.aside.bs-docs-aside .nav {
+  margin: 0px;
+}
+.bs-docs-social {
+  max-height: 200px;
+}
+.bs-docs-social ul {
+  list-style: none;
+  padding: 1em 0 0 0;
+}
+.bs-docs-social ul li {
+  height: 30px;
+}
+@media (max-width: 991px) {
+  .bs-docs-social ul li {
+    display: inline-block;
+  }
+}
+/*
+ * Topography, yo!
+ *
+ * Apply the map background via base64 and relevant colors where we need 'em.
+ */
+.bs-docs-home,
+.bs-header {
+  color: white;
+  background: #b94846 url("../images/triangular-red.png");
+  padding-bottom: 20px;
+}
+/* Echo out a label for the example */
+pre > code {
+  background: transparent;
+}
+.bs-example + .highlight {
+  position: relative;
+}
+.bs-example + .highlight code {
+  padding: 2.5em 0.5em 1em;
+}
+.bs-example + .highlight:after {
+  content: "Source";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.edit-plunkr,
+a[ng-click] {
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  cursor: pointer;
+}
+.panel-heading[role="tab"] .panel-title a {
+  cursor: pointer;
+}
+.twitter-follow-button {
+  position: relative;
+  top: 5px;
+  margin-left: 10px;
+}
+.tab-pane.am-fade {
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+  opacity: 1;
+}
+.tab-pane.am-fade.active-remove {
+  display: none !important;
+}
+.tab-pane.am-fade.active-add {
+  animation-name: fadeIn;
+}
+.panel-collapse.am-collapse {
+  animation-duration: .3s;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+  overflow: hidden;
+}
+.panel-collapse.am-collapse.in-remove {
+  animation-name: collapse;
+  display: block;
+}
+.panel-collapse.am-collapse.in-add {
+  animation-name: expand;
+}
+.panel-collapse.am-collapse2 {
+  transition: 0.3s ease max-height;
+  max-height: 100px;
+  overflow: hidden;
+}
+.panel-collapse.am-collapse2.in-remove {
+  max-height: 100px;
+  display: block;
+}
+.panel-collapse.am-collapse2.in-add {
+  max-height: 0px;
+}
+@keyframes expand {
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 100px;
+  }
+}
+@keyframes collapse {
+  from {
+    max-height: 100px;
+  }
+  to {
+    max-height: 0px;
+  }
+}
+
+
+
+/**
+ * angular-motion
+ * @version v0.4.2 - 2015-05-20
+ * @link https://github.com/mgcrea/angular-motion
+ * @author Olivier Louvignes <olivier@mg-crea.com> (https://github.com/mgcrea)
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+.am-collapse{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease;animation-timing-function:ease;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards;overflow:hidden;opacity:1}.am-collapse.am-collapse-add,.am-collapse.ng-hide-remove,.am-collapse.ng-move{-webkit-animation-name:expand;animation-name:expand}.am-collapse.am-collapse-remove,.am-collapse.ng-hide{-webkit-animation-name:collapse;animation-name:collapse}.am-collapse.ng-enter{visibility:hidden;-webkit-animation-name:expand;animation-name:expand;-webkit-animation-play-state:paused;animation-play-state:paused}.am-collapse.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-collapse.ng-leave{-webkit-animation-name:collapse;animation-name:collapse;-webkit-animation-play-state:paused;animation-play-state:paused}.am-collapse.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}@-webkit-keyframes expand{from{max-height:0}to{max-height:500px}}@keyframes expand{from{max-height:0}to{max-height:500px}}@-webkit-keyframes collapse{from{max-height:500px}to{max-height:0}}@keyframes collapse{from{max-height:500px}to{max-height:0}}.panel-collapse.am-collapse.in-remove{-webkit-animation-name:collapse;animation-name:collapse;display:block}.panel-collapse.am-collapse.in-add{-webkit-animation-name:expand;animation-name:expand}.am-fade{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:linear;animation-timing-function:linear;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards;opacity:1}.am-fade.am-fade-add,.am-fade.ng-hide-remove,.am-fade.ng-move{-webkit-animation-name:fadeIn;animation-name:fadeIn}.am-fade.am-fade-remove,.am-fade.ng-hide{-webkit-animation-name:fadeOut;animation-name:fadeOut}.am-fade.ng-enter{visibility:hidden;-webkit-animation-name:fadeIn;animation-name:fadeIn;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-fade.ng-leave{-webkit-animation-name:fadeOut;animation-name:fadeOut;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}@-webkit-keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@-webkit-keyframes fadeOut{from{opacity:1}to{opacity:0}}@keyframes fadeOut{from{opacity:1}to{opacity:0}}.tab-pane.am-fade.active-remove{display:none!important}.tab-pane.am-fade.active-add{-webkit-animation-name:fadeIn;animation-name:fadeIn}.aside-backdrop.am-fade,.modal-backdrop.am-fade{background:rgba(0,0,0,.5);-webkit-animation-duration:.15s;animation-duration:.15s}.aside-backdrop.am-fade.ng-leave,.modal-backdrop.am-fade.ng-leave{-webkit-animation-delay:.3s;animation-delay:.3s}.am-flip-x{-webkit-animation-duration:.4s;animation-duration:.4s;-webkit-animation-timing-function:ease;animation-timing-function:ease;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-flip-x.am-flip-x-add,.am-flip-x.ng-hide-remove,.am-flip-x.ng-move{-webkit-animation-name:flipInXBounce;animation-name:flipInXBounce}.am-flip-x.am-flip-x-remove,.am-flip-x.ng-hide{-webkit-animation-name:flipOutX;animation-name:flipOutX}.am-flip-x.ng-enter{visibility:hidden;-webkit-animation-name:flipInXBounce;animation-name:flipInXBounce;-webkit-animation-play-state:paused;animation-play-state:paused}.am-flip-x.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-flip-x.ng-leave{-webkit-animation-name:flipOutX;animation-name:flipOutX;-webkit-animation-play-state:paused;animation-play-state:paused}.am-flip-x.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}.am-flip-x-linear{-webkit-animation-duration:.4s;animation-duration:.4s;-webkit-animation-timing-function:ease;animation-timing-function:ease;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-flip-x-linear.am-flip-x-add,.am-flip-x-linear.ng-hide-remove,.am-flip-x-linear.ng-move{-webkit-animation-name:flipInX;animation-name:flipInX}.am-flip-x-linear.am-flip-x-remove,.am-flip-x-linear.ng-hide{-webkit-animation-name:flipOutX;animation-name:flipOutX}.am-flip-x-linear.ng-enter{visibility:hidden;-webkit-animation-name:flipInX;animation-name:flipInX;-webkit-animation-play-state:paused;animation-play-state:paused}.am-flip-x-linear.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-flip-x-linear.ng-leave{-webkit-animation-name:flipOutX;animation-name:flipOutX;-webkit-animation-play-state:paused;animation-play-state:paused}.am-flip-x-linear.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}@-webkit-keyframes flipInX{from{opacity:0;-webkit-transform:perspective(400px) rotateX(90deg);transform:perspective(400px) rotateX(90deg)}to{opacity:1;-webkit-transform:perspective(400px) rotateX(0deg);transform:perspective(400px) rotateX(0deg)}}@keyframes flipInX{from{opacity:0;-webkit-transform:perspective(400px) rotateX(90deg);transform:perspective(400px) rotateX(90deg)}to{opacity:1;-webkit-transform:perspective(400px) rotateX(0deg);transform:perspective(400px) rotateX(0deg)}}@-webkit-keyframes flipInXBounce{from{opacity:0;-webkit-transform:perspective(400px) rotateX(90deg);transform:perspective(400px) rotateX(90deg)}40%{-webkit-transform:perspective(400px) rotateX(-10deg);transform:perspective(400px) rotateX(-10deg)}70%{-webkit-transform:perspective(400px) rotateX(10deg);transform:perspective(400px) rotateX(10deg)}to{opacity:1;-webkit-transform:perspective(400px) rotateX(0deg);transform:perspective(400px) rotateX(0deg)}}@keyframes flipInXBounce{from{opacity:0;-webkit-transform:perspective(400px) rotateX(90deg);transform:perspective(400px) rotateX(90deg)}40%{-webkit-transform:perspective(400px) rotateX(-10deg);transform:perspective(400px) rotateX(-10deg)}70%{-webkit-transform:perspective(400px) rotateX(10deg);transform:perspective(400px) rotateX(10deg)}to{opacity:1;-webkit-transform:perspective(400px) rotateX(0deg);transform:perspective(400px) rotateX(0deg)}}@-webkit-keyframes flipOutX{from{opacity:1;-webkit-transform:perspective(400px) rotateX(0deg);transform:perspective(400px) rotateX(0deg)}to{opacity:0;-webkit-transform:perspective(400px) rotateX(90deg);transform:perspective(400px) rotateX(90deg)}}@keyframes flipOutX{from{opacity:1;-webkit-transform:perspective(400px) rotateX(0deg);transform:perspective(400px) rotateX(0deg)}to{opacity:0;-webkit-transform:perspective(400px) rotateX(90deg);transform:perspective(400px) rotateX(90deg)}}.am-slide-top{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-slide-top.am-slide-top-add,.am-slide-top.ng-hide-remove,.am-slide-top.ng-move{-webkit-animation-name:slideFromTop;animation-name:slideFromTop}.am-slide-top.am-slide-top-remove,.am-slide-top.ng-hide{-webkit-animation-name:slideToTop;animation-name:slideToTop}.am-slide-top.ng-enter{visibility:hidden;-webkit-animation-name:slideFromTop;animation-name:slideFromTop;-webkit-animation-play-state:paused;animation-play-state:paused}.am-slide-top.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-slide-top.ng-leave{-webkit-animation-name:slideToTop;animation-name:slideToTop;-webkit-animation-play-state:paused;animation-play-state:paused}.am-slide-top.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}.am-slide-right{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-slide-right.am-slide-right-add,.am-slide-right.ng-hide-remove,.am-slide-right.ng-move{-webkit-animation-name:slideFromRight;animation-name:slideFromRight}.am-slide-right.am-slide-right-remove,.am-slide-right.ng-hide{-webkit-animation-name:slideToRight;animation-name:slideToRight}.am-slide-right.ng-enter{visibility:hidden;-webkit-animation-name:slideFromRight;animation-name:slideFromRight;-webkit-animation-play-state:paused;animation-play-state:paused}.am-slide-right.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-slide-right.ng-leave{-webkit-animation-name:slideToRight;animation-name:slideToRight;-webkit-animation-play-state:paused;animation-play-state:paused}.am-slide-right.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}.am-slide-bottom{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-slide-bottom.am-slide-bottom-add,.am-slide-bottom.ng-hide-remove,.am-slide-bottom.ng-move{-webkit-animation-name:slideFromBottom;animation-name:slideFromBottom}.am-slide-bottom.am-slide-bottom-remove,.am-slide-bottom.ng-hide{-webkit-animation-name:slideToBottom;animation-name:slideToBottom}.am-slide-bottom.ng-enter{visibility:hidden;-webkit-animation-name:slideFromBottom;animation-name:slideFromBottom;-webkit-animation-play-state:paused;animation-play-state:paused}.am-slide-bottom.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-slide-bottom.ng-leave{-webkit-animation-name:slideToBottom;animation-name:slideToBottom;-webkit-animation-play-state:paused;animation-play-state:paused}.am-slide-bottom.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}.am-slide-left{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-slide-left.am-slide-left-add,.am-slide-left.ng-hide-remove,.am-slide-left.ng-move{-webkit-animation-name:slideFromLeft;animation-name:slideFromLeft}.am-slide-left.am-slide-left-remove,.am-slide-left.ng-hide{-webkit-animation-name:slideToLeft;animation-name:slideToLeft}.am-slide-left.ng-enter{visibility:hidden;-webkit-animation-name:slideFromLeft;animation-name:slideFromLeft;-webkit-animation-play-state:paused;animation-play-state:paused}.am-slide-left.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-slide-left.ng-leave{-webkit-animation-name:slideToLeft;animation-name:slideToLeft;-webkit-animation-play-state:paused;animation-play-state:paused}.am-slide-left.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}@-webkit-keyframes slideFromTop{from{-webkit-transform:translateY(-100%);transform:translateY(-100%)}}@keyframes slideFromTop{from{-webkit-transform:translateY(-100%);transform:translateY(-100%)}}@-webkit-keyframes slideToTop{to{-webkit-transform:translateY(-100%);transform:translateY(-100%)}}@keyframes slideToTop{to{-webkit-transform:translateY(-100%);transform:translateY(-100%)}}@-webkit-keyframes slideFromRight{from{-webkit-transform:translateX(100%);transform:translateX(100%)}}@keyframes slideFromRight{from{-webkit-transform:translateX(100%);transform:translateX(100%)}}@-webkit-keyframes slideToRight{to{-webkit-transform:translateX(100%);transform:translateX(100%)}}@keyframes slideToRight{to{-webkit-transform:translateX(100%);transform:translateX(100%)}}@-webkit-keyframes slideFromBottom{from{-webkit-transform:translateY(100%);transform:translateY(100%)}}@keyframes slideFromBottom{from{-webkit-transform:translateY(100%);transform:translateY(100%)}}@-webkit-keyframes slideToBottom{to{-webkit-transform:translateY(100%);transform:translateY(100%)}}@keyframes slideToBottom{to{-webkit-transform:translateY(100%);transform:translateY(100%)}}@-webkit-keyframes slideFromLeft{from{-webkit-transform:translateX(-100%);transform:translateX(-100%)}}@keyframes slideFromLeft{from{-webkit-transform:translateX(-100%);transform:translateX(-100%)}}@-webkit-keyframes slideToLeft{to{-webkit-transform:translateX(-100%);transform:translateX(-100%)}}@keyframes slideToLeft{to{-webkit-transform:translateX(-100%);transform:translateX(-100%)}}.am-fade-and-slide-top{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-fade-and-slide-top.am-fade-and-slide-top-add,.am-fade-and-slide-top.ng-hide-remove,.am-fade-and-slide-top.ng-move{-webkit-animation-name:fadeAndSlideFromTop;animation-name:fadeAndSlideFromTop}.am-fade-and-slide-top.am-fade-and-slide-top-remove,.am-fade-and-slide-top.ng-hide{-webkit-animation-name:fadeAndSlideToTop;animation-name:fadeAndSlideToTop}.am-fade-and-slide-top.ng-enter{visibility:hidden;-webkit-animation-name:fadeAndSlideFromTop;animation-name:fadeAndSlideFromTop;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-slide-top.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-fade-and-slide-top.ng-leave{-webkit-animation-name:fadeAndSlideToTop;animation-name:fadeAndSlideToTop;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-slide-top.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}.am-fade-and-slide-right{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-fade-and-slide-right.am-fade-and-slide-right-add,.am-fade-and-slide-right.ng-hide-remove,.am-fade-and-slide-right.ng-move{-webkit-animation-name:fadeAndSlideFromRight;animation-name:fadeAndSlideFromRight}.am-fade-and-slide-right.am-fade-and-slide-right-remove,.am-fade-and-slide-right.ng-hide{-webkit-animation-name:fadeAndSlideToRight;animation-name:fadeAndSlideToRight}.am-fade-and-slide-right.ng-enter{visibility:hidden;-webkit-animation-name:fadeAndSlideFromRight;animation-name:fadeAndSlideFromRight;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-slide-right.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-fade-and-slide-right.ng-leave{-webkit-animation-name:fadeAndSlideToRight;animation-name:fadeAndSlideToRight;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-slide-right.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}.am-fade-and-slide-bottom{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-fade-and-slide-bottom.am-fade-and-slide-bottom-add,.am-fade-and-slide-bottom.ng-hide-remove,.am-fade-and-slide-bottom.ng-move{-webkit-animation-name:fadeAndSlideFromBottom;animation-name:fadeAndSlideFromBottom}.am-fade-and-slide-bottom.am-fade-and-slide-bottom-remove,.am-fade-and-slide-bottom.ng-hide{-webkit-animation-name:fadeAndSlideToBottom;animation-name:fadeAndSlideToBottom}.am-fade-and-slide-bottom.ng-enter{visibility:hidden;-webkit-animation-name:fadeAndSlideFromBottom;animation-name:fadeAndSlideFromBottom;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-slide-bottom.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-fade-and-slide-bottom.ng-leave{-webkit-animation-name:fadeAndSlideToBottom;animation-name:fadeAndSlideToBottom;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-slide-bottom.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}.am-fade-and-slide-left{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-fade-and-slide-left.am-fade-and-slide-left-add,.am-fade-and-slide-left.ng-hide-remove,.am-fade-and-slide-left.ng-move{-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards;-webkit-animation-name:fadeAndSlideFromLeft;animation-name:fadeAndSlideFromLeft}.am-fade-and-slide-left.am-fade-and-slide-left-remove,.am-fade-and-slide-left.ng-hide{-webkit-animation-name:fadeAndSlideToLeft;animation-name:fadeAndSlideToLeft}.am-fade-and-slide-left.ng-enter{visibility:hidden;-webkit-animation-name:fadeAndSlideFromLeft;animation-name:fadeAndSlideFromLeft;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-slide-left.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-fade-and-slide-left.ng-leave{-webkit-animation-name:fadeAndSlideToLeft;animation-name:fadeAndSlideToLeft;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-slide-left.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}@-webkit-keyframes fadeAndSlideFromTop{from{opacity:0;-webkit-transform:translateY(-20%);transform:translateY(-20%)}to{opacity:1}}@keyframes fadeAndSlideFromTop{from{opacity:0;-webkit-transform:translateY(-20%);transform:translateY(-20%)}to{opacity:1}}@-webkit-keyframes fadeAndSlideToTop{from{opacity:1}to{opacity:0;-webkit-transform:translateY(-20%);transform:translateY(-20%)}}@keyframes fadeAndSlideToTop{from{opacity:1}to{opacity:0;-webkit-transform:translateY(-20%);transform:translateY(-20%)}}@-webkit-keyframes fadeAndSlideFromRight{from{opacity:0;-webkit-transform:translateX(20%);transform:translateX(20%)}to{opacity:1}}@keyframes fadeAndSlideFromRight{from{opacity:0;-webkit-transform:translateX(20%);transform:translateX(20%)}to{opacity:1}}@-webkit-keyframes fadeAndSlideToRight{from{opacity:1}to{opacity:0;-webkit-transform:translateX(20%);transform:translateX(20%)}}@keyframes fadeAndSlideToRight{from{opacity:1}to{opacity:0;-webkit-transform:translateX(20%);transform:translateX(20%)}}@-webkit-keyframes fadeAndSlideFromBottom{from{opacity:0;-webkit-transform:translateY(20%);transform:translateY(20%)}to{opacity:1}}@keyframes fadeAndSlideFromBottom{from{opacity:0;-webkit-transform:translateY(20%);transform:translateY(20%)}to{opacity:1}}@-webkit-keyframes fadeAndSlideToBottom{from{opacity:1}to{opacity:0;-webkit-transform:translateY(20%);transform:translateY(20%)}}@keyframes fadeAndSlideToBottom{from{opacity:1}to{opacity:0;-webkit-transform:translateY(20%);transform:translateY(20%)}}@-webkit-keyframes fadeAndSlideFromLeft{from{opacity:0;-webkit-transform:translateX(-20%);transform:translateX(-20%)}to{opacity:1}}@keyframes fadeAndSlideFromLeft{from{opacity:0;-webkit-transform:translateX(-20%);transform:translateX(-20%)}to{opacity:1}}@-webkit-keyframes fadeAndSlideToLeft{from{opacity:1}to{opacity:0;-webkit-transform:translateX(-20%);transform:translateX(-20%)}}@keyframes fadeAndSlideToLeft{from{opacity:1}to{opacity:0;-webkit-transform:translateX(-20%);transform:translateX(-20%)}}.am-fade-and-scale{-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards}.am-fade-and-scale.am-fade-and-scale-add,.am-fade-and-scale.ng-enter,.am-fade-and-scale.ng-hide-remove,.am-fade-and-scale.ng-move{-webkit-animation-name:fadeAndScaleIn;animation-name:fadeAndScaleIn}.am-fade-and-scale.am-fade-and-scale-remove,.am-fade-and-scale.ng-hide,.am-fade-and-scale.ng-leave{-webkit-animation-name:fadeAndScaleOut;animation-name:fadeAndScaleOut}.am-fade-and-scale.ng-enter{visibility:hidden;-webkit-animation-name:fadeAndScaleIn;animation-name:fadeAndScaleIn;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-scale.ng-enter.ng-enter-active{visibility:visible;-webkit-animation-play-state:running;animation-play-state:running}.am-fade-and-scale.ng-leave{-webkit-animation-name:fadeAndScaleOut;animation-name:fadeAndScaleOut;-webkit-animation-play-state:paused;animation-play-state:paused}.am-fade-and-scale.ng-leave.ng-leave-active{-webkit-animation-play-state:running;animation-play-state:running}@-webkit-keyframes fadeAndScaleIn{from{opacity:0;-webkit-transform:scale(0.7);transform:scale(0.7)}to{opacity:1}}@keyframes fadeAndScaleIn{from{opacity:0;-webkit-transform:scale(0.7);transform:scale(0.7)}to{opacity:1}}@-webkit-keyframes fadeAndScaleOut{from{opacity:1}to{opacity:0;-webkit-transform:scale(0.7);transform:scale(0.7)}}@keyframes fadeAndScaleOut{from{opacity:1}to{opacity:0;-webkit-transform:scale(0.7);transform:scale(0.7)}}
+/*# sourceMappingURL=angular-motion.min.css.map */
+/**
+ * bootstrap-additions
+ * @version v0.3.1 - 2015-05-20
+ * @link https://github.com/mgcrea/bootstrap-additions
+ * @author Olivier Louvignes <olivier@mg-crea.com> (https://github.com/mgcrea)
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+@media (max-width:991px){.aside{min-width:240px}}.alert{outline:0}.alert.bottom,.alert.bottom-left,.alert.bottom-right,.alert.top,.alert.top-left,.alert.top-right{position:fixed;z-index:1050;margin:20px}.alert.top,.alert.top-left,.alert.top-right{top:50px}.alert.top{right:0;left:0}.alert.top-right{right:0}.alert.top-right .close{padding-left:10px}.alert.top-left{left:0}.alert.top-left .close{padding-right:10px}.alert.bottom,.alert.bottom-left,.alert.bottom-right{bottom:0}.alert.bottom{right:0;left:0}.alert.bottom-right{right:0}.alert.bottom-right .close{padding-left:10px}.alert.bottom-left{left:0}.alert.bottom-left .close{padding-right:10px}.aside .aside-dialog .aside-footer:after,.aside .aside-dialog .aside-footer:before,.btn-group-vertical>.btn-group:after,.btn-group-vertical>.btn-group:before,.btn-toolbar:after,.btn-toolbar:before,.container-fluid:after,.container-fluid:before,.container:after,.container:before,.dl-horizontal dd:after,.dl-horizontal dd:before,.form-horizontal .form-group:after,.form-horizontal .form-group:before,.modal-footer:after,.modal-footer:before,.nav:after,.nav:before,.navbar-collapse:after,.navbar-collapse:before,.navbar-header:after,.navbar-header:before,.navbar:after,.navbar:before,.pager:after,.pager:before,.panel-body:after,.panel-body:before,.row:after,.row:before{content:" ";display:table}.aside .aside-dialog .aside-footer:after,.btn-group-vertical>.btn-group:after,.btn-toolbar:after,.container-fluid:after,.container:after,.dl-horizontal dd:after,.form-horizontal .form-group:after,.modal-footer:after,.nav:after,.navbar-collapse:after,.navbar-header:after,.navbar:after,.pager:after,.panel-body:after,.row:after{clear:both}.aside{position:fixed;top:0;bottom:0;z-index:1049;overflow:auto;min-width:320px;background:#fff}.aside:focus{outline:0}@media (max-width:991px){.aside{min-width:240px}}.aside.left{right:auto;left:0}.aside.right{right:0;left:auto}.aside .aside-dialog .aside-header{border-bottom:1px solid #e5e5e5;min-height:16.43px;padding:6px 15px;background:#337ab7;color:#fff}.aside .aside-dialog .aside-header .close{margin-right:-8px;padding:4px 8px;color:#fff;font-size:25px;opacity:.8}.aside .aside-dialog .aside-body{position:relative;padding:15px}.aside .aside-dialog .aside-footer{padding:15px;text-align:right;border-top:1px solid #e5e5e5}.aside .aside-dialog .aside-footer .btn+.btn{margin-left:5px;margin-bottom:0}.aside .aside-dialog .aside-footer .btn-group .btn+.btn{margin-left:-1px}.aside .aside-dialog .aside-footer .btn-block+.btn-block{margin-left:0}.aside-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1040;background-color:#000}.aside-backdrop.fade{opacity:0;filter:alpha(opacity=0)}.aside-backdrop.in{opacity:.5;filter:alpha(opacity=50)}.datepicker.dropdown-menu{width:250px;height:270px}.datepicker.dropdown-menu button{outline:0;border:0}.datepicker.dropdown-menu tbody{height:180px}.datepicker.dropdown-menu tbody button{padding:6px}.datepicker.dropdown-menu.datepicker-mode-1 tbody button,.datepicker.dropdown-menu.datepicker-mode-2 tbody button{height:65px}.callout{margin:20px 0;padding:20px;border-left:3px solid #eee}.callout h4{margin-top:0;margin-bottom:5px}.callout p:last-child{margin-bottom:0}.callout-danger{border-color:#eed3d7;background-color:#fdf7f7}.callout-danger h4{color:#b94a48}.callout-warning{border-color:#faebcc;background-color:#faf8f0}.callout-warning h4{color:#8a6d3b}.callout-info{border-color:#bce8f1;background-color:#f4f8fa}.callout-info h4{color:#34789a}.modal.center .modal-dialog{position:fixed;top:40%;left:50%;min-width:320px;max-width:630px;width:50%;-webkit-transform:translateX(-50%) translateY(-50%);-ms-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%)}.popover.top-left{margin-top:-10px}.popover.top-left .arrow{margin-left:-11px;border-bottom-width:0;border-top-color:#999;border-top-color:rgba(0,0,0,.25);bottom:-11px;left:10%}.popover.top-left .arrow:after{content:" ";bottom:1px;margin-left:-10px;border-bottom-width:0;border-top-color:#fff}.popover.top-right{margin-top:-10px}.popover.top-right .arrow{margin-left:-11px;border-bottom-width:0;border-top-color:#999;border-top-color:rgba(0,0,0,.25);bottom:-11px;left:90%}.popover.top-right .arrow:after{content:" ";bottom:1px;margin-left:-10px;border-bottom-width:0;border-top-color:#fff}.popover.bottom-left{margin-top:10px}.popover.bottom-left .arrow{margin-left:-11px;border-top-width:0;border-bottom-color:#999;border-bottom-color:rgba(0,0,0,.25);top:-11px;left:10%}.popover.bottom-left .arrow:after{content:" ";top:1px;margin-left:-10px;border-top-width:0;border-bottom-color:#fff}.popover.bottom-right{margin-top:10px}.popover.bottom-right .arrow{margin-left:-11px;border-top-width:0;border-bottom-color:#999;border-bottom-color:rgba(0,0,0,.25);top:-11px;left:90%}.popover.bottom-right .arrow:after{content:" ";top:1px;margin-left:-10px;border-top-width:0;border-bottom-color:#fff}.timepicker.dropdown-menu{padding:0 4px}.timepicker.dropdown-menu button{outline:0;border:0}.timepicker.dropdown-menu tbody button{padding:6px}.carousel-inner>.item>a>img,.carousel-inner>.item>img,.thumbnail a>img,.thumbnail>img{display:block;max-width:100%;height:auto}.btn-group-lg>.btn{padding:10px 16px;font-size:18px;line-height:1.3333333;border-radius:6px}.btn-group-sm>.btn{padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px}.btn-group-xs>.btn{padding:1px 5px;font-size:12px;line-height:1.5;border-radius:3px}.btn-group-vertical>.btn-group:after,.btn-group-vertical>.btn-group:before,.btn-toolbar:after,.btn-toolbar:before,.container-fluid:after,.container-fluid:before,.container:after,.container:before,.dl-horizontal dd:after,.dl-horizontal dd:before,.form-horizontal .form-group:after,.form-horizontal .form-group:before,.modal-footer:after,.modal-footer:before,.nav:after,.nav:before,.navbar-collapse:after,.navbar-collapse:before,.navbar-header:after,.navbar-header:before,.navbar:after,.navbar:before,.pager:after,.pager:before,.panel-body:after,.panel-body:before,.row:after,.row:before{content:" ";display:table}.btn-group-vertical>.btn-group:after,.btn-toolbar:after,.container-fluid:after,.container:after,.dl-horizontal dd:after,.form-horizontal .form-group:after,.modal-footer:after,.nav:after,.navbar-collapse:after,.navbar-header:after,.navbar:after,.pager:after,.panel-body:after,.row:after{clear:both}.tooltip.tooltip-info.top .tooltip-arrow,.tooltip.tooltip-info.top-left .tooltip-arrow,.tooltip.tooltip-info.top-right .tooltip-arrow{border-top-color:#d9edf7}.tooltip.tooltip-info.right .tooltip-arrow{border-right-color:#d9edf7}.tooltip.tooltip-info.bottom .tooltip-arrow,.tooltip.tooltip-info.bottom-left .tooltip-arrow,.tooltip.tooltip-info.bottom-right .tooltip-arrow{border-bottom-color:#d9edf7}.tooltip.tooltip-info.left .tooltip-arrow{border-left-color:#d9edf7}.tooltip.tooltip-info .tooltip-inner{background-color:#d9edf7;border-color:#bce8f1;color:#31708f}.tooltip.tooltip-info .tooltip-inner hr{border-top-color:#a6e1ec}.tooltip.tooltip-info .tooltip-inner .alert-link{color:#245269}.tooltip.tooltip-success.top .tooltip-arrow,.tooltip.tooltip-success.top-left .tooltip-arrow,.tooltip.tooltip-success.top-right .tooltip-arrow{border-top-color:#dff0d8}.tooltip.tooltip-success.right .tooltip-arrow{border-right-color:#dff0d8}.tooltip.tooltip-success.bottom .tooltip-arrow,.tooltip.tooltip-success.bottom-left .tooltip-arrow,.tooltip.tooltip-success.bottom-right .tooltip-arrow{border-bottom-color:#dff0d8}.tooltip.tooltip-success.left .tooltip-arrow{border-left-color:#dff0d8}.tooltip.tooltip-success .tooltip-inner{background-color:#dff0d8;border-color:#d6e9c6;color:#3c763d}.tooltip.tooltip-success .tooltip-inner hr{border-top-color:#c9e2b3}.tooltip.tooltip-success .tooltip-inner .alert-link{color:#2b542c}.tooltip.tooltip-danger.top .tooltip-arrow,.tooltip.tooltip-danger.top-left .tooltip-arrow,.tooltip.tooltip-danger.top-right .tooltip-arrow{border-top-color:#f2dede}.tooltip.tooltip-danger.right .tooltip-arrow{border-right-color:#f2dede}.tooltip.tooltip-danger.bottom .tooltip-arrow,.tooltip.tooltip-danger.bottom-left .tooltip-arrow,.tooltip.tooltip-danger.bottom-right .tooltip-arrow{border-bottom-color:#f2dede}.tooltip.tooltip-danger.left .tooltip-arrow{border-left-color:#f2dede}.tooltip.tooltip-danger .tooltip-inner{background-color:#f2dede;border-color:#ebccd1;color:#a94442}.tooltip.tooltip-danger .tooltip-inner hr{border-top-color:#e4b9c0}.tooltip.tooltip-danger .tooltip-inner .alert-link{color:#843534}.tooltip.top-left{margin-top:-3px;padding:5px 0}.tooltip.top-left .tooltip-arrow{bottom:0;margin-left:-5px;border-width:5px 5px 0;border-top-color:#000;left:10%}.tooltip.top-right{margin-top:-3px;padding:5px 0}.tooltip.top-right .tooltip-arrow{bottom:0;margin-left:-5px;border-width:5px 5px 0;border-top-color:#000;left:90%}.tooltip.bottom-left{margin-top:3px;padding:5px 0}.tooltip.bottom-left .tooltip-arrow{top:0;margin-left:-5px;border-width:0 5px 5px;border-bottom-color:#000;left:10%}.tooltip.bottom-right{margin-top:3px;padding:5px 0}.tooltip.bottom-right .tooltip-arrow{top:0;margin-left:-5px;border-width:0 5px 5px;border-bottom-color:#000;left:90%}
+/*# sourceMappingURL=bootstrap-additions.min.css.map */

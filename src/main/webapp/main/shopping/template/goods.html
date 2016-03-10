@@ -1,0 +1,75 @@
+<div class="shopping-goods container-fluid" ng-controller="goodsMainController">
+	<!--HEAD-->
+	<div class="goods-head row">
+		<div class="shopping-nav-bar clearfloat">
+			<!-- span class="shopping-nav-labels" ng-bind="$state.current.label"></span> -->
+			<span class="shopping-nav-btn shopping-cart-btn pull-right">
+				<i class="shopping-cart-icon fa fa-shopping-cart" ng-click="goMyCartPage()"></i>
+				<i class="shopping-cart-count" ng-show="myCartCount > 0" ng-bind="myCartCountStr"></i>
+			</span>
+			<span class="shopping-nav-btn shopping-order-btn btn btn-default pull-right" ng-if="$state.current.name != 'shopping.detail'" ng-click="goMyOrdersPage()">我的订单</span>
+			<span class="shopping-nav-btn shopping-back-btn btn btn-default pull-right" ng-if="$state.current.name != 'shopping'" ng-click="goBackMainPage()">返回购物页面</span>
+		</div>
+	</div>
+	
+	<!-- slider -->
+	<div class="row slider" ng-if="$state.current.name == 'shopping'">
+		<img ng-src="{{goodsImgs.slider}}" />
+	</div>
+	
+	<!--SUB-VIEW-->
+	<div ng-if="$state.current.name != 'shopping'" class="sub-view" ui-view style="padding:20px 0px;"></div>
+	<!--BODY-->
+	<div ng-if="$state.current.name == 'shopping'" ng-controller="goodsController">			
+		<ul class="type nav nav-pills">
+		  <li role="presentation" ng-repeat="(key, item) in goods.category" ng-click="setActive(key)" class="list-group-item" ng-class="{'active':active==key}" ><a href="javascript:void(0);">{{item.categoryname}}</a></li>
+		</ul>	
+	
+		<!-- recommend -->
+		<div class="row recommend" ng-if="active<=0">
+			<img ng-src="{{goodsImgs.recommend}}" />
+			<a class="btn" style="top:315px;right:430px;" href="#/goods/detail/1">&nbsp;</a>
+			<a class="btn" style="bottom:23px;right:702px;" href="#/goods/detail/3">&nbsp;</a>
+			<a class="btn" style="bottom:23px;right:449px;" href="#/goods/detail/2">&nbsp;</a>
+		</div>
+		
+		<div class="goods-content row">
+			<div class="goods-list">
+				<i ng-repeat-start="ware in goods.list"></i>
+					<span class="goods-item" ng-click="goods.enterDetail(ware)">
+						<a class="goods-img">
+							<img ng-src="{{ware.imageurlmiddle}}"/>
+						</a>
+						<span class="goods-price"><b ng-bind="ware.priceStr"></b></span>
+						<span class="goods-memo" ng-bind="ware.name"></span>
+						<!-- span class="goods-stock" ng-if="ware.stocknum > 0">有货</span>
+						<span class="goods-stock" ng-if="ware.stocknum <= 0">无货</span> -->
+					</span> 
+				<i ng-repeat-end></i>
+				<!-- <span class="justify_fix"></span> -->
+				<span class="left_fix">&nbsp;</span>
+				<span class="left_fix">&nbsp;</span>
+				<span class="left_fix">&nbsp;</span>
+				<span class="left_fix">&nbsp;</span>
+				<span class="left_fix">&nbsp;</span>
+				<span class="left_fix">&nbsp;</span>
+			</div>
+			<div class="empty-list-warning" ng-if="initFlag && (!goods.list || goods.list.length == 0)">
+				<i class="empty-list-warning-icon fa fa-wrench"></i>
+				<span class="empty-list-warning-conclusion">&nbsp;商品正在扩充中...&nbsp;敬请期待</span>
+			</div>
+			<div class="goods-page">
+				<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="totalItems" ng-model="currentPage" items-per-page="pageCount" max-size="maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+<!--
+	.hms-home_view{
+		width:1366px;
+		padding:0;
+		margin:0 auto;
+	}
+-->
+</style>

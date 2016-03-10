@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<file>${catalina.base}/logs/hms.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${catalina.base}/logs/hms.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+			 <maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%-20(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{80} - %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<root level="info">
+		<appender-ref ref="file" />
+	</root>
+
+	<logger name="jdbc.connection" additivity="false" level="ERROR">
+		<appender-ref ref="file" />
+	</logger>
+	<logger name="jdbc.resultset" additivity="false" level="ERROR">
+		<appender-ref ref="file" />
+	</logger>
+	<logger name="jdbc.audit" additivity="false" level="WARN">
+		<appender-ref ref="file" />
+	</logger>
+	<logger name="jdbc.sqlonly" additivity="false" level="WARN">
+		<appender-ref ref="file" />
+	</logger>
+	<logger name="jdbc.sqltiming" additivity="false" level="ERROR">
+		<appender-ref ref="file" />
+	</logger>
+
+	<logger name="org.springframework.beans" additivity="false" level="WARN">
+		<appender-ref ref="file" />
+	</logger>
+
+	<!--生产环境下com.mk.hms包不包括子包(websocket、mapper包)，设置为DEBUG级别输出，便于定位问题-->
+	<logger name="com.mk.hms" additivity="false" level="DEBUG">
+		<appender-ref ref="file"/>
+	</logger>
+	<!--关闭websocket日志输出-->
+	<logger name="com.mk.hms.websocket" additivity="false" level="WARN">
+		<appender-ref ref="file" />
+	</logger>
+	<!--生产环境下mapper包日志设置为INFO级别输出-->
+	<logger name="com.mk.hms.mapper" additivity="false" level="DEBUG">
+		<appender-ref ref="file"/>
+	</logger>
+
+</configuration>  

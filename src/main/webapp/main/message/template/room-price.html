@@ -1,0 +1,85 @@
+<div ng-controller="roomPriceController">
+	<div class="memo-contrainer-bottom" hms-Affix>
+		<div class="row">
+			<div class="col-md-6">
+			<h3 class="title">{{roomType.name}}房价设置</h3>
+			</div>
+			<div class="col-md-offset-3 col-md-3">
+				<div class="btn btn-success  btn-danger" ng-show="!readOnly" ng-click="save()">
+					<i class="glyphicon glyphicon-save"></i>
+					保存
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-11">
+				<p class="memo">门市价：</p>
+				<div class="row">
+					<div class="col-md-12">
+						<h4>{{roomType.cost | currency}}<small>     元</small></h4>
+					</div>
+				</div>
+				<br/>
+				<p class="memo">眯客价（OTA价）：</p>
+				<form class="form-horizontal" name="roomPriceForm">				
+				  	<div class="form-group">
+						<div class="col-md-3">
+							<div class="hms-radio">
+								<input name="price" id="rad_price" type="radio" ng-model="priceType" value='price'>
+								<label for="rad_price"></label>
+							</div>
+						</div>
+						<div class="col-md-3">							
+							<div class="input-group">
+							    <input type="number" class="form-control hms-input" id="price" ng-model="price.price" ng-disabled="priceType!='price'" required>
+	 							<span class="input-group-addon">元</span>
+ 							</div>					
+						</div>
+				  	</div>
+					<div class="form-group">
+						<div class="col-md-1">
+							<div class="hms-radio">
+								<input name="price" id="rad_subper" type="radio" ng-model="priceType" value='subper' >
+								<label for="rad_subper"></label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<small>下浮</small>				
+						</div>
+						<div class="col-md-3">
+							<div class="input-group">
+							    <input type="number" class="form-control hms-input" id="subper" ng-model="price.subper" ng-disabled="priceType!='subper'" required>		
+	 							<span class="input-group-addon">%</span>
+ 							</div>				
+						</div>
+						<div class="col-md-3" ng-show="priceType=='subper'">
+							<h4>{{subperPrice | currency:'' }}<small>  元</small></h4>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-1">
+							<div class="hms-radio">
+								<input name="price" id="rad_subprice" type="radio" ng-model="priceType" value='subprice'>
+								<label for="rad_subprice"></label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<small>下浮</small>				
+						</div>
+						<div class="col-md-3">
+							<div class="input-group">
+							    <input type="number" class="form-control hms-input" id="subprice" ng-model="price.subprice" ng-disabled="priceType!='subprice'" required>
+	 							<span class="input-group-addon">元</span>								
+							</div>				
+						</div>
+						<div class="col-md-3" ng-show="priceType=='subprice'">
+							<h4>{{subperPrice | currency:'' }}<small>  元</small></h4>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

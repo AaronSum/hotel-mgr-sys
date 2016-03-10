@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.hms.mapper.RoomSaleConfigMapper">
+
+	<resultMap id="roomSaleConfig" type="com.mk.hms.model.TRoomSaleConfig">
+	    <result property="id" column="id" />
+	    <result property="hotelId" column="hotelId" />
+	    <result property="roomId" column="roomId" />
+        <result property="roomTypeId" column="roomTypeId" />
+        <result property="saleType" column="saleType"/>
+        <result property="saleValue" column="saleValue" />
+        <result property="costPrice" column="costPrice" />
+        <result property="num" column="num" />
+        <result property="saleName" column="saleName" />
+        <result property="settleValue" column="settleValue" />
+        <result property="settleType" column="settleType" />
+        <result property="valid" column="valid" />
+        <result property="styleType" column="styleType" />
+        <result property="started" column="started" />
+        <result property="saleConfigInfoId" column="saleConfigInfoId" />
+        <result property="createTime" column="createTime" />
+        <result property="createBy" column="createBy" />
+        <result property="updateTime" column="updateTime" />
+        <result property="updateBy" column="updateBy" />
+        <result property="saleRoomTypeId" column="saleRoomTypeId" />
+        <result property="saleTypeId" column="saleTypeId" />
+        <result property="startDate" column="startDate" />
+        <result property="endDate" column="endDate" />
+        <result property="startTime" column="startTime" />
+        <result property="endTime" column="endTime" />
+        <result property="saleValue" column="saleValue" />
+        <result property="saleLabel" column="saleLabel" />
+        <result property="description" column="description" />
+        <result property="fontColor" column="fontColor" />
+        <result property="saleTypeName" column="saleTypeName" />
+        <result property="saleTypeValue" column="saleTypeValue" />
+        <result property="promoType" column="promoType" />
+	</resultMap>
+
+    <sql id="Base_Column_List" >
+        hotelId, roomId, roomTypeId,saleType,saleValue,costPrice,num,saleName,settleValue,settleType,valid,
+        styleType,started,saleConfigInfoId,createTime,createBy,updateTime,updateBy,saleRoomTypeId
+    </sql>
+
+    <sql id="Base_Query_List" >
+        <where>
+              1 = 1
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="hotelId != null">
+                AND hotelId = #{hotelId}
+            </if>
+            <if test="roomId != null">
+                AND roomId = #{roomId}
+            </if>
+            <if test="roomTypeId != null">
+                AND roomTypeId = #{roomTypeId}
+            </if>
+            <if test="saleName != null">
+                AND saleName = #{saleName}
+            </if>
+            <if test="saleRoomTypeId != null">
+                AND saleRoomTypeId = #{saleRoomTypeId}
+            </if>
+            <if test="settleValue != null">
+                AND settleValue = #{settleValue}
+            </if>
+            <if test="settleType != null">
+                AND settleType = #{settleType}
+            </if>
+            <if test="valid != null">
+                AND valid = #{valid}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryRoomSaleConfig" resultMap="roomSaleConfig" parameterType="com.mk.hms.model.TRoomSaleConfig">
+        SELECT
+        id,<include refid="Base_Column_List"/>
+         FROM  t_room_sale_config
+        <include refid="Base_Query_List"/>
+        limit 1
+    </select>
+
+    <select id="queryRoomSaleConfigInfo" resultMap="roomSaleConfig" parameterType="com.mk.hms.model.TRoomSaleConfig">
+        SELECT
+        id,saleTypeId
+        FROM  t_room_sale_config_info
+        where id = #{id}
+    </select>
+
+</mapper>

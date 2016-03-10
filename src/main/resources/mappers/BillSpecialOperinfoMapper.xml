@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mk.hms.mapper.BillSpecialOperinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mk.hms.model.BillSpecialOperinfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="special_id" property="specialId" jdbcType="BIGINT" />
+    <result column="billCost" property="billcost" jdbcType="DECIMAL" />
+    <result column="checkStatus" property="checkstatus" jdbcType="VARCHAR" />
+    <result column="checkStatusName" property="checkstatusname" jdbcType="VARCHAR" />
+    <result column="financeStatus" property="financestatus" jdbcType="VARCHAR" />
+    <result column="financeStatusName" property="financestatusname" jdbcType="VARCHAR" />
+    <result column="changeMoney" property="changemoney" jdbcType="DECIMAL" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="checkUserid" property="checkuserid" jdbcType="BIGINT" />
+    <result column="checkUsername" property="checkusername" jdbcType="VARCHAR" />
+    <result column="checkTime" property="checktime" jdbcType="TIMESTAMP" />
+    <result column="backUserId" property="backuserid" jdbcType="BIGINT" />
+    <result column="backUserName" property="backusername" jdbcType="VARCHAR" />
+    <result column="backTime" property="backtime" jdbcType="TIMESTAMP" />
+    <result column="backMemo" property="backmemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, special_id, billCost, checkStatus, checkStatusName, financeStatus, financeStatusName, 
+    changeMoney, note, checkUserid, checkUsername, checkTime, backUserId, backUserName, 
+    backTime, backMemo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mk.hms.model.BillSpecialOperinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from b_bill_special_operinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_bill_special_operinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from b_bill_special_operinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.hms.model.BillSpecialOperinfo" >
+    insert into b_bill_special_operinfo (id, special_id, billCost, 
+      checkStatus, checkStatusName, financeStatus, 
+      financeStatusName, changeMoney, note, 
+      checkUserid, checkUsername, checkTime, 
+      backUserId, backUserName, backTime, 
+      backMemo)
+    values (#{id,jdbcType=BIGINT}, #{specialId,jdbcType=BIGINT}, #{billcost,jdbcType=DECIMAL}, 
+      #{checkstatus,jdbcType=VARCHAR}, #{checkstatusname,jdbcType=VARCHAR}, #{financestatus,jdbcType=VARCHAR}, 
+      #{financestatusname,jdbcType=VARCHAR}, #{changemoney,jdbcType=DECIMAL}, #{note,jdbcType=VARCHAR}, 
+      #{checkuserid,jdbcType=BIGINT}, #{checkusername,jdbcType=VARCHAR}, #{checktime,jdbcType=TIMESTAMP}, 
+      #{backuserid,jdbcType=BIGINT}, #{backusername,jdbcType=VARCHAR}, #{backtime,jdbcType=TIMESTAMP}, 
+      #{backmemo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.hms.model.BillSpecialOperinfo" >
+    insert into b_bill_special_operinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="specialId != null" >
+        special_id,
+      </if>
+      <if test="billcost != null" >
+        billCost,
+      </if>
+      <if test="checkstatus != null" >
+        checkStatus,
+      </if>
+      <if test="checkstatusname != null" >
+        checkStatusName,
+      </if>
+      <if test="financestatus != null" >
+        financeStatus,
+      </if>
+      <if test="financestatusname != null" >
+        financeStatusName,
+      </if>
+      <if test="changemoney != null" >
+        changeMoney,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="checkuserid != null" >
+        checkUserid,
+      </if>
+      <if test="checkusername != null" >
+        checkUsername,
+      </if>
+      <if test="checktime != null" >
+        checkTime,
+      </if>
+      <if test="backuserid != null" >
+        backUserId,
+      </if>
+      <if test="backusername != null" >
+        backUserName,
+      </if>
+      <if test="backtime != null" >
+        backTime,
+      </if>
+      <if test="backmemo != null" >
+        backMemo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="specialId != null" >
+        #{specialId,jdbcType=BIGINT},
+      </if>
+      <if test="billcost != null" >
+        #{billcost,jdbcType=DECIMAL},
+      </if>
+      <if test="checkstatus != null" >
+        #{checkstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstatusname != null" >
+        #{checkstatusname,jdbcType=VARCHAR},
+      </if>
+      <if test="financestatus != null" >
+        #{financestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="financestatusname != null" >
+        #{financestatusname,jdbcType=VARCHAR},
+      </if>
+      <if test="changemoney != null" >
+        #{changemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="checkuserid != null" >
+        #{checkuserid,jdbcType=BIGINT},
+      </if>
+      <if test="checkusername != null" >
+        #{checkusername,jdbcType=VARCHAR},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="backuserid != null" >
+        #{backuserid,jdbcType=BIGINT},
+      </if>
+      <if test="backusername != null" >
+        #{backusername,jdbcType=VARCHAR},
+      </if>
+      <if test="backtime != null" >
+        #{backtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="backmemo != null" >
+        #{backmemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mk.hms.model.BillSpecialOperinfoExample" resultType="java.lang.Integer" >
+    select count(*) from b_bill_special_operinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.hms.model.BillSpecialOperinfo" >
+    update b_bill_special_operinfo
+    <set >
+      <if test="specialId != null" >
+        special_id = #{specialId,jdbcType=BIGINT},
+      </if>
+      <if test="billcost != null" >
+        billCost = #{billcost,jdbcType=DECIMAL},
+      </if>
+      <if test="checkstatus != null" >
+        checkStatus = #{checkstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstatusname != null" >
+        checkStatusName = #{checkstatusname,jdbcType=VARCHAR},
+      </if>
+      <if test="financestatus != null" >
+        financeStatus = #{financestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="financestatusname != null" >
+        financeStatusName = #{financestatusname,jdbcType=VARCHAR},
+      </if>
+      <if test="changemoney != null" >
+        changeMoney = #{changemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="checkuserid != null" >
+        checkUserid = #{checkuserid,jdbcType=BIGINT},
+      </if>
+      <if test="checkusername != null" >
+        checkUsername = #{checkusername,jdbcType=VARCHAR},
+      </if>
+      <if test="checktime != null" >
+        checkTime = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="backuserid != null" >
+        backUserId = #{backuserid,jdbcType=BIGINT},
+      </if>
+      <if test="backusername != null" >
+        backUserName = #{backusername,jdbcType=VARCHAR},
+      </if>
+      <if test="backtime != null" >
+        backTime = #{backtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="backmemo != null" >
+        backMemo = #{backmemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.hms.model.BillSpecialOperinfo" >
+    update b_bill_special_operinfo
+    set special_id = #{specialId,jdbcType=BIGINT},
+      billCost = #{billcost,jdbcType=DECIMAL},
+      checkStatus = #{checkstatus,jdbcType=VARCHAR},
+      checkStatusName = #{checkstatusname,jdbcType=VARCHAR},
+      financeStatus = #{financestatus,jdbcType=VARCHAR},
+      financeStatusName = #{financestatusname,jdbcType=VARCHAR},
+      changeMoney = #{changemoney,jdbcType=DECIMAL},
+      note = #{note,jdbcType=VARCHAR},
+      checkUserid = #{checkuserid,jdbcType=BIGINT},
+      checkUsername = #{checkusername,jdbcType=VARCHAR},
+      checkTime = #{checktime,jdbcType=TIMESTAMP},
+      backUserId = #{backuserid,jdbcType=BIGINT},
+      backUserName = #{backusername,jdbcType=VARCHAR},
+      backTime = #{backtime,jdbcType=TIMESTAMP},
+      backMemo = #{backmemo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

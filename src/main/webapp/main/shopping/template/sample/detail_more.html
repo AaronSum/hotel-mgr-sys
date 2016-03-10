@@ -1,0 +1,48 @@
+<div>
+	<ul class="nav nav-tabs hms-body-nav">
+		<li role="presentation"
+			ng-class="{true: 'active', false: ''}[isActive]"><a
+			ng-click="setActive2(true)">商品介绍</a></li>
+ 	</ul>
+	<!-- sub view -->
+	<div class="hms-order-view">
+		<div class="table-responsive">
+			<div class="p-parameter">
+				<ul id="parameter2" class="p-parameter-list">
+					<li ng-repeat="wareAttr in wareAttrList">
+						{{wareAttr.attr}}：{{wareAttr.attrvalue}}
+					</li>
+					<!--<li title="怡宝  纯净水350ml*6瓶">商品名称：怡宝 纯净水350ml</li>
+					<li title="1639881087">商品编号：1639881087</li>
+					<li title="学众食品专营店">店铺：学众食品专营店</li>
+					<li title="2015-07-17 23:28:53">上架时间：2015-07-17</li>
+					<li title="3.1kg">商品毛重：3.1kg</li>
+					<li title="纯净水">类别：纯净水</li>
+					<li title="瓶装">包装：瓶装</li>
+					<li title="无汽">特性：无汽</li> -->
+				</ul>
+			</div>
+
+			<div class="detail-more-con">
+				<div class="detail-correction">
+                     <b class="product-detail"></b>如果您发现商品信息不准确，欢迎纠错!
+                 </div>
+				<div class="detail-more-item"  ng-repeat="item in wareMoreImages">
+					<img class="p-parameter-list-img" data-lazyload="done" ng-src="{{item.imageurl1}}">
+					<br>
+					<br>
+				</div>
+				<!-- #J-detail-content -->
+				<div id="activity_footer"></div>
+			</div>
+			<div id="promises" class="ui-box">
+                <strong>服务承诺：</strong>
+                <br>
+				乐住平台卖家销售并发货的商品，由平台卖家提供发票和相应的售后服务。请您放心购买！<br>
+				注：因厂家会在没有任何提前通知的情况下更改产品包装、产地或者一些附件，本司不能确保客户收到的货物与商城图片、产地、附件说明完全一致。只能确保为原厂正货！并且保证与当时市场上同样主流新品一致。若本商城没有及时更新，请大家谅解！
+				<br>
+				<br>
+            </div>
+		</div>
+	</div>
+</div>

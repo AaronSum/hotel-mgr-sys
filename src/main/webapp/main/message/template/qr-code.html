@@ -1,0 +1,25 @@
+<div ng-controller="HotelRuleController">
+  <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" ng-click="modalConfirmClose()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">二维码</h4>
+  </div>
+  <div class="modal-body">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <div class="col-sm-12 text-center">
+            <div ng-repeat="i2dimCode in printI2dimCodes">
+              <img ng-src="{{getPrintI2dimCodeUrl(i2dimCode.content, i2dimCode.tag)}}" width="150" height="150" style="border:1px solid #ccc;padding:3px;">
+              <br>
+              <a ng-click="goToPrintPage(i2dimCode.content, i2dimCode.tag)">打印二维码</a>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-primary" code="#hmsI2DimCodesModal" id="hmsI2DimCodesModalOk" ng-click="goToPrintPage()"><i class="glyphicon glyphicon-print"></i>打印全部</button>
+      <button type="button" class="btn btn-default" ng-click="cancle()">取消</button>
+  </div>
+</div>

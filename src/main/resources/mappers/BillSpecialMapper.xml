@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mk.hms.mapper.BillSpecialMapper" >
+  <resultMap id="BaseResultMap" type="com.mk.hms.model.BillSpecial" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="promoType" property="promotype" jdbcType="INTEGER" />
+    <result column="hotelId" property="hotelid" jdbcType="BIGINT" />
+    <result column="hotelName" property="hotelname" jdbcType="VARCHAR" />
+    <result column="cityCode" property="citycode" jdbcType="VARCHAR" />
+    <result column="cityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="checkStatus" property="checkstatus" jdbcType="INTEGER" />
+    <result column="billTime" property="billtime" jdbcType="VARCHAR" />
+    <result column="beginTime" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="orderNum" property="ordernum" jdbcType="INTEGER" />
+    <result column="onlinePaid" property="onlinepaid" jdbcType="DECIMAL" />
+    <result column="aliPaid" property="alipaid" jdbcType="DECIMAL" />
+    <result column="wechatPaid" property="wechatpaid" jdbcType="DECIMAL" />
+    <result column="billCost" property="billcost" jdbcType="DECIMAL" />
+    <result column="changeCost" property="changecost" jdbcType="DECIMAL" />
+    <result column="changeCorrectCost" property="changecorrectcost" jdbcType="DECIMAL" />
+    <result column="finalCost" property="finalcost" jdbcType="DECIMAL" />
+    <result column="income" property="income" jdbcType="DECIMAL" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="financeStatus" property="financestatus" jdbcType="INTEGER" />
+    <result column="availableMoney" property="availablemoney" jdbcType="DECIMAL" />
+    <result column="isFreeze" property="isfreeze" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, promoType, hotelId, hotelName, cityCode, cityName, checkStatus, billTime, beginTime, 
+    endTime, orderNum, onlinePaid, aliPaid, wechatPaid, billCost, changeCost, changeCorrectCost, 
+    finalCost, income, createTime, financeStatus, availableMoney, isFreeze
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mk.hms.model.BillSpecialExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from b_bill_special
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause} desc
+    </if>
+    <if test="limitStart != null and limitStart>-1" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_bill_special
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from b_bill_special
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.hms.model.BillSpecial" >
+    insert into b_bill_special (id, promoType, hotelId, 
+      hotelName, cityCode, cityName, 
+      checkStatus, billTime, beginTime, 
+      endTime, orderNum, onlinePaid, 
+      aliPaid, wechatPaid, billCost, 
+      changeCost, changeCorrectCost, finalCost, 
+      income, createTime, financeStatus, 
+      availableMoney, isFreeze)
+    values (#{id,jdbcType=BIGINT}, #{promotype,jdbcType=INTEGER}, #{hotelid,jdbcType=BIGINT}, 
+      #{hotelname,jdbcType=VARCHAR}, #{citycode,jdbcType=VARCHAR}, #{cityname,jdbcType=VARCHAR}, 
+      #{checkstatus,jdbcType=INTEGER}, #{billtime,jdbcType=VARCHAR}, #{begintime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{ordernum,jdbcType=INTEGER}, #{onlinepaid,jdbcType=DECIMAL}, 
+      #{alipaid,jdbcType=DECIMAL}, #{wechatpaid,jdbcType=DECIMAL}, #{billcost,jdbcType=DECIMAL}, 
+      #{changecost,jdbcType=DECIMAL}, #{changecorrectcost,jdbcType=DECIMAL}, #{finalcost,jdbcType=DECIMAL}, 
+      #{income,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, #{financestatus,jdbcType=INTEGER}, 
+      #{availablemoney,jdbcType=DECIMAL}, #{isfreeze,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.hms.model.BillSpecial" >
+    insert into b_bill_special
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="promotype != null" >
+        promoType,
+      </if>
+      <if test="hotelid != null" >
+        hotelId,
+      </if>
+      <if test="hotelname != null" >
+        hotelName,
+      </if>
+      <if test="citycode != null" >
+        cityCode,
+      </if>
+      <if test="cityname != null" >
+        cityName,
+      </if>
+      <if test="checkstatus != null" >
+        checkStatus,
+      </if>
+      <if test="billtime != null" >
+        billTime,
+      </if>
+      <if test="begintime != null" >
+        beginTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="ordernum != null" >
+        orderNum,
+      </if>
+      <if test="onlinepaid != null" >
+        onlinePaid,
+      </if>
+      <if test="alipaid != null" >
+        aliPaid,
+      </if>
+      <if test="wechatpaid != null" >
+        wechatPaid,
+      </if>
+      <if test="billcost != null" >
+        billCost,
+      </if>
+      <if test="changecost != null" >
+        changeCost,
+      </if>
+      <if test="changecorrectcost != null" >
+        changeCorrectCost,
+      </if>
+      <if test="finalcost != null" >
+        finalCost,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="financestatus != null" >
+        financeStatus,
+      </if>
+      <if test="availablemoney != null" >
+        availableMoney,
+      </if>
+      <if test="isfreeze != null" >
+        isFreeze,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="promotype != null" >
+        #{promotype,jdbcType=INTEGER},
+      </if>
+      <if test="hotelid != null" >
+        #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="hotelname != null" >
+        #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstatus != null" >
+        #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="billtime != null" >
+        #{billtime,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordernum != null" >
+        #{ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="onlinepaid != null" >
+        #{onlinepaid,jdbcType=DECIMAL},
+      </if>
+      <if test="alipaid != null" >
+        #{alipaid,jdbcType=DECIMAL},
+      </if>
+      <if test="wechatpaid != null" >
+        #{wechatpaid,jdbcType=DECIMAL},
+      </if>
+      <if test="billcost != null" >
+        #{billcost,jdbcType=DECIMAL},
+      </if>
+      <if test="changecost != null" >
+        #{changecost,jdbcType=DECIMAL},
+      </if>
+      <if test="changecorrectcost != null" >
+        #{changecorrectcost,jdbcType=DECIMAL},
+      </if>
+      <if test="finalcost != null" >
+        #{finalcost,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financestatus != null" >
+        #{financestatus,jdbcType=INTEGER},
+      </if>
+      <if test="availablemoney != null" >
+        #{availablemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="isfreeze != null" >
+        #{isfreeze,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mk.hms.model.BillSpecialExample" resultType="java.lang.Integer" >
+    select count(*) from b_bill_special
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.hms.model.BillSpecial" >
+    update b_bill_special
+    <set >
+      <if test="promotype != null" >
+        promoType = #{promotype,jdbcType=INTEGER},
+      </if>
+      <if test="hotelid != null" >
+        hotelId = #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="hotelname != null" >
+        hotelName = #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        cityCode = #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null" >
+        cityName = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstatus != null" >
+        checkStatus = #{checkstatus,jdbcType=INTEGER},
+      </if>
+      <if test="billtime != null" >
+        billTime = #{billtime,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        beginTime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordernum != null" >
+        orderNum = #{ordernum,jdbcType=INTEGER},
+      </if>
+      <if test="onlinepaid != null" >
+        onlinePaid = #{onlinepaid,jdbcType=DECIMAL},
+      </if>
+      <if test="alipaid != null" >
+        aliPaid = #{alipaid,jdbcType=DECIMAL},
+      </if>
+      <if test="wechatpaid != null" >
+        wechatPaid = #{wechatpaid,jdbcType=DECIMAL},
+      </if>
+      <if test="billcost != null" >
+        billCost = #{billcost,jdbcType=DECIMAL},
+      </if>
+      <if test="changecost != null" >
+        changeCost = #{changecost,jdbcType=DECIMAL},
+      </if>
+      <if test="changecorrectcost != null" >
+        changeCorrectCost = #{changecorrectcost,jdbcType=DECIMAL},
+      </if>
+      <if test="finalcost != null" >
+        finalCost = #{finalcost,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financestatus != null" >
+        financeStatus = #{financestatus,jdbcType=INTEGER},
+      </if>
+      <if test="availablemoney != null" >
+        availableMoney = #{availablemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="isfreeze != null" >
+        isFreeze = #{isfreeze,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelchangecost != null" >
+        hotelchangecost = #{hotelchangecost,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.hms.model.BillSpecial" >
+    update b_bill_special
+    set promoType = #{promotype,jdbcType=INTEGER},
+      hotelId = #{hotelid,jdbcType=BIGINT},
+      hotelName = #{hotelname,jdbcType=VARCHAR},
+      cityCode = #{citycode,jdbcType=VARCHAR},
+      cityName = #{cityname,jdbcType=VARCHAR},
+      checkStatus = #{checkstatus,jdbcType=INTEGER},
+      billTime = #{billtime,jdbcType=VARCHAR},
+      beginTime = #{begintime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      orderNum = #{ordernum,jdbcType=INTEGER},
+      onlinePaid = #{onlinepaid,jdbcType=DECIMAL},
+      aliPaid = #{alipaid,jdbcType=DECIMAL},
+      wechatPaid = #{wechatpaid,jdbcType=DECIMAL},
+      billCost = #{billcost,jdbcType=DECIMAL},
+      changeCost = #{changecost,jdbcType=DECIMAL},
+      changeCorrectCost = #{changecorrectcost,jdbcType=DECIMAL},
+      finalCost = #{finalcost,jdbcType=DECIMAL},
+      income = #{income,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      financeStatus = #{financestatus,jdbcType=INTEGER},
+      availableMoney = #{availablemoney,jdbcType=DECIMAL},
+      isFreeze = #{isfreeze,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

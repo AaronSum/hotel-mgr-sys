@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mk.hms.mapper.BillSpecialDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.mk.hms.model.BillSpecialDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="billId" property="billid" jdbcType="BIGINT" />
+    <result column="orderId" property="orderid" jdbcType="BIGINT" />
+    <result column="hotelId" property="hotelid" jdbcType="BIGINT" />
+    <result column="checkinTime" property="checkintime" jdbcType="TIMESTAMP" />
+    <result column="checkoutTime" property="checkouttime" jdbcType="TIMESTAMP" />
+    <result column="beginTime" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="orderTime" property="ordertime" jdbcType="TIMESTAMP" />
+    <result column="dayNumber" property="daynumber" jdbcType="INTEGER" />
+    <result column="mikePrice" property="mikeprice" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="lezhuCoins" property="lezhucoins" jdbcType="DECIMAL" />
+    <result column="orderPrice" property="orderprice" jdbcType="DECIMAL" />
+    <result column="orderType" property="ordertype" jdbcType="INTEGER" />
+    <result column="roomTypeName" property="roomtypename" jdbcType="VARCHAR" />
+    <result column="roomNo" property="roomno" jdbcType="VARCHAR" />
+    <result column="payMethod" property="paymethod" jdbcType="VARCHAR" />
+    <result column="userCost" property="usercost" jdbcType="DECIMAL" />
+    <result column="availableMoney" property="availablemoney" jdbcType="DECIMAL" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, billId, orderId, hotelId, checkinTime, checkoutTime, beginTime, endTime, orderTime, 
+    dayNumber, mikePrice, discount, lezhuCoins, orderPrice, orderType, roomTypeName, 
+    roomNo, payMethod, userCost, availableMoney, createTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mk.hms.model.BillSpecialDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from b_bill_special_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause} desc
+    </if>
+    <if test="limitStart != null and limitStart>-1" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_bill_special_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from b_bill_special_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.hms.model.BillSpecialDetail" >
+    insert into b_bill_special_detail (id, billId, orderId, 
+      hotelId, checkinTime, checkoutTime, 
+      beginTime, endTime, orderTime, 
+      dayNumber, mikePrice, discount, 
+      lezhuCoins, orderPrice, orderType, 
+      roomTypeName, roomNo, payMethod, 
+      userCost, availableMoney, createTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{billid,jdbcType=BIGINT}, #{orderid,jdbcType=BIGINT}, 
+      #{hotelid,jdbcType=BIGINT}, #{checkintime,jdbcType=TIMESTAMP}, #{checkouttime,jdbcType=TIMESTAMP}, 
+      #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{ordertime,jdbcType=TIMESTAMP}, 
+      #{daynumber,jdbcType=INTEGER}, #{mikeprice,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL}, 
+      #{lezhucoins,jdbcType=DECIMAL}, #{orderprice,jdbcType=DECIMAL}, #{ordertype,jdbcType=INTEGER}, 
+      #{roomtypename,jdbcType=VARCHAR}, #{roomno,jdbcType=VARCHAR}, #{paymethod,jdbcType=VARCHAR}, 
+      #{usercost,jdbcType=DECIMAL}, #{availablemoney,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.hms.model.BillSpecialDetail" >
+    insert into b_bill_special_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="billid != null" >
+        billId,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="hotelid != null" >
+        hotelId,
+      </if>
+      <if test="checkintime != null" >
+        checkinTime,
+      </if>
+      <if test="checkouttime != null" >
+        checkoutTime,
+      </if>
+      <if test="begintime != null" >
+        beginTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="ordertime != null" >
+        orderTime,
+      </if>
+      <if test="daynumber != null" >
+        dayNumber,
+      </if>
+      <if test="mikeprice != null" >
+        mikePrice,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="lezhucoins != null" >
+        lezhuCoins,
+      </if>
+      <if test="orderprice != null" >
+        orderPrice,
+      </if>
+      <if test="ordertype != null" >
+        orderType,
+      </if>
+      <if test="roomtypename != null" >
+        roomTypeName,
+      </if>
+      <if test="roomno != null" >
+        roomNo,
+      </if>
+      <if test="paymethod != null" >
+        payMethod,
+      </if>
+      <if test="usercost != null" >
+        userCost,
+      </if>
+      <if test="availablemoney != null" >
+        availableMoney,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="billid != null" >
+        #{billid,jdbcType=BIGINT},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=BIGINT},
+      </if>
+      <if test="hotelid != null" >
+        #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="checkintime != null" >
+        #{checkintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkouttime != null" >
+        #{checkouttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="daynumber != null" >
+        #{daynumber,jdbcType=INTEGER},
+      </if>
+      <if test="mikeprice != null" >
+        #{mikeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="lezhucoins != null" >
+        #{lezhucoins,jdbcType=DECIMAL},
+      </if>
+      <if test="orderprice != null" >
+        #{orderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="ordertype != null" >
+        #{ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="roomtypename != null" >
+        #{roomtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="roomno != null" >
+        #{roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="paymethod != null" >
+        #{paymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="usercost != null" >
+        #{usercost,jdbcType=DECIMAL},
+      </if>
+      <if test="availablemoney != null" >
+        #{availablemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mk.hms.model.BillSpecialDetailExample" resultType="java.lang.Integer" >
+    select count(*) from b_bill_special_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.hms.model.BillSpecialDetail" >
+    update b_bill_special_detail
+    <set >
+      <if test="billid != null" >
+        billId = #{billid,jdbcType=BIGINT},
+      </if>
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=BIGINT},
+      </if>
+      <if test="hotelid != null" >
+        hotelId = #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="checkintime != null" >
+        checkinTime = #{checkintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkouttime != null" >
+        checkoutTime = #{checkouttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begintime != null" >
+        beginTime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordertime != null" >
+        orderTime = #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="daynumber != null" >
+        dayNumber = #{daynumber,jdbcType=INTEGER},
+      </if>
+      <if test="mikeprice != null" >
+        mikePrice = #{mikeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="lezhucoins != null" >
+        lezhuCoins = #{lezhucoins,jdbcType=DECIMAL},
+      </if>
+      <if test="orderprice != null" >
+        orderPrice = #{orderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="ordertype != null" >
+        orderType = #{ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="roomtypename != null" >
+        roomTypeName = #{roomtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="roomno != null" >
+        roomNo = #{roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="paymethod != null" >
+        payMethod = #{paymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="usercost != null" >
+        userCost = #{usercost,jdbcType=DECIMAL},
+      </if>
+      <if test="availablemoney != null" >
+        availableMoney = #{availablemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.hms.model.BillSpecialDetail" >
+    update b_bill_special_detail
+    set billId = #{billid,jdbcType=BIGINT},
+      orderId = #{orderid,jdbcType=BIGINT},
+      hotelId = #{hotelid,jdbcType=BIGINT},
+      checkinTime = #{checkintime,jdbcType=TIMESTAMP},
+      checkoutTime = #{checkouttime,jdbcType=TIMESTAMP},
+      beginTime = #{begintime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      orderTime = #{ordertime,jdbcType=TIMESTAMP},
+      dayNumber = #{daynumber,jdbcType=INTEGER},
+      mikePrice = #{mikeprice,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=DECIMAL},
+      lezhuCoins = #{lezhucoins,jdbcType=DECIMAL},
+      orderPrice = #{orderprice,jdbcType=DECIMAL},
+      orderType = #{ordertype,jdbcType=INTEGER},
+      roomTypeName = #{roomtypename,jdbcType=VARCHAR},
+      roomNo = #{roomno,jdbcType=VARCHAR},
+      payMethod = #{paymethod,jdbcType=VARCHAR},
+      userCost = #{usercost,jdbcType=DECIMAL},
+      availableMoney = #{availablemoney,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

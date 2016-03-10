@@ -1,0 +1,115 @@
+<div class="container-fluid room-setting-detail">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel-body">
+				<form class="form-horizontal">
+					<div class="form-group"  ng-hide="isSettingMoreRoomtype">
+			              <label class="col-md-2 control-label">房型：</label>
+					      <div class="col-md-4">
+							  <input type="hidden" class="form-control hms-input room-setting-detail-input"
+							         ng-model="roomSetting.rtsarray" ng-hide="true">
+							  <input type="type" class="form-control hms-input room-setting-detail-input"
+							         ng-model="roomSetting.roomTypeid" ng-hide="true">
+							  <input type="type" class="form-control hms-input room-setting-detail-input" 
+							         ng-model="roomSetting.roomtypename" 
+							         ng-disabled="isDisabled">
+					      </div>
+					      <label class="col-md-2 control-label">房号：</label>
+					      <div class="col-md-4">
+							  <input type="type" class="form-control hms-input room-setting-detail-input" 
+							         ng-model="roomSetting.roomno"  
+							         ng-disabled="isDisabled">
+				          </div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label">房间窗户朝向：</label>
+					      <div class="col-md-4">
+							  <input type="text" class="form-control hms-input room-setting-detail-input" 
+							         ng-model="roomSetting.roomdirection"  ng-disabled="isSelect" maxlength="20">
+					      </div>
+					      <label class="col-md-2 control-label">  楼层：</label>
+					      <div class="col-md-4">
+							  <input type="text" class="form-control hms-input room-setting-detail-input" 
+							         ng-model="roomSetting.roomfloor" maxlength="20"  ng-disabled="isSelect">
+<!-- 							         onkeyup="this.value=this.value.replace(/\D/g,'')" -->
+							         
+				          </div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label">  是否有窗：</label>
+					      <div class="col-md-4">
+							  <div class="hms-radio" style="display:inline-block;">
+								  <input name="isWindow" id="isWindowY" type="radio" ng-model="roomSetting.iswindow"   ng-disabled="isSelect" required value='T'>
+							  	  <label for="isWindowY"></label>
+							  </div>
+							  <span style="vertical-align:middle;line-height:19px;">是</span>
+							  <div class="hms-radio" style="display:inline-block;">
+									<input name="isWindow" id="isWindowN" type="radio" ng-model="roomSetting.iswindow"  ng-disabled="isSelect" required value='F'>
+							  		<label for="isWindowN"></label>
+							  </div>
+							  <span style="vertical-align:middle;line-height:19px;">否  &nbsp;(必填<strong class="text-danger">*</strong>)</p></span>
+					      </div>
+					      <label class="col-md-2 control-label">床型：</label>
+					      <div class="col-md-4">
+							  <input type="type" class="form-control hms-input room-setting-detail-input" ng-disabled="isSelect"
+							         ng-model="roomSetting.bedtypename" maxlength="20" placeholder="例如：电动床、水床">
+				          </div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label">房间位置：</label>
+					    <div class="col-md-10 room-setting-detail-position">
+					    	 <label class="col-md-2 control-label room-setting-detail-stair">是否楼梯口：</label>
+					    	 <div class="col-md-2">
+								  <div class="hms-radio" style="display:inline-block;">
+									  <input name="isStair" id="isStairY" type="radio" ng-model="roomSetting.isstair"  ng-disabled="isSelect" value='T'>
+								  	  <label for="isStairY"></label>
+								  </div>
+								  <span style="vertical-align:middle;line-height:19px;">是</span>
+								  <div class="hms-radio" style="display:inline-block;">
+										<input name="isStair" id="isStairN" type="radio" ng-model="roomSetting.isstair"  ng-disabled="isSelect" value='F'>
+								  		<label for="isStairN"></label>
+								  </div>
+								  <span style="vertical-align:middle;line-height:19px;">否</span>
+							  </div>
+							  
+							  
+							  <label class="col-md-2 control-label room-setting-detail-stair">电梯口附近：</label>
+					    	 <div class="col-md-2">
+								  <div class="hms-radio" style="display:inline-block;">
+									  <input name="isElevator" id="isElevatorY" type="radio" ng-model="roomSetting.iselevator"  ng-disabled="isSelect" value='T'>
+								  	  <label for="isElevatorY"></label>
+								  </div>
+								  <span style="vertical-align:middle;line-height:19px;">是</span>
+								  <div class="hms-radio" style="display:inline-block;">
+										<input name="isElevator" id="isElevatorN" type="radio" ng-model="roomSetting.iselevator"  ng-disabled="isSelect" value='F'>
+								  		<label for="isElevatorN"></label>
+								  </div>
+								  <span style="vertical-align:middle;line-height:19px;">否</span>
+							  </div>
+					    	 <label class="col-md-2 control-label room-setting-detail-stair">是否临街：</label>
+					    	 <div class="col-md-2">
+								  <div class="hms-radio" style="display:inline-block;">
+									  <input name="isStreet" id="isStreetY" type="radio" ng-model="roomSetting.isstreet"  ng-disabled="isSelect" value='T'>
+								  	  <label for="isStreetY"></label>
+								  </div>
+								  <span style="vertical-align:middle;line-height:19px;">是</span>
+								  <div class="hms-radio" style="display:inline-block;">
+										<input name="isStreet" id="isStreetN" type="radio" ng-model="roomSetting.isstreet"  ng-disabled="isSelect" value='F'>
+								  		<label for="isStreetN"></label>
+								  </div>
+								  <span style="vertical-align:middle;line-height:19px;">否</span>
+							  </div>
+					      </div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-10"></div>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-success room-setting-button" ng-show="!isSelect" ng-click="setSettingBack()">返回</button>
+							<button type="button" class="btn btn-success room-setting-button" ng-show="isSelect" ng-click="settingBack()">返回</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

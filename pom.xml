@@ -1,0 +1,1706 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.mk</groupId>
+	<artifactId>hms</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ots Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<cxf.version>2.2.5</cxf.version>
+		<java.version>1.6</java.version>
+		<slf4j.version>1.7.12</slf4j.version>
+
+		<logback.version>1.1.2</logback.version>
+		<spring.version>4.1.5.RELEASE</spring.version>
+		<spring-session.version>1.0.1.RELEASE</spring-session.version>
+		<spring-security.version>3.2.6.RELEASE</spring-security.version>
+		<hibernate.version>4.2.18.Final</hibernate.version>
+		<aspectj.version>1.6.12.M2</aspectj.version>
+		<hamcrest.core.version>1.3</hamcrest.core.version>
+		<junit.version>4.11</junit.version>
+		<mockito.core.version>1.9.5</mockito.core.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>public</id>
+			<name>Public Repositories</name>
+			<url>http://10.4.4.228:8081/nexus/content/repositories/releases</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>public</id>
+			<name>Public Repositories</name>
+			<url> http://10.4.4.228:8081/nexus/content/repositories/releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.35</version>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>stringtemplate</artifactId>
+			<version>4.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-exec</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xbean</groupId>
+			<artifactId>xbean-spring</artifactId>
+			<version>3.6</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.1-GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.8-beta5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.8-beta5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>jstl-api</artifactId>
+			<version>1.2</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.8.2</version>
+		</dependency>
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>0.9.21</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.46</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>[7.0.0, 7.0.99]</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<!-- 二维码 -->
+		<dependency>
+			<groupId>com.xiongyingqi</groupId>
+			<artifactId>qrcode</artifactId>
+			<version>0.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.0.27.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-web</artifactId> <version>${spring.version}</version> </dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> <version>${slf4j.version}</version> </dependency> -->
+		<dependency>
+			<groupId>org.apache.ws.commons.schema</groupId>
+			<artifactId>XmlSchema</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+		<!-- spring timmer -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<!-- <dependency> <groupId>opensymphony</groupId> <artifactId>quartz-all</artifactId> <version>1.6.0</version> </dependency> -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.cassandra</groupId>
+			<artifactId>cassandra-thrift</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>${hamcrest.core.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.core.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>1.2.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.drewnoakes</groupId>
+			<artifactId>metadata-extractor</artifactId>
+			<version>2.7.2</version>
+		</dependency>
+		<dependency>
+			<groupId>net.spy</groupId>
+			<artifactId>spymemcached</artifactId>
+			<version>2.11.6</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.jpush.api</groupId>
+			<artifactId>jpush-client</artifactId>
+			<version>3.1.3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.7.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>4.0.38</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jodd</groupId>
+			<artifactId>jodd-proxetta</artifactId>
+			<version>3.6.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+			<version>${spring-session.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session</artifactId>
+			<version>${spring-session.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.5.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.8</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.easyrules</groupId>
+			<artifactId>easyrules-core</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.generator</groupId>
+			<artifactId>mybatis-generator-core</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<!-- hessian -->
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>3.1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-elasticsearch</artifactId>
+			<version>1.2.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>baidu.yun</groupId>
+			<artifactId>baidu.yun</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mk</groupId>
+			<artifactId>mike.web</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mk</groupId>
+			<artifactId>pms_hessian</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esotericsoftware.yamlbeans</groupId>
+			<artifactId>yamlbeans</artifactId>
+			<version>1.09</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.marcosemiao.log4jdbc.core</groupId>
+			<artifactId>log4jdbc-api</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.unidal.framework</groupId>
+			<artifactId>foundation-service</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.dianping.cat</groupId>
+			<artifactId>cat-client</artifactId>
+			<version>1.3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-container-default</artifactId>
+			<version>1.5.5</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>google-collections</artifactId>
+					<groupId>com.google.collections</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-classworlds</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.mk</groupId>
+			<artifactId>monitor-connector</artifactId>
+			<version>0.0.5</version>
+		</dependency>
+		<!-- kafka jar -->
+		<dependency>
+			<groupId>com.mk</groupId>
+    		<artifactId>mk-kafka</artifactId>
+    		<version>1.2.1</version>
+		</dependency>
+		<!-- mobile user agent utils -->
+		<dependency>
+			<groupId>eu.bitwalker</groupId>
+			<artifactId>UserAgentUtils</artifactId>
+			<version>1.18</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>hms</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.properties</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/logback/${label}</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.2</version>
+				<!-- NB: do not use 1.3 or 1.3.x due to MASPECTJ-90 and do not use 1.4 due to declare parents issue -->
+				<dependencies>
+					<!-- NB: You must use Maven 2.0.9 or above or these are ignored (see MNG-2972) -->
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjrt</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
+				</dependencies>
+				<!-- <executions> <execution> <goals> <goal>compile</goal> <goal>test-compile</goal> </goals> </execution> </executions> -->
+				<configuration>
+					<outxml>true</outxml>
+					<aspectLibraries>
+						<aspectLibrary>
+							<groupId>org.springframework</groupId>
+							<artifactId>spring-aspects</artifactId>
+						</aspectLibrary>
+					</aspectLibraries>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<SVN-Revision>${SVN.revision}</SVN-Revision>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<printSummary>false</printSummary>
+					<redirectTestOutputToFile>true</redirectTestOutputToFile>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+			<!-- IDE -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.7</version>
+				<!-- Note 2.8 does not work with AspectJ aspect path -->
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+					<wtpversion>2.0</wtpversion>
+					<additionalBuildcommands>
+						<buildCommand>
+							<name>org.eclipse.ajdt.core.ajbuilder</name>
+							<arguments>
+								<aspectPath>org.springframework.aspects</aspectPath>
+							</arguments>
+						</buildCommand>
+						<buildCommand>
+							<name>org.springframework.ide.eclipse.core.springbuilder</name>
+						</buildCommand>
+					</additionalBuildcommands>
+					<additionalProjectnatures>
+						<projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
+						<projectnature>com.springsource.sts.roo.core.nature</projectnature>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.1.v20140609</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webApp>
+						<tempDirectory>${project.build.directory}/work</tempDirectory>
+					</webApp>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<user>${master.jdbc.user}</user>
+					<password>${master.jdbc.password}</password>
+					<driver>${jdbc.driver}</driver>
+					<url>${master.jdbc.url}</url>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>3.0.5</version>
+				<configuration>
+					<changeLogFile>src/main/resources/db/liquibase/liquibase.xml</changeLogFile>
+					<driver>${jdbc.driver}</driver>
+					<url>${master.jdbc.url}</url>
+					<username>${master.jdbc.user}</username>
+					<password>${master.jdbc.password}</password>
+					<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<configuration>
+					<configurationFile>${basedir}/src/main/resources/mybatis/generatorConfig.xml</configurationFile>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.35</version>
+					</dependency>
+					<dependency>
+						<groupId>PaginationPlugin</groupId>
+						<artifactId>PaginationPlugin</artifactId>
+						<version>1.0</version>
+						<scope>system</scope>
+						<systemPath>${project.basedir}/lib/mybatis-page-plugin-1.0-SNAPSHOT.jar</systemPath>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+			</plugins>
+		</pluginManagement>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<label>local</label>
+				<jdbc.driver>net.sf.log4jdbc.DriverSpy</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:log4jdbc:mysql://10.4.17.242:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>ota2developer</master.jdbc.user>
+				<master.jdbc.password>www.imike.com</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:mysql://10.4.17.242:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>ota2developer</slave.jdbc.user>
+				<slave.jdbc.password>www.imike.com</slave.jdbc.password>
+				<spring.redis.sentinel.master>ota2-test-redis</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>10.4.27.128:26379</spring.redis.sentinel.nodes>
+				<synserver.ip>10.4.15.193</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://ota2test.imike.cn/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://ota2test.imike.cn/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://ota2test.imike.cn/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://ota2test.imike.cn/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://ota2test.imike.cn/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://ota2test.imike.cn/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://ota2test.imike.cn/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://ota2test.imike.cn/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://ota2test.imike.cn/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://ota2test.imike.cn/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://ota2test.imike.cn/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>localhost:8080</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://ota2test.imike.cn/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.4.31.46:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.4.31.46:9092,10.4.31.46:9093,10.4.31.46:9094</metadata.broker.list>
+				<ots.restful.address>http://ota2test.imike.cn/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>dev-local</id>
+			<properties>
+				<label>local</label>
+				<jdbc.driver>net.sf.log4jdbc.DriverSpy</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:log4jdbc:mysql://192.168.199.10:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>root</master.jdbc.user>
+				<master.jdbc.password>imike@2015</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:mysql://192.168.199.10:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>root</slave.jdbc.user>
+				<slave.jdbc.password>imike@2015</slave.jdbc.password>
+				<spring.redis.sentinel.master>mymaster</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>192.168.199.10:26379</spring.redis.sentinel.nodes>
+				<synserver.ip>192.168.199.10</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://192.168.199.10:8001/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://192.168.199.10:8001/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://192.168.199.10:8001/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://192.168.199.10:8001/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://192.168.199.10:8001/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://192.168.199.10:8001/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://192.168.199.10:8001/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://192.168.199.10:8001/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://192.168.199.10:8001/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://192.168.199.10:8001/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://192.168.199.10:8001/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>localhost:8080</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://192.168.199.10:8001/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.4.31.46:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.4.31.46:9092,10.4.31.46:9093,10.4.31.46:9094</metadata.broker.list>
+				<ots.restful.address>http://192.168.199.10:8001/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>localtest-1904</id>
+			<properties>
+				<label>test</label>
+				<jdbc.driver>com.mk.jdbc.MonitorDriver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://192.168.0.17:3358/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>root</master.jdbc.user>
+				<master.jdbc.password>imike@2015</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://192.168.0.18:3358/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>root</slave.jdbc.user>
+				<slave.jdbc.password>imike@2015</slave.jdbc.password>
+				<spring.redis.sentinel.master>ots-test-redis</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>192.168.0.10:26379</spring.redis.sentinel.nodes>
+				<synserver.ip>192.168.0.100</synserver.ip>
+				<synserver.port>9999</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://192.168.0.11:8002/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://192.168.0.11:8002/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://192.168.0.11:8002/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://192.168.0.11:8002/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://192.168.0.11:8002/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://192.168.0.11:8002/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://192.168.0.11:8002/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://192.168.0.11:8002/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://192.168.0.11:8002/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://192.168.0.11:8002/ots/hms/hotelgit/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://192.168.0.11:8002/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>192.168.0.12:8001</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://192.168.0.11:8002/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.4.31.46:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.4.31.46:9092,10.4.31.46:9093,10.4.31.46:9094</metadata.broker.list>
+				<ots.restful.address>http://192.168.0.11:8002/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>localtest-1106</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<label>test</label>				
+				<jdbc.driver>net.sf.log4jdbc.DriverSpy</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:log4jdbc:mysql://192.168.0.34:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>root</master.jdbc.user>
+				<master.jdbc.password>imike@2015</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://192.168.0.34:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>root</slave.jdbc.user>
+				<slave.jdbc.password>imike@2015</slave.jdbc.password>
+				<spring.redis.sentinel.master>mymaster</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>192.168.0.21:26379</spring.redis.sentinel.nodes>
+				<synserver.ip>192.168.0.21</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://192.168.0.21:8016/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://192.168.0.21:8016/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://192.168.0.21:8016/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://192.168.0.21:8016/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://192.168.0.21:8016/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://service.congqipms.com/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://192.168.0.21:8016/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://192.168.0.21:8016/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://192.168.0.21:8016/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://192.168.0.21:8016/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://192.168.0.21:8016/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>192.168.0.21:8012</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://192.168.0.21:8016/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>192.168.0.17:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>192.168.0.17:9092,192.168.0.17:9093,192.168.0.17:9094</metadata.broker.list>
+				<ots.restful.address>http://192.168.0.21:8016/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>extranet-1106</id>
+			<properties>
+				<label>extranet-test</label>
+				<jdbc.driver>com.mk.jdbc.MonitorDriver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://192.168.0.34:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>root</master.jdbc.user>
+				<master.jdbc.password>imike@2015</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://192.168.0.34:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>root</slave.jdbc.user>
+				<slave.jdbc.password>imike@2015</slave.jdbc.password>
+				<spring.redis.sentinel.master>mymaster</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>192.168.0.21:26379</spring.redis.sentinel.nodes>
+				<synserver.ip>192.168.0.21</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://192.168.0.21:8016/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://192.168.0.21:8016/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://192.168.0.21:8016/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://192.168.0.21:8016/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://192.168.0.21:8016/ots/pms/initPMS</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://192.168.0.21:8016/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://192.168.0.21:8016/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://192.168.0.21:8016/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://192.168.0.21:8016/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://192.168.0.21:8016/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>hms1.ops-hero.cn</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://192.168.0.21:8016/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>192.168.0.17:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>192.168.0.17:9092,192.168.0.17:9093,192.168.0.17:9094</metadata.broker.list>
+				<ots.restful.address>http://192.168.0.21:8016/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>pro</id>
+			<properties>
+				<label>product</label>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:mysql://10.4.17.242:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>ota2developer</master.jdbc.user>
+				<master.jdbc.password>www.imike.com</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:mysql://10.4.17.242:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>ota2developer</slave.jdbc.user>
+				<slave.jdbc.password>www.imike.com</slave.jdbc.password>
+				<spring.redis.sentinel.master>ots-redis</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>10.4.1.14:26379,10.4.1.210:26379</spring.redis.sentinel.nodes>
+				<!-- websocket ip、端口 -->
+				<synserver.ip>10.4.25.248</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://ota2test.imike.cn/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://ota2test.imike.cn/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://ota2test.imike.cn/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://ota2test.imike.cn/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://ota2test.imike.cn/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://ota2test.imike.cn/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://ota2test.imike.cn/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://ota2test.imike.cn/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://ota2test.imike.cn/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://ota2test.imike.cn/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://ota2test.imike.cn/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<!-- <qiniu.download.address>https://dn-imke-pro.qbox.me</qiniu.download.address> -->
+				<!-- 七牛空间名称 -->
+				<!-- <qiniu.bucket>hotelpic</qiniu.bucket> -->
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>hms2test.imike.cn</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://ota2test.imike.cn/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.4.31.46:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.4.31.46:9092,10.4.31.46:9093,10.4.31.46:9094</metadata.broker.list>
+				<ots.restful.address>http://ota2test.imike.cn/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>clu</id>
+			<properties>
+				<label>product</label>
+				<jdbc.driver>com.mk.jdbc.MonitorDriver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://10.4.1.242:3306/ots?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8]]></master.jdbc.url>
+				<master.jdbc.user>imike-writer</master.jdbc.user>
+				<master.jdbc.password>Imike-writer</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://10.4.17.67:3306/ots?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8]]></slave.jdbc.url>
+				<slave.jdbc.user>imike-reader</slave.jdbc.user>
+				<slave.jdbc.password>Imike-reader!@#$</slave.jdbc.password>
+				<spring.redis.sentinel.master>ots-redis</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>10.4.1.14:26379,10.4.1.210:26379</spring.redis.sentinel.nodes>
+				<synserver.ip>10.4.15.193</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://ots.imike.com/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://ots.imike.com/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://ots.imike.com/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://ots.imike.com/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://ots.imike.com/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://service.congqipms.com/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://ots.imike.com/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://ots.imike.com/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://ots.imike.com/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://ots.imike.com/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://ots.imike.com/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke-pro.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>hotelpic</qiniu.bucket>
+				<!-- 七牛获取文件路径 -->
+				<!--<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address> -->
+				<!-- 七牛空间名称 -->
+				<!--<qiniu.bucket>test</qiniu.bucket> -->
+				<!-- 主机地址 -->
+				<host.address>hms.imike.com</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wx.imike.com/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>weixin.imike.com</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://ots.imike.com/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.4.36.125:2181,10.4.37.39:2181,10.4.39.92:2181</zk.connect>
+				<!-- brokerlist线上环境 -->
+				<metadata.broker.list>10.4.37.39:9092,10.4.39.92:9092,10.4.36.125:9092</metadata.broker.list>
+				<ots.restful.address>http://ots.imike.com/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>test</id>
+			<properties>
+				<label>test</label>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:mysql://10.4.17.242:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>ota2developer</master.jdbc.user>
+				<master.jdbc.password>www.imike.com</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:mysql://10.4.17.242:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>ota2developer</slave.jdbc.user>
+				<slave.jdbc.password>www.imike.com</slave.jdbc.password>
+				<!-- <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:mysql://10.4.24.11:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>smlt-writer</master.jdbc.user>
+				<master.jdbc.password>j9bcyZ5U5LQp7xxEomsu</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:mysql://10.4.24.11:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>smlt-writer</slave.jdbc.user>
+				<slave.jdbc.password>j9bcyZ5U5LQp7xxEomsu</slave.jdbc.password> -->
+				<spring.redis.sentinel.master>ota2-test-redis</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>10.4.27.128:26379</spring.redis.sentinel.nodes>
+				<!-- websocket ip、端口 -->
+				<synserver.ip>10.4.10.190</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://ota2test.imike.cn/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://ota2test.imike.cn/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://ota2test.imike.cn/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://ota2test.imike.cn/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://ota2test.imike.cn/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://ota2test.imike.cn/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://ota2test.imike.cn/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://ota2test.imike.cn/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://ota2test.imike.cn/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://ota2test.imike.cn/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://ota2test.imike.cn/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<!-- <qiniu.download.address>https://dn-imke-pro.qbox.me</qiniu.download.address> -->
+				<!-- 七牛空间名称 -->
+				<!-- <qiniu.bucket>hotelpic</qiniu.bucket> -->
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>hms2test.imike.cn</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://ota2test.imike.cn/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.4.31.46:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.4.31.46:9092,10.4.31.46:9093,10.4.31.46:9094</metadata.broker.list>
+				<ots.restful.address>http://ota2test.imike.cn/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>shanghai-simulation</id>
+			<properties>
+				<label>product</label>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:mysql://10.4.24.11:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>smlt-writer</master.jdbc.user>
+				<master.jdbc.password>j9bcyZ5U5LQp7xxEomsu</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:mysql://10.4.24.11:3306/ots?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8]]></slave.jdbc.url>
+				<slave.jdbc.user>smlt-writer</slave.jdbc.user>
+				<slave.jdbc.password>j9bcyZ5U5LQp7xxEomsu</slave.jdbc.password>
+				<spring.redis.sentinel.master>ota2-test-redis</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>10.4.20.206:26379</spring.redis.sentinel.nodes>
+				<!-- websocket ip、端口 -->
+				<synserver.ip>10.4.17.121</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://10.4.26.201:8081/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://10.4.26.201:8081/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://10.4.26.201:8081/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://10.4.26.201:8081/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://10.4.26.201:8081/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://hotelsimu.congqipms.com/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://10.4.26.201:8081/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://10.4.26.201:8081/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://10.4.26.201:8081/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://10.4.26.201:8081/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://10.4.26.201:8081/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<!-- <qiniu.download.address>https://dn-imke-pro.qbox.me</qiniu.download.address> -->
+				<!-- 七牛空间名称 -->
+				<!-- <qiniu.bucket>hotelpic</qiniu.bucket> -->
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>10.4.17.121:8080</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://10.4.26.201:8081/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.4.31.46:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.4.31.46:9092,10.4.31.46:9093,10.4.31.46:9094</metadata.broker.list>
+				<ots.restful.address>http://10.4.26.201:8081/ots</ots.restful.address>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>hotfix</id>
+			<properties>
+				<label>product</label>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:mysql://10.4.24.11:3306/hotfix_ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>hotfix-writer</master.jdbc.user>
+				<master.jdbc.password>5A6QG9Y8Ol</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:mysql://10.4.24.11:3306/hotfix_ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>hotfix-reader</slave.jdbc.user>
+				<slave.jdbc.password>1fn1CTw9O4</slave.jdbc.password>
+				<spring.redis.sentinel.master>ota2-test-redis</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>10.4.20.206:26379</spring.redis.sentinel.nodes>
+				<!-- websocket ip、端口 -->
+				<synserver.ip>10.4.11.218</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://10.4.11.218:8081/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://10.4.11.218:8081/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://10.4.11.218:8081/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<update.hotel.mikeprices.cache.address>http://10.4.11.218:8081/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://10.4.11.218:8081/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://10.4.11.218:8081/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://10.4.11.218:8081/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://10.4.11.218:8081/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://10.4.11.218:8081/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://10.4.11.218:8081/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://10.4.11.218:8081/ots/hms/hotel/offline</online.hotel.off.address><!-- 七牛获取文件路径 -->
+				<!-- <qiniu.download.address>https://dn-imke-pro.qbox.me</qiniu.download.address> -->
+				<!-- 七牛空间名称 -->
+				<!-- <qiniu.bucket>hotelpic</qiniu.bucket> -->
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>10.4.11.218:8080</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://wechat.imike.cn/rt/</qrcode.conttent.prefix>
+				<!-- B规则地址 -->
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://10.4.11.218:8081/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.4.31.46:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.4.31.46:9092,10.4.31.46:9093,10.4.31.46:9094</metadata.broker.list>
+				<ots.restful.address>http://10.4.11.218:8081/ots</ots.restful.address>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>bgp-simulation</id>
+			<properties>
+				<label>product</label>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<master.jdbc.url><![CDATA[jdbc:mysql://10.10.187.189:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></master.jdbc.url>
+				<master.jdbc.user>smlt-writer</master.jdbc.user>
+				<master.jdbc.password>j9bcyZ5U5LQp7xxEomsu</master.jdbc.password>
+				<slave.jdbc.url><![CDATA[jdbc:mysql://10.10.187.189:3306/ots?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]></slave.jdbc.url>
+				<slave.jdbc.user>smlt-writer</slave.jdbc.user>
+				<slave.jdbc.password>j9bcyZ5U5LQp7xxEomsu</slave.jdbc.password>
+				<spring.redis.sentinel.master>ots-smlt-bj-redis</spring.redis.sentinel.master>
+				<spring.redis.sentinel.nodes>10.10.115.57:26379</spring.redis.sentinel.nodes>
+				<!-- websocket ip、端口 -->
+				<synserver.ip>10.10.124.247</synserver.ip>
+				<synserver.port>8000</synserver.port>
+				<!-- 短信接口地址 -->
+				<sms.msg.address>http://smlt-ots.imike.cn/ots/verifycode/send</sms.msg.address>
+				<!-- 前台切客优惠接口 -->
+				<waiter.bargain.address>http://smlt-ots.imike.cn/ots/order/changeprice</waiter.bargain.address>
+				<!-- ots反查酒店房态接口 -->
+				<refresh.room.online.address>http://smlt-ots.imike.cn/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+				<!-- 更新酒店mike价格 -->
+				<!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://smlt-ots.imike.cn/ots/pms/initPMS</old.pms.install.address>
+				<update.hotel.mikeprices.cache.address>http://smlt-ots.imike.cn/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+				<!-- 安装新pms地址 -->
+				<new.pms.install.address>http://hotelsimu.congqipms.com/ots2pms/online</new.pms.install.address>
+				<!-- 审核添加接口 -->
+				<check.hotel.insert.address>http://smlt-ots.imike.cn/ots/hms/hotel/add</check.hotel.insert.address>
+				<!-- 审核修改接口 -->
+				<check.hotel.update.address>http://smlt-ots.imike.cn/ots/hms/hotel/update</check.hotel.update.address>
+				<!-- 审核删除接口 -->
+				<check.hotel.delete.address>http://smlt-ots.imike.cn/ots/hms/hotel/delete</check.hotel.delete.address>
+				<!-- 酒店上线接口地址 -->
+				<online.hotel.on.address>http://smlt-ots.imike.cn/ots/hms/hotel/online</online.hotel.on.address>
+				<!-- 酒店下线接口地址 -->
+				<online.hotel.off.address>http://smlt-ots.imike.cn/ots/hms/hotel/offline</online.hotel.off.address>
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke-pro.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<!-- <qiniu.bucket>hotelpic</qiniu.bucket> -->
+				<!-- 七牛获取文件路径 -->
+				<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address>
+				<!-- 七牛空间名称 -->
+				<qiniu.bucket>test</qiniu.bucket>
+				<!-- 主机地址 -->
+				<host.address>localhost:8080</host.address>
+				<!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+				<!-- 切客二维码前缀 -->
+				<qrcode.conttent.prefix>http://weixin.imike.cn/rt/</qrcode.conttent.prefix>
+				<rule.B.URL>wechat.imike.cn</rule.B.URL>
+				<!-- 提前结算接口地址 -->
+				<gen.BILLCONFIRMCHECKS.URL>http://smlt-ots.imike.cn/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.10.144.40:2181,10.10.136.210:2181,10.10.115.52:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.10.144.40:9092,10.10.136.210:9092,10.10.115.52:9092</metadata.broker.list>
+				<ots.restful.address>http://smlt-ots.imike.cn/ots</ots.restful.address>
+			</properties>
+		</profile>
+		
+		<profile>
+            <id>bgp-clu</id>
+            <properties>
+                <label>product</label>
+                <jdbc.driver>com.mk.jdbc.MonitorDriver</jdbc.driver>
+                <master.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://10.10.119.90:3306/ots?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8]]></master.jdbc.url>
+                <master.jdbc.user>imike-writer</master.jdbc.user>
+                <master.jdbc.password>Imike-writer</master.jdbc.password>
+                <slave.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://10.10.119.90:3306/ots?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8]]></slave.jdbc.url>
+                <slave.jdbc.user>imike-reader</slave.jdbc.user>
+                <slave.jdbc.password>Imike-reader!@#$</slave.jdbc.password>
+                <spring.redis.sentinel.master>ots-redis</spring.redis.sentinel.master>
+                <spring.redis.sentinel.nodes>10.10.103.141:26379,10.10.104.151:26379</spring.redis.sentinel.nodes>
+                <synserver.ip>10.10.108.139</synserver.ip>
+                <synserver.port>8000</synserver.port>
+                <!-- 短信接口地址 -->
+                <sms.msg.address>http://ots.imike.com/ots/verifycode/send</sms.msg.address>
+                <!-- 前台切客优惠接口 -->
+                <waiter.bargain.address>http://ots.imike.com/ots/order/changeprice</waiter.bargain.address>
+                <!-- ots反查酒店房态接口 -->
+                <refresh.room.online.address>http://ots.imike.com/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+                <!-- 更新酒店mike价格 -->
+                <update.hotel.mikeprices.cache.address>http://ots.imike.com/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+                <!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://ots.imike.com/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+                <new.pms.install.address>http://service.congqipms.com/ots2pms/online</new.pms.install.address>
+                <!-- 审核添加接口 -->
+                <check.hotel.insert.address>http://ots.imike.com/ots/hms/hotel/add</check.hotel.insert.address>
+                <!-- 审核修改接口 -->
+                <check.hotel.update.address>http://ots.imike.com/ots/hms/hotel/update</check.hotel.update.address>
+                <!-- 审核删除接口 -->
+                <check.hotel.delete.address>http://ots.imike.com/ots/hms/hotel/delete</check.hotel.delete.address>
+                <!-- 酒店上线接口地址 -->
+                <online.hotel.on.address>http://ots.imike.com/ots/hms/hotel/online</online.hotel.on.address>
+                <!-- 酒店下线接口地址 -->
+                <online.hotel.off.address>http://ots.imike.com/ots/hms/hotel/offline</online.hotel.off.address>
+                <!-- 七牛获取文件路径 -->
+                <qiniu.download.address>https://dn-imke-pro.qbox.me</qiniu.download.address>
+                <!-- 七牛空间名称 -->
+                <qiniu.bucket>hotelpic</qiniu.bucket>
+                <!-- 七牛获取文件路径 -->
+                <!--<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address> -->
+                <!-- 七牛空间名称 -->
+                <!--<qiniu.bucket>test</qiniu.bucket> -->
+                <!-- 主机地址 -->
+                <host.address>hms.imike.com</host.address>
+                <!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+                <!-- 切客二维码前缀 -->
+                <qrcode.conttent.prefix>http://wx.imike.com/rt/</qrcode.conttent.prefix>
+                <!-- B规则地址 -->
+                <rule.B.URL>weixin.imike.com</rule.B.URL>
+                <!-- 提前结算接口地址 -->
+                <gen.BILLCONFIRMCHECKS.URL>http://ots.imike.com/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<!-- zk.connect -->
+				<zk.connect>10.10.105.143:2181,10.10.106.212:2181,10.10.103.91:2181</zk.connect>
+				<!-- brokerlist测试环境 -->
+				<metadata.broker.list>10.10.105.143:9092,10.10.106.212:9092,10.10.103.91:9092</metadata.broker.list>
+				<ots.restful.address>http://ots.imike.com/ots</ots.restful.address>
+			</properties>
+        </profile>
+        
+        <profile>
+            <id>bgp-test</id>
+            <properties>
+                <label>product</label>
+                <jdbc.driver>com.mk.jdbc.MonitorDriver</jdbc.driver>
+                <master.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://10.10.119.90:3306/ots?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8&autoReconnect=true]]></master.jdbc.url>
+                <master.jdbc.user>imike-writer</master.jdbc.user>
+                <master.jdbc.password>Imike-writer</master.jdbc.password>
+                <slave.jdbc.url><![CDATA[jdbc:monitor4jdbc:mysql://10.10.141.244:3306/ots?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8&autoReconnect=true]]></slave.jdbc.url>
+                <slave.jdbc.user>imike-reader</slave.jdbc.user>
+                <slave.jdbc.password>Imike-reader!@#$</slave.jdbc.password>
+                <spring.redis.sentinel.master>ots-redis</spring.redis.sentinel.master>
+                <spring.redis.sentinel.nodes>10.10.103.141:26379,10.10.104.151:26379</spring.redis.sentinel.nodes>
+                <synserver.ip>10.10.108.139</synserver.ip>
+                <synserver.port>8000</synserver.port>
+                <!-- 短信接口地址 -->
+                <sms.msg.address>http://trans-ots.imike.cn/ots/verifycode/send</sms.msg.address>
+                <!-- 前台切客优惠接口 -->
+                <waiter.bargain.address>http://trans-ots.imike.cn/ots/order/changeprice</waiter.bargain.address>
+                <!-- ots反查酒店房态接口 -->
+                <refresh.room.online.address>http://trans-ots.imike.cn/ots/pmsutil/synPmsOrder</refresh.room.online.address>
+                <!-- 更新酒店mike价格 -->
+                <update.hotel.mikeprices.cache.address>http://trans-ots.imike.cn/ots/hotel/updateHotelMikepricesCache</update.hotel.mikeprices.cache.address>
+                <!-- 安装旧pms地址 -->
+				<old.pms.install.address>http://trans-ots.imike.cn/ots/pms/initPMS</old.pms.install.address>
+				<!-- 安装新pms地址 -->
+                <new.pms.install.address>http://trans-ots.imike.cn/ots2pms/online</new.pms.install.address>
+                <!-- 审核添加接口 -->
+                <check.hotel.insert.address>http://trans-ots.imike.cn/ots/hms/hotel/add</check.hotel.insert.address>
+                <!-- 审核修改接口 -->
+                <check.hotel.update.address>http://trans-ots.imike.cn/ots/hms/hotel/update</check.hotel.update.address>
+                <!-- 审核删除接口 -->
+                <check.hotel.delete.address>http://trans-ots.imike.cn/ots/hms/hotel/delete</check.hotel.delete.address>
+                <!-- 酒店上线接口地址 -->
+                <online.hotel.on.address>http://trans-ots.imike.cn/ots/hms/hotel/online</online.hotel.on.address>
+                <!-- 酒店下线接口地址 -->
+                <online.hotel.off.address>http://trans-ots.imike.cn/ots/hms/hotel/offline</online.hotel.off.address>
+                <!-- 七牛获取文件路径 -->
+                <qiniu.download.address>https://dn-imke-pro.qbox.me</qiniu.download.address>
+                <!-- 七牛空间名称 -->
+                <qiniu.bucket>hotelpic</qiniu.bucket>
+                <!-- 七牛获取文件路径 -->
+                <!--<qiniu.download.address>https://dn-imke.qbox.me</qiniu.download.address> -->
+                <!-- 七牛空间名称 -->
+                <!--<qiniu.bucket>test</qiniu.bucket> -->
+                <!-- 主机地址 -->
+                <host.address>trans-hms.imike.cn</host.address>
+                <!--  des 明文密钥key-->
+				<des.key>_imike_hms_des_key_</des.key>
+                <!-- 切客二维码前缀 -->
+                <qrcode.conttent.prefix>http://trans-wx.imike.cn/rt/</qrcode.conttent.prefix>
+                <!-- B规则地址 -->
+                <rule.B.URL>trans-weixin.imike.cn</rule.B.URL>
+                <!-- 提前结算接口地址 -->
+                <gen.BILLCONFIRMCHECKS.URL>http://trans-ots.imike.cn/ots/bill/genBillConfirmChecks</gen.BILLCONFIRMCHECKS.URL>
+				<ots.restful.address>http://trans-ots.imike.cn/ots</ots.restful.address>
+            </properties>
+        </profile>
+	</profiles>
+
+</project>

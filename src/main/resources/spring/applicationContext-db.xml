@@ -1,0 +1,85 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.wxsd">
+
+	<context:annotation-config />
+	<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration" />
+
+	<bean class="com.mk.ots.redis.EmbeddedRedisConfiguration" />
+
+	<bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" abstract="true">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="initialSize" value="25" />
+		<property name="maxActive" value="60" />
+		<property name="maxWait" value="60000" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="testOnBorrow" value="true" />
+		<property name="validationQuery" value="SELECT 1" />
+	</bean>
+
+	<bean id="masterDataSource" parent="parentDataSource">
+		<property name="url" value="${master.jdbc.url}" />
+		<property name="username" value="${master.jdbc.user}" />
+		<property name="password" value="${master.jdbc.password}" />
+	</bean>
+
+	<bean id="slaveDataSource" parent="parentDataSource">
+		<property name="url" value="${slave.jdbc.url}" />
+		<property name="username" value="${slave.jdbc.user}" />
+		<property name="password" value="${slave.jdbc.password}" />
+	</bean>
+
+	<bean id="dataSource" class="com.mk.ots.db.ReadWriteSplittingDataSource">
+		<property name="targetDataSources">
+			<map>
+				<entry key="master" value-ref="masterDataSource" />
+				<entry key="slave" value-ref="slaveDataSource" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- Spring jdbcTemplate JDBC配置 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!--  Spring namedParameterJdbcTemplate JDBC配置-->
+	<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg type="DataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="transactionManager" class="com.mk.ots.db.ReadWriteSplittingTranscationManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+    
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath*:/mappers/*.xml" />
+		<property name="typeAliasesPackage" value="com.mk.ots.domain;com.mk.hms.model" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="count*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="list*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="query*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config expose-proxy="true">
+		<aop:pointcut id="txPointcut" expression="execution(* com.mk.ots.service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+	</aop:config>
+
+</beans>

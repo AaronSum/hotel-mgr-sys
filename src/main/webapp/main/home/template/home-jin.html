@@ -1,0 +1,74 @@
+<div class="row hms-home-nav"  ng-app="homeJinApp" ng-controller="homeJinController">
+	<div class="col-md-12">
+		<div class="row" hms-affix>
+			<div class="col-md-6">
+				<h3>酒店资料</h3>
+			</div>
+			<div class="col-md-4 pull-right">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="queryContent" placeholder="酒店名／地址／联系人／id" ng-keyup="enter($event)">
+					<span class="input-group-btn">
+					 	<button class="btn btn-default" type="button" ng-click="doSearch()"><span class="glyphicon glyphicon-search"></span></button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row hms-jin-container">
+			<div class="col-md-2">
+				<div class="list-group" hms-affix>
+					<a ng-repeat="(key, item) in navItems" ng-click="setActive(key)" class="list-group-item" ng-class="{'active':active==key}">{{item.displayName}}</a>
+				</div>
+			</div>
+			<div class="col-md-10">
+				<div class="container-fluid">
+					<div class="row" ng-hide="isForeignPerson == true">
+						<div class="col-md-12">
+							<p class="memo pull-left">{{navItems[active].displayName}}</p>
+							<button class="btn btn-danger pull-left" ng-if="navItems[active].funCode && navItems[active].funCode == 'locationAdjust'" ng-click="locationAdjustAll()">批量位置自动校准</button>
+							<div class="pull-right hms-jin-checkbox" ng-hide="navItems[active].funCode && navItems[active].funCode == 'locationAdjust'">
+								<label style="display: inline-flex; margin-right: 20px; margin-bottom: 0;">
+								我的酒店&nbsp;&nbsp;<input type="checkbox" class="ios-switch green tinyswitch" ng-model="isMySelfFlag" ng-change="mySelfFlagChanged()" />
+									<div style="margin: 0; padding: 0;">
+										<div></div>
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table hms-table border-top">
+								<thead>
+									<tr>
+										<th class="{{item.class}}" ng-repeat="item in columns"  width="{{item.width}}">{{item.displayName}}</th>
+										<th class="text-center">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in rowsData">
+										<td class="{{item.class}}" ng-repeat="item in columns"  width="{{item.width}}">{{row[item.field]}}</td>
+										<td class="text-center">
+											<a class="btn btn-success btn-xs" ng-click="installPMS(row)" ng-if="showInstallPMS(row)">安装PMS</a>
+											<a class="btn btn-success btn-xs" ng-if="showInstallPMSing(row)">数据同步中...</a>
+											<a class="btn btn-primary btn-xs" ng-click="checkEHotel(row)" ng-if="showCheckEHotel(row)">{{row.state=='3'?'初次审核':'修改审核'}}</a>
+											<a class="btn btn-warning btn-xs" ng-click="editHotel(row)" ng-if="showEditHotel(row)">完善酒店信息</a>
+											<a class="btn btn-danger btn-xs" ng-click="offlineHotel(row)" ng-if="showOnlineHotel(row)">下线</a>
+											<a class="btn btn-danger btn-xs" ng-click="onlineHotel(row)" ng-if="showOfflineHotel(row)">上线</a>
+											<a class="btn btn-info btn-xs" ng-click="readHotel(row)" ng-if="showReadHotel(row)">查看</a>
+											<a ng-if="navItems[active].funCode && navItems[active].funCode == 'locationAdjust' && row.okLoaction == 2;" class="btn btn-danger btn-xs" ng-click="locationAdjust(row)">位置自动校准</a>
+											<p ng-if="navItems[active].funCode && navItems[active].funCode == 'locationAdjust' && row.okLoaction == 3;" class="text-danger">
+												需要手动修改位置信息
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="totalItems" ng-model="currentPage" items-per-page="pageCount" max-size="maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hms-loading ng-show="showLoading"></hms-loading>
+</div>

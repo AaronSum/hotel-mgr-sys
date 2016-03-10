@@ -1,0 +1,157 @@
+<div class="row" ng-app="messageApp" ng-controller="messageController">
+	<div class="col-md-12">
+		<ul class="nav nav-tabs">
+		  <li role="presentation" class="active"><a href="#">酒店讯息</a></li>
+		</ul>
+		<div class="row hms-message-view hms-jin-container">
+			<div class="col-md-3">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="headingOne">
+				      <h4 class="panel-title">
+				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+				          酒店名称
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+				      <div class="panel-body left-first">
+				      	<table class="table table-hover">
+				      		<tr>
+				      			<td class="table-first">{{thisHotel.hotelName}}</td>
+				      		</tr>
+				      		<tr>
+				      			<td>{{thisHotel.pmsUser}}</td>
+				      		</tr>
+				      		<tr>
+				      			<td>{{group.regphone}}</td>
+				      		</tr>
+				      		<tr>
+				      			<td>{{thisHotel.detailAddr}}</td>
+				      		</tr>
+						</table>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="headingTwo">
+				      <h4 class="panel-title">
+				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+				          酒店资料
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+				      <div class="panel-body">
+				        <ul class="nav nav-list">
+						  <li ng-repeat="(index, item) in hotelNav.hotelInfo.item">
+						 	<i ng-class="{'glyphicon glyphicon-ok' : selected(item) }"></i>
+						  	<a ng-click="showItem(item)">{{item.displayName}}</a>
+						  </li>
+						</ul>
+				      </div>
+				    </div>
+				  </div>
+				  <!--    房型管理      -->
+				  <div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="headingThree">
+				      <h4 class="panel-title">
+				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				          房型管理
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+				      <div class="panel-body">
+				        <ul class="nav nav-list">
+						  <li ng-repeat="(index, item) in hotelNav.roomType.item">
+						 	<i ng-class="{'glyphicon glyphicon-ok' : selected(item) }"></i>
+						  	<a ng-click="showItem(item)">{{item.displayName}}</a>
+						  </li>
+						</ul>
+				      </div>
+				    </div>
+				  </div>
+				  <!--  房间管理     -->
+				  <div class="panel panel-default">
+				      <div class="panel-heading" role="tab" id="heading6">
+					      <h4 class="panel-title">
+					        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+					          	房间管理
+					        </a>
+					      </h4>
+				      </div>
+				      <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+				          <div class="panel-body">
+					          <ul class="nav nav-list">
+								  <li ng-repeat="(index, item) in hotelNav.roomSetting.item">
+								 	  <i ng-class="{'glyphicon glyphicon-ok' : selected(item) }"></i>
+								  	  <a ng-click="showItem(item)">{{item.displayName}}</a>
+								  </li>
+							  </ul>
+				          </div>
+				      </div>
+				  </div>
+				  
+				  <!-- 	 房价设置       -->
+				  <div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="headingFour">
+				      <h4 class="panel-title">
+				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+				          房价设置
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+				      <div class="panel-body">
+				        <ul class="nav nav-list">
+						  <li ng-repeat="(index, item) in hotelNav.roomPrice.item">
+						 	<i ng-class="{'glyphicon glyphicon-ok' : selected(item) }"></i>
+						  	<a ng-click="showItem(item)">{{item.displayName}}</a>
+						  </li>
+						</ul>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel panel-default" ng-if="false">
+				    <div class="panel-heading" role="tab" id="heading5">
+				      <h4 class="panel-title">
+				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+				          账期设置
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+				      <div class="panel-body">
+				        <ul class="nav nav-list">
+						  <li ng-repeat="(index, item) in hotelNav.accountSetting.item">
+						 	<i ng-class="{'glyphicon glyphicon-ok' : selected(item) }"></i>
+						  	<a ng-click="showItem(item)">{{item.displayName}}</a>
+						  </li>
+						</ul>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel panel-default" ng-if="showRuleCode && (ctrlMode=='edit' || ctrlMode=='check')">
+				    <div class="panel-heading" role="tab" id="heading6">
+				      <h4 class="panel-title text-center">
+				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#collapse5" aria-expanded="false" aria-controls="collapse6" ng-click="showSetHotelRule()">
+				          酒店规则设置
+				        </a>
+				      </h4>
+				    </div>
+				  </div>
+				</div>
+			    <div class="col-md-offset-2 col-md-8 memo-contrainer-bottom">
+			    	<button class="btn btn-success" ng-if="ctrlMode=='edit'" ng-click="finish();">搞定</button>
+			    	<button class="btn btn-success" ng-disabled="editDisabled" ng-if="ctrlMode=='default'" ng-click="showfinish()">编辑</button>
+			    	<button class="btn btn-success btn-danger" ng-if="ctrlMode=='check'" ng-click="checkEHotel();">{{checking?'审核中....':'通过审核'}}</button>
+			    </div>
+			</div>
+			<div class="col-md-9">
+				<div ui-view></div>
+				<div ng-show="readOnly" class="hms-pop-view"></div>
+			</div>
+		</div>
+	</div>
+</div>

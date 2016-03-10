@@ -1,0 +1,42 @@
+<!--BODY-->
+<div class="orders-body row" ng-controller="ordersController">
+	<div class="carts-content col-md-12">
+		<table class="table hms-table border-top">
+			<thead>
+				<tr>
+					<th class="{{item.class}}" ng-repeat="item in columns"  width="{{item.width}}" ng-bind="item.displayName">
+					</th>
+					<th class="text-center">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="order in orderslist">
+<!-- 					<td class="{{item.class}} text-center" ng-bind="order.orderid"></td> -->
+					<td class="{{item.class}} text-left">
+						<div style="font-size: x-small;">订单号：<span ng-bind="order.orderid"></span></div>
+						<span ng-repeat="orderDetail in order.orderDetails">
+							<img class="shopping-cart-image" ng-src="{{orderDetail.imageurlsmall}}"/>
+						</span>
+					</td>
+					<td class="{{item.class}} text-center" ng-bind="order.orderamount | number:2"></td>
+					<td class="{{item.class}} text-center" ng-bind="order.paydate| date:'yyyy-MM-dd HH:mm:ss'"></td>
+					<td class="{{item.class}} text-center">
+						<span ng-switch on="order.istype">
+							<span ng-switch-when="10" class="{{item.class}} text-center">已确认</span>
+							<span ng-switch-when="20" class="{{item.class}} text-center">已开始配送</span>
+							<span ng-switch-when="30" class="{{item.class}} text-center">已收到 </span>
+							<span ng-switch-when="40" class="{{item.class}} text-center">款项已结清</span>
+						</span>
+					</td>
+					<td class="{{item.class}}  text-center">
+						<button class="btn btn-default btn-xs" ng-click="orders.showEnterDetail(order)">查看</button>
+						<i class='fa fa-question-circle' bs-popover data-placement="top" data-title="提示" data-content="{{getWarnStr(order)}}" data-trigger="hover" data-auto-close="1"></i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="carts-page">
+			<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="totalItems" ng-model="currentPage" items-per-page="pageCount" max-size="maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+		</div>
+	</div>
+</div>

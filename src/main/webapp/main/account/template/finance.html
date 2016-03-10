@@ -1,0 +1,19 @@
+<div ng-app="accountApp" ng-controller="financeController">
+	<div class="row">		
+		<div class="col-md-12">
+			<ul class="nav nav-tabs hms-body-nav">
+			  <li role="presentation" ng-repeat="(key, item) in Nav.items" ng-class="{'active':Nav.selected==key}"><a ng-click="Nav.selected=key">{{item.displayName}}</a></li>
+			</ul>
+			<p style="position:absolute;top:0;right:15px;">
+				<!--<button class="btn btn-default"
+						ng-if="tqjsBtn.isThreshold=='T'"
+						ng-disabled="!tqjsBtn.isFreeze"
+						ng-show="Nav.selected==0"
+						ng-click="preCalAccount()" >提前结算</button>-->
+				<button class="btn btn-default" ng-click="showBankCount()">收款账号信息</button> 
+			</p>
+		</div>
+	</div>
+	<br>
+	<div ng-repeat="(key, item) in Nav.items" ng-include="item.page" ng-show="Nav.selected==key" ng-if="item.loaded" class="row"></div>
+</div>

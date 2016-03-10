@@ -1,0 +1,32 @@
+<!--周结算-->
+<div ng-controller="FinanceNewController">
+    <div class="col-md-2">
+        <div class="list-group">
+            <a ng-repeat="(key, item) in BaseFinance.nav.items" ng-click="BaseFinance.nav.selected=key" class="list-group-item" ng-class="{'active':BaseFinance.nav.selected==key}">{{item.displayName}}</a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <table class="table hms-table border-top">
+            <thead>
+                <tr>
+                    <th class="text-center" width="5%">序号</th>
+                    <th class="{{column.class}}" ng-repeat="column in BaseFinance.columns" width="{{column.width}}">{{column.displayName}}</th>
+                    <th class="text-center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in BaseFinance.data">
+                    <td class="text-center">{{(BaseFinance.pagination.currentPage-1)*BaseFinance.pagination.pageCount + $index+1}}</td>
+                    <td class="{{column.class}}" ng-repeat="column in BaseFinance.columns" width="{{column.width}}">{{row[column.field]}}</td>
+                    <td class="text-center">
+                        <!--<button class="btn btn-info btn-xs" ng-show="row.checkstatus == 1" ng-click="confirmSpecialBill(clone(row))">确认金额</button>-->
+                        <button class="btn btn-danger btn-xs" ng-show="row.checkStatus == 6 && !row.feedbackIng" ng-click="baseVerifyBill(clone(row))">申诉</button>
+                        <!--<button class="btn btn-default btn-xs" ng-show="row.checkstatus > 1" ng-click="showReadCheck(clone(row))">审核详情</button>-->
+                        <button class="btn btn-default btn-xs" ng-click="showBaseBillDetail(clone(row))">账期明细</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="BaseFinance.pagination.totalItems" ng-model="BaseFinance.pagination.currentPage" items-per-page="BaseFinance.pagination.pageCount" max-size="BaseFinance.pagination.maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="BaseFinance.pagination.pageChanged()"></pagination>
+    </div>
+</div>

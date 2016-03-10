@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	<!-- HTTP security configurations auto-config="true" -->
+ 	<http use-expressions="true" auto-config="false" entry-point-ref="http403EntryPoint">
+ 		<!-- <form-login login-processing-url="/resources/j_spring_security_check"
+			login-page="/login" authentication-failure-handler-ref="failureHandler"
+			authentication-success-handler-ref="successHandler" />  -->
+		<logout logout-url="/resources/j_spring_security_logout" />
+		<intercept-url pattern="/resources/**" access="permitAll" /> 
+		<intercept-url pattern="/images/**" access="permitAll" />
+		<intercept-url pattern="/css/**" access="permitAll" />
+		<intercept-url pattern="/login" access="permitAll" requires-channel="any" /><!-- requires-channel支持三个值：http、https和any -->
+		<intercept-url pattern="/login/**" access="permitAll" />
+		<intercept-url pattern="/image/**" access="permitAll" />
+		<intercept-url pattern="/js/**" access="permitAll" />
+		<intercept-url pattern="/main/**" access="permitAll" />
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/home/**" access="isAuthenticated()" />
+		<intercept-url pattern="/homeController/**" access="isAuthenticated()" />
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/remoting/**" access="permitAll" />
+		<intercept-url pattern="/websocket/**" access="permitAll" />
+		<intercept-url pattern="/order/**" access="permitAll" />
+		<intercept-url pattern="/app/**" access="isAuthenticated()" />
+		
+		<!-- 银行账号 -->
+		<intercept-url pattern="/bank/**" access="isAuthenticated()" />
+		
+		<!-- 账单清算 -->
+		<intercept-url pattern="/bill/**" access="isAuthenticated()" />
+		
+		<!-- B规则 -->
+		<intercept-url pattern="/brule/**" access="isAuthenticated()" />
+		
+		<!-- 评论 -->
+		<intercept-url pattern="/comment/**" access="isAuthenticated()" />
+		
+		<!-- 首页 -->
+		<intercept-url pattern="/home/**" access="isAuthenticated()" />
+		
+		<!-- 酒店 -->
+		<intercept-url pattern="/hotel/province" access="permitAll" />
+		<intercept-url pattern="/hotel/provinces" access="permitAll" />
+		<intercept-url pattern="/hotel/city" access="permitAll" />
+		<intercept-url pattern="/hotel/cities" access="permitAll" />
+		<intercept-url pattern="/hotel/citiesbycode" access="permitAll" />
+		<intercept-url pattern="/hotel/district" access="permitAll" />
+		<intercept-url pattern="/hotel/districts" access="permitAll" />
+		<intercept-url pattern="/hotel/districtsbycode" access="permitAll" />
+		<intercept-url pattern="/hotel/regHotel" access="permitAll" />
+		<intercept-url pattern="/hotel/retrievePasswordNext" access="permitAll" />
+		<intercept-url pattern="/hotel/modifyPassword" access="permitAll" />
+		<intercept-url pattern="/hotel/pmsUsers" access="permitAll" />
+		<intercept-url pattern="/hotel/pmsUserByCode" access="permitAll" />
+		<intercept-url pattern="/hotel/**" access="isAuthenticated()" />
+		
+		<!-- 酒店讯息 -->
+		<intercept-url pattern="/hotelmessage/**" access="isAuthenticated()" />
+		
+		<!-- 二维码 -->
+		<intercept-url pattern="/i2dimcodes/**" access="isAuthenticated()" />
+		
+		<!-- 消息 -->
+		<intercept-url pattern="/message/**" access="isAuthenticated()" />
+		
+		<!-- 订单 -->
+		<intercept-url pattern="/otsorder/**" access="isAuthenticated()" />
+		
+		<!-- 客单 -->
+		<intercept-url pattern="/otsroomorder/**" access="isAuthenticated()" />
+		
+		<!-- 价格 -->
+		<intercept-url pattern="/price/**" access="isAuthenticated()" />
+		
+		<!-- 价格 -->
+		<intercept-url pattern="/price/**" access="isAuthenticated()" />
+		
+		<!-- 房型 -->
+		<intercept-url pattern="/roomtype/**" access="isAuthenticated()" />
+		
+		<!-- 用户 -->
+		<intercept-url pattern="/user/regUser" access="permitAll" />
+		<intercept-url pattern="/user/verifyCode" access="permitAll" />
+		<intercept-url pattern="/user/**" access="isAuthenticated()" />
+		
+		<session-management session-authentication-strategy-ref="sas" />
+		
+		<custom-filter position="FORM_LOGIN_FILTER" ref="myFilter"  />
+	</http>
+	
+	<beans:bean id="sas"
+		class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+		<beans:constructor-arg name="sessionRegistry"
+			ref="sessionRegistry" />
+		<beans:property name="maximumSessions" value="1" /> 
+		<!-- 防止session攻击 -->
+		<beans:property name="alwaysCreateSession" value="true" />
+		<beans:property name="migrateSessionAttributes" value="false" />
+		<!-- 同一个帐号 同时只能一个人登录 -->
+		<beans:property name="exceptionIfMaximumExceeded"
+			value="true" />
+	</beans:bean>
+	
+	<beans:bean id="myFilter" class="com.mk.ots.security.web.Hms4PmsAuthenticationFilter">
+	    <beans:property name="authenticationManager" ref ="org.springframework.security.authenticationManager"/>
+	    <beans:property name="authenticationSuccessHandler" ref ="successHandler"/>
+	    <beans:property name="authenticationFailureHandler" ref ="failureHandler"/>
+	</beans:bean>
+	
+	<beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+	<!-- Configure Authentication mechanism -->
+<!-- 	<authentication-manager alias="authenticationManager">
+		SHA-256 values can be produced using 'echo -n your_desired_password 
+			| sha256sum' (using normal *nix environments)
+		<authentication-provider user-service-ref="userdetailservice">
+			<password-encoder ref="md5PasswordEncoder" />
+		</authentication-provider>
+	</authentication-manager>
+ -->
+ 
+ 	<beans:bean id="org.springframework.security.authenticationManager" class="org.springframework.security.authentication.ProviderManager" >
+ 	    <beans:constructor-arg >
+ 	        <beans:list>
+ 	            <beans:ref bean="daoAuthenicationProvider"/>
+ 	        </beans:list>
+ 	    </beans:constructor-arg>
+    </beans:bean>
+    
+ 	<beans:bean id= "daoAuthenicationProvider" class="com.mk.ots.security.web.Hms4PmsDaoAuthenticationProvider">
+ 	    <beans:property name="passwordEncoder" ref="md5PasswordEncoder"/>
+ 	    <beans:property name="userDetailsService" ref="userdetailservice"/>
+ 	</beans:bean>
+ 	
+	<beans:bean name="md5PasswordEncoder"
+		class="com.mk.ots.security.web.Md5PasswordEncoder2UpperCase">
+	</beans:bean>
+
+	<beans:bean id="userdetailservice"
+		class="com.mk.ots.security.web.UserDetailsServiceImpl">
+	</beans:bean>
+
+	<beans:bean
+		class="org.springframework.security.core.context.SecurityContextHolder"
+		factory-method="getContextHolderStrategy" />
+
+	<beans:bean id="failureHandler" class="com.mk.hms.handler.HmsAccessFailureHandler"/>
+
+	<beans:bean id="successHandler" class="com.mk.hms.handler.HmsAccessSuccessHandler"/>
+
+	<beans:bean id="http403EntryPoint"
+		class="com.mk.ots.security.web.authentication.Http403ForbiddenEntryPoint">
+	</beans:bean>
+
+</beans:beans>

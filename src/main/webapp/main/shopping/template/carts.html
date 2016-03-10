@@ -1,0 +1,63 @@
+<!--BODY-->
+<div class="carts-body row" ng-controller="cartsController">
+	<div ng-if="cart.cartlist && cart.cartlist.length" class="carts-content col-md-12">
+		<div class="panel-heading hotel-home-panel-heading shopping-carts-area" ng-bind="'地址：' + thisHotel.detailAddr"></div>
+		<table class="table hms-table border-top">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:10%;"><input type="checkbox" ng-model="cart.allTick" ng-change="afterAllTick()"/>&nbsp;全选</th>
+					<th class="{{item.class}}" ng-repeat="item in columns"  width="{{item.width}}" ng-bind="item.displayName"></th>
+					<th class="text-center">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="ware in cart.cartlist">
+					<!--选择框-->
+					<td class="text-center"><input type="checkbox" ng-model="ware.tick" ng-change="afterTick()"/></td>
+					<!--商品信息-->
+					<td class="text-left clearfloat">
+						<div class="cart-item-image" ng-show="ware.wareShopping.imageurlsmall">
+							<img class="shopping-cart-image" ng-src="{{ware.wareShopping.imageurlsmall}}"/>
+						</div>
+						<div class="cart-item-name">
+							<span ng-bind="ware.wareShopping.name"></span>
+						</div>
+						<span class="cart-item-promotion-info"  ng-bind="ware.wareShopping.promotionDesc"></span>
+					</td>
+					<!--单价-->
+					<td class="text-center" ng-bind="ware.wareShopping.price | number:2"></td>
+					<!--数量-->
+					<td class="text-center">
+						<div class="quantity-form">
+							<hms-form-counter data="ware" key="num" callback="carts.updateCountCallback"></hms-form-counter>
+						</div>
+					</td>
+					<!--金额-->
+					<td class="text-center">
+						<strong ng-class="{true: 'cart-item-price',false: ''}[ware.wareShopping.isPromotionActive]" ng-bind="(ware.num * ware.wareShopping.price) | number:2"></strong><br />
+						<strong class="cart-item-promotion-price" ng-bind="ware.wareShopping.promotionPrice| number:2"></strong>
+					</td>
+					<!--优惠价-->
+					<td class="text-center" ng-bind="ware.wareShopping.discount | number:2"></td>
+					<!--运费-->
+					<td class="text-center" ng-bind="ware.wareShopping.fee | number:2"></td>
+					<!--操作-->
+					<td class="text-center">
+						<button class="btn btn-default btn-xs" ng-click="carts.deleteShoppingCart(ware,cart.cartlist)">删除</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-right shopping-cart-submit-order">
+			总价（不含运费）：<span class="shopping-cart-pay-amount" ng-bind="getTotalAmount()"></span>
+			<span class="btn btn-primary" ng-click="carts.submitOrder()">提交订单</span>
+		</div>
+	</div>
+	<div ng-if="initFlag && (!cart.cartlist || cart.cartlist.length == 0)">
+		<div class="cart-warn-con row">
+			<i class="cart-warn-icon fa fa-warning"></i>
+			<span class="cart-warn-conclusion">您的购物车没有商品！</span>
+			<button class="cart-warn-btn btn btn-danger" ng-click="goBackMainPage()">去商城逛逛吧</button>
+		</div>
+	</div>
+</div>

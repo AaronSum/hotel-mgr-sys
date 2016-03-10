@@ -1,0 +1,69 @@
+<!-- First Step -->
+<div class="container-fluid">
+	<!-- Head -->
+	<div class="row">
+		<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+			<img src="{{login.MIKE_PNG}}" />
+			<a class="" ng-click="login.backLogin()" style="position:absolute;top:10px;right:50px">返回</a>
+		</div>
+	</div>
+	<!-- Content -->
+	<div class="row content">
+		<!-- left -->
+		<div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+			<!-- Image:free open -->
+			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-3 col-lg-offset-0 col-md-offset-0 col-sm-offset-0 col-xs-offset-1">
+				<img src="{{login.MFKD_PNG}}" />
+			</div>
+			<!-- Form -->
+			<form id="login-form" class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+				<div id="phone-num-con" class="form-group has-feedback" ng-class="{'has-error':login.phoneNumMsg,'has-success':!login.phoneNumMsg && login.phoneNum}">
+				    <label class="control-label">请输入你的手机号</label>
+				    <input type="text" id="phone-num" class="form-control radius-3" placeholder="手机号" ng-model="login.phoneNum" ng-blur="login.phoneNumCheck()">
+				    <!-- <span ng-show="login.phoneNumCheck()" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span> -->
+				    <p ng-bind="login.phoneNumMsg"></p>
+				</div>
+
+				<div id="phone-yzm-con" class="form-group" ng-class="{'has-error':login.phoneYzmMsg}">
+				    <label class="control-label">手机验证码</label>
+				    <div style="display:inline-flex;">
+					    <input type="text" id="phone-yzm" class="form-control radius-3" placeholder="验证码" ng-model="login.phoneYzm" ng-blur="login.phoneYzmCheck()">
+					    <button type="submit" id="phone-yzm-btn" class="btn btn-info" ng-click="login.receivePhoneYzm()" ng-bind="login.phoneYzmBtnMsg" ng-disabled="login.yzmLoading"></button>
+				    </div>
+				    <p ng-bind="login.phoneYzmMsg"></p>
+				</div>
+
+				<div id="phone-num-apsd" class="form-group has-feedback" ng-class="{'has-error':login.aPsdMsg,'has-success':!login.aPsdMsg && login.aPsd}">
+					<label class="control-label">设置你的密码</label>
+				    <input type="password" class="form-control radius-3" ng-model="login.aPsd" ng-blur="login.aPsdCheck()"/>
+				    <!-- <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span> -->
+				    <p ng-bind="login.aPsdMsg"></p>
+				</div>
+
+				<div id="phone-num-vpsd" class="form-group has-feedback" ng-class="{'has-error':login.vPsdMsg,'has-success':!login.vPsdMsg && login.vPsd}">
+					<label class="control-label">确认密码</label>
+				    <input type="password" class="form-control radius-3" ng-model="login.vPsd" ng-blur="login.vPsdCheck()"/>
+				    <!-- <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span> -->
+				    <p ng-bind="login.vPsdMsg"></p>
+				</div>
+
+				<div class="button submit-btn-con">
+					<button type="submit" check="completeButton" class="reg-btn btn btn-success radius-3" style="background-color: #2cd593;" ng-disabled="login.canSubmit()" ng-click="login.submit()">完成</button>
+				</div>
+			</form>
+		</div>
+		<!-- right -->
+		<!-- Image:phone -->
+		<div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-0 hidden-xs">
+			<img class="reg-phone" src="{{login.PHONE}}" />
+		</div>
+	</div>
+</div>
+
+
+					
+					
+		            
+
+				
+

@@ -1,0 +1,23 @@
+<div class="modal-header">
+	<h3 class="modal-title memo">您有新订单需要确认</h3>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- <p ng-class="{true: 'text-success', false: 'text-error'}[isOk]">{{msg}}</p> -->
+			<p><b>用户：</b>{{dataObj.memberName}}，<b>预定</b>&nbsp;&nbsp;{{dataObj.roomTypeName}} {{dataObj.roomNo}}，<b>共</b>{{dataObj.daynumber}}<b>晚</b></p>
+			<div class="form-group">
+			    <label for="changeprice" class="col-md-3 control-label" style="padding: 0; padding-top: 5px;">价格设置(总金额)：</label>
+			    <div class="col-md-9">
+			      <input type="number" class="form-control" ng-model="dataObj.changeprice" id="changeprice" placeholder="填写议价金额(房价必需小于平台价)">
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="pull-right">
+		<div class="btn btn-default" ng-click="closeSocketModal()" ng-hide="dataObj.isOk">返回</div>
+		<div class="btn btn-success" ng-click="changeOrderBargainByWaiter()" ng-hide="dataObj.isOk">确定</div>
+	</div>
+</div>

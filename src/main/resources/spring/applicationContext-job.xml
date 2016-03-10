@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans   
+			http://www.springframework.org/schema/beans/spring-beans-4.1.xsd  
+			http://www.springframework.org/schema/context  
+			http://www.springframework.org/schema/context/spring-context-4.1.xsd  
+			http://www.springframework.org/schema/aop  
+			http://www.springframework.org/schema/aop/spring-aop-4.1.xsd  
+			http://www.springframework.org/schema/tx  
+			http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+			 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+    <!-- 定时执行更新酒店规则 转换任务 -->
+    <bean id ="hotelRuleWorker" class = "com.mk.hms.quartz.HotelRuleWorker" />
+    
+    <bean id="ruleWorkerJobDetail"
+     class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+      <property name="targetObject" ref="hotelRuleWorker" />
+      <property name="targetMethod" value="doTask" />
+      <property name="concurrent" value="false" />
+   	</bean>
+   	<bean id="ruleWorkerTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+      <property name="jobDetail" ref="ruleWorkerJobDetail" />
+      <property name="cronExpression" value="0 0 0 * * ?" />
+   	</bean>
+    <!-- 定时执行更新酒店规则 转换任务 -->
+   	<bean id ="billRuleWorker" class = "com.mk.hms.quartz.BillRuleWorker" />
+   	
+    <bean id="billWorkerJobDetail"
+     class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+      <property name="targetObject" ref="billRuleWorker" />
+      <property name="targetMethod" value="doTask" />
+      <property name="concurrent" value="false" />
+   	</bean>
+   	<bean id="billWorkerTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+      <property name="jobDetail" ref="billWorkerJobDetail" />
+      <property name="cronExpression" value="0 0 6,7,8 * * ?" />
+   	</bean>
+   	<bean id="workerScheduler" 
+   		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+      	<property name="triggers">
+         	<list>
+           		<ref bean="ruleWorkerTrigger"/>
+           		<ref bean="billWorkerTrigger"/>
+         	</list>
+      	</property>
+   	</bean>
+</beans>

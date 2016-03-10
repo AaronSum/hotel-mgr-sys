@@ -1,0 +1,408 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>高德aMap地图</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="initial-scale=1.0,user-scalable=no">
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link href="../plug-in/bootstrap/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body{margin:0;height:100%;width:100%;position:absolute;/*font-size:12px;*/font-family: "microsoft yahei", Arial;}
+		#mapContainer{position: absolute;top:80px;left: 0;right:0;bottom:0;border: 1px solid #BEBEBE;border-radius: 3px;}
+		#tip{background-color:#fff;border:1px solid #ccc;padding-left:10px;padding-right:2px;position:absolute;min-height:65px;top:10px;font-size:12px;right:10px;border-radius:3px;overflow:hidden;line-height:20px;min-width:400px;}
+		#tip input[type="button"]{background-color: #0D9BF2;height:25px;text-align:center;line-height:25px;color:#fff;font-size:12px;border-radius:3px;outline: none;border:0;cursor:pointer;}
+		#tip input[type="text"]{height:25px;border:1px solid #ccc;padding-left:5px;border-radius:3px;outline:none;}
+		#result1{max-height:300px;}
+	</style>
+</head>
+<body onload="initialize()">
+	<div class="form-group">
+		<label class="control-label">酒店详细地址</label>
+		<input type="text" id="keyword" name="keyword" value="" class="form-control radius-3" placeholder="请输入准确的地址并在地图上准确定位，以方便用户找到酒店" autocomplete="off" disable="disabled"/>
+		<div id="result1" name="result1" style="overflow: auto; width: 100%; border: 1px solid gray; position: absolute; color: #000; background-color: #FFF; height: 240px; display: none; z-index: 99999">
+		</div>
+	</div>
+    <div id="mapContainer" ></div>
+</body>
+<script type="text/javascript" src="../plug-in/jquery/jquery-2.1.3/jquery-2.1.3.min.js"></script>
+<script src="http://webapi.amap.com/maps?v=1.3&key=7f744cdfe78aa7bb5d40f15eda4705cd" type="text/javascript"></script>
+<script type="text/javascript" src="../plug-in/bootstrap/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+//全局变量
+var mapObj, //地图对象
+	currMar, //当前marker
+	initLng = 116.397428, //初始经度
+	initLat = 39.90923, //初始纬度
+	lng, //经度
+	lat, //纬度
+	zoom = 13, //地图缩放级别
+	rotation = 0, //地图旋转角度
+	keyboardEnable = true, //是否可通过键盘控制
+	lang = "zh_cn", //设置地图语言类型，默认：中文简体
+	markerIcon = "http://webapi.amap.com/images/1.png", //marker图标样式
+	parentH = {},
+    srcInputValue = "";
+
+//
+function receive(lng, lat, clean, detailAddr){
+    if (lng && lat) {
+        setMarker(new AMap.LngLat(lng, lat));
+    }
+    if (clean) {
+        if (detailAddr) {
+            document.getElementById("keyword").value = srcInputValue = detailAddr;
+        } else {
+            document.getElementById("keyword").value = srcInputValue = "";
+        }
+        if (document.getElementById("result1")) {
+            document.getElementById("result1").curSelect = -1;
+            document.getElementById("result1").innerHTML = "";
+            document.getElementById("result1").style.display = "none";
+        }
+    }
+}
+
+function lockOrUnlockAddr(lock){
+    if (lock) {
+        jQuery("#keyword").attr("disabled","true");
+    } else {
+        jQuery("#keyword").removeAttr("disabled");
+    }
+}
+
+//设定marker
+function setMarker(pos) {
+    if (currMar && currMar.setPosition) {
+        currMar.setPosition(pos);
+        parentH.hotel.longitude = lng = pos.getLng();
+        parentH.hotel.latitude = lat = pos.getLat();
+        // mapObj.setFitView();
+        mapObj.setCenter(pos);
+    } else {
+        var markerOption = {
+            map : mapObj,
+            icon : markerIcon,
+            position : pos
+        };
+        currMar = new AMap.Marker(markerOption);
+        currMar.setDraggable(false); //可拖动dragend
+        currMar.setAnimation("AMAP_ANIMATION_DROP");
+        // AMap.event.addListener(currMar, "dragend", function(){
+        //     lng = currMar.getPosition().getLng();
+        //     lat = currMar.getPosition().getLat();
+        //     // mapObj.setFitView();
+        //     mapObj.setCenter(currMar.getPosition());
+        // });
+        parentH.hotel.longitude = lng = pos.getLng();
+        parentH.hotel.latitude = lat = pos.getLat();
+        mapObj.setCenter(pos);
+    }
+}
+
+//初始化
+function initialize(){
+	//创建地图实例
+	mapObj = new AMap.Map("mapContainer",{
+		//创建地图二维视口
+		view: new AMap.View2D({
+			center: new AMap.LngLat(initLng, initLat), //创建中心点坐标
+			zoom: zoom,
+			rotation: rotation
+		}),
+		keyboardEnable: keyboardEnable,
+		lang: lang
+	});
+               
+    //监听click  
+	// var clickListener = AMap.event.addListener(mapObj,"click",function(e){
+	// 	setMarker(e.lnglat);
+	// });
+
+	//
+	document.getElementById("keyword").onkeyup = keyup;
+    // document.getElementById("keyword").onblur = blur;
+}
+
+function keyup(event){
+    var key = (event||window.event).keyCode;
+    var result = document.getElementById("result1");
+    var keywordInput = document.getElementById("keyword");
+    var cur = result.curSelect;
+    if(key===40){//down
+        if(cur + 1 < result.childNodes.length){
+            if(result.childNodes[cur]){
+                result.childNodes[cur].style.background='';
+            }
+            result.curSelect=cur+1;
+            result.childNodes[cur+1].style.background='#CAE1FF';
+            keywordInput.value = result.geoArr[cur+1].formattedAddress;
+        }
+    }else if(key===38){//up
+        if(cur-1>=0){
+            if(result.childNodes[cur]){
+                result.childNodes[cur].style.background='';
+            }
+            result.curSelect=cur-1;
+            result.childNodes[cur-1].style.background='#CAE1FF';
+            keywordInput.value = result.geoArr[cur-1].formattedAddress;
+        }
+        if (cur == 0) {
+            // var r = keywordInput.createTextRange();
+            // r.collapse(false);
+            // r.select();
+             if(result.childNodes[cur]){
+                result.childNodes[cur].style.background='';
+            }
+            result.curSelect=cur-1;
+            keywordInput.value = srcInputValue;
+        }
+    }else if(key === 13){ //回车
+        var res = document.getElementById("result1");
+        if(res && res['curSelect'] !== -1){
+            selectResult(document.getElementById("result1").curSelect);
+        }
+        srcInputValue = "";
+        //geocoder(document.getElementById("keyword").value);
+    }else{ //其他
+        parentH.hotel.longitude = lng = "";
+        parentH.hotel.latitude = lat = "";
+        autoSearch();
+        srcInputValue = keywordInput.value;
+    }
+}
+
+//从输入提示框中选择关键字并查询
+function selectResult(index) {
+    if(index<0){
+        return;
+    }
+    // if (navigator.userAgent.indexOf("MSIE") > 0) {
+    //     document.getElementById("keyword").onpropertychange = null;
+    //     document.getElementById("keyword").onfocus = focus_callback;
+    // }
+    //截取输入提示的关键字部分
+    var geos = document.getElementById("result1").geoArr;
+    if (geos && geos[index]) {
+        document.getElementById("keyword").value = geos[index].formattedAddress;
+        document.getElementById("result1").style.display = "none";
+        document.getElementById("result1").curSelect = -1;
+        document.getElementById("result1").innerHTML = "";
+        setMarker(geos[index].location);
+        setParDetailAdrr();
+    }
+    // var text = document.getElementById("divid" + (index + 1)).innerHTML.replace(/<[^>].*?>.*<\/[^>].*?>/g,"");
+    // var cityCode = document.getElementById("divid" + (index + 1)).getAttribute('data');
+    // document.getElementById("keyword").value = text;
+    // document.getElementById("result1").style.display = "none";
+    //根据选择的输入提示关键字查询
+    // mapObj.plugin(["AMap.PlaceSearch"], function() {       
+    //     var msearch = new AMap.PlaceSearch();  //构造地点查询类
+    //     AMap.event.addListener(msearch, "complete", placeSearch_CallBack); //查询成功时的回调函数
+    //     msearch.setCity(cityCode);
+    //     msearch.search(text);  //关键字查询查询
+    // });
+    // setParDetailAdrr();
+}
+
+//输出关键字查询结果的回调函数
+function placeSearch_CallBack(data) {
+    var poiArr = data.poiList.pois;
+    var resultCount = poiArr.length;
+    if (poiArr.length) {
+        setMarker(poiArr[0].location);
+    }
+}
+
+//输入提示
+function autoSearch() {
+    var keywords = document.getElementById("keyword").value;
+    var auto;
+    //加载输入提示插件
+    // AMap.service(["AMap.Autocomplete"], function() {
+	   //  var autoOptions = {
+    //         pageSize:50,
+	   //      city: "" //城市，默认全国
+	   //  };
+	   //  auto = new AMap.Autocomplete(autoOptions);
+	   //  //查询成功时返回查询结果
+	   //  if ( keywords.length > 0) {
+	   //      auto.search(keywords, function(status, result){
+	   //      	autocomplete_CallBack(result);
+	   //      });
+	   //  } else {
+	   //      document.getElementById("result1").style.display = "none";
+	   //  }
+    // });
+
+    var MGeocoder;
+    //加载地理编码插件
+    AMap.service(["AMap.Geocoder"], function() { 
+        var city = "";
+        if (parentH && parentH.hotel && parentH.hotel.city && parentH.hotel.city.code) {
+            //city = (parentH.hotel.area.areacode && parentH.hotel.area.areacode != -1 && parentH.hotel.area.areacode) || parentH.hotel.city.code;
+            city = parentH.hotel.city.code;
+        }       
+        MGeocoder = new AMap.Geocoder({ 
+            city:city, //城市，默认：“全国”
+            radius:3000 //范围，默认：500
+        });
+        //返回地理编码结果  
+        //地理编码
+        if ( keywords.length > 0) {
+            MGeocoder.getLocation(keywords, function(status, result){
+                if(status === 'complete' && result.info === 'OK'){
+                    autocomplete_CallBack(result);
+                }else{
+                    document.getElementById("result1").curSelect = -1;
+                    document.getElementById("result1").innerHTML = "";
+                    document.getElementById("result1").style.display = "none";
+                }
+            });
+        } else {
+            document.getElementById("result1").style.display = "none";
+        }
+    });
+
+    setParDetailAdrr();
+}
+
+function setParDetailAdrr(){
+    parentH.$apply(function() {
+        var keywords = document.getElementById("keyword").value;
+        parentH.hotel.detailAddr = keywords;
+    });
+}
+ 
+//输出输入提示结果的回调函数
+function autocomplete_CallBack(data) {
+    var resultStr = "";
+    var geoArr = data.geocodes;
+    if (geoArr&&geoArr.length>0) {                 
+        for (var i = 0; i < geoArr.length; i++) {
+            resultStr += "<div id='divid" + (i + 1) + "' " 
+            + "onmouseover='openMarkerTipById(" + (i + 1) + ",this)' " 
+            + "onclick='selectResult(" + i + ")' " 
+            + "onmouseout='onmouseout_MarkerStyle(" + (i + 1)
+            + ",this)' style=\"font-size: 13px;cursor:pointer;padding:5px 5px 5px 5px;\"" + "data=" + geoArr[i].adcode + ">" + geoArr[i].formattedAddress + "<span style='color:#C1C1C1;'>"  + geoArr[i].addressComponent.city + geoArr[i].addressComponent.district + "</span></div>";
+        }
+        document.getElementById("result1").curSelect = -1;
+        document.getElementById("result1").geoArr = geoArr;
+        document.getElementById("result1").innerHTML = resultStr;
+        document.getElementById("result1").style.display = "block";
+    }
+    else  {
+        // resultStr = " π__π 亲,人家找不到结果!<br />要不试试：<br />1.请确保所有字词拼写正确<br />2.尝试不同的关键字<br />3.尝试更宽泛的关键字";
+        document.getElementById("result1").curSelect = -1;
+        document.getElementById("result1").innerHTML = resultStr;
+        document.getElementById("result1").style.display = "none";
+    }
+}
+
+//输入提示框鼠标滑过时的样式
+function openMarkerTipById(pointid, thiss) {  //根据id打开搜索结果点tip 
+    thiss.style.background = '#CAE1FF';
+}
+ 
+//输入提示框鼠标移出时的样式
+function onmouseout_MarkerStyle(pointid, thiss) {  //鼠标移开后点样式恢复 
+    thiss.style.background = "";
+}
+ 
+//定位选择输入提示关键字
+function focus_callback() {
+    if (navigator.userAgent.indexOf("MSIE") > 0) {
+        document.getElementById("keyword").onpropertychange = autoSearch;
+   }
+}
+ 
+//鼠标滑过查询结果改变背景样式，根据id打开信息窗体
+function openMarkerTipById1(pointid, thiss) {
+    thiss.style.background = '#CAE1FF';
+    windowsArr[pointid].open(mapObj, marker[pointid]);
+}
+
+//
+// function blur(event){
+//     setTimeout(function(){
+//         document.getElementById("result1").innerHTML = "";
+//         document.getElementById("result1").style.display = "none";
+//     }, 200);
+// }
+
+function getArea(areacode, discode){
+    AMap.service(["AMap.DistrictSearch"], function() {
+        var opts = {
+            subdistrict: 1,   //返回下一级行政区
+            extensions: 'all',  //返回行政区边界坐标组等具体信息
+            level:'district'  //查询行政级别为 市
+        };
+    
+        //实例化DistrictSearch
+        district = new AMap.DistrictSearch(opts);
+        // district.setLevel(level); //行政区级别
+        //行政区查询
+        district.search(discode, function(status, result){
+            if(status === 'no_data' || status === 'complete' && result.info === 'OK'){
+                var dList;
+                if (result && result.districtList && result.districtList[0] && result.districtList[0].districtList) {
+                    dList = result.districtList[0].districtList;
+                }
+                parentH.$apply(function() {
+                    var area = {};
+                    if (dList) {
+                        for(var i=0;i<dList.length;i++) {
+                            var data = dList[i];
+                            var location = [data.center.lng, data.center.lat];
+                            if (data.areacode == areacode) {
+                                area.areacode = data.areacode;
+                                area.name = data.name;
+                                area.location = location;
+                                break;
+                            }
+                        }
+                    }
+                    parentH.hotel.area = area;
+                    parentH.hotel.areas.push(area);
+                });
+            }
+        }); 
+    });
+}
+
+function getAreas(discode){
+    AMap.service(["AMap.DistrictSearch"], function() {
+        var opts = {
+            subdistrict: 1,   //返回下一级行政区
+            extensions: 'all',  //返回行政区边界坐标组等具体信息
+            level:'district'  //查询行政级别为 市
+        };
+    
+        //实例化DistrictSearch
+        district = new AMap.DistrictSearch(opts);
+        // district.setLevel(level); //行政区级别
+        //行政区查询
+        district.search(discode, function(status, result){
+             if(status === 'no_data' || status === 'complete' && result.info === 'OK'){
+                var dList;
+                if (result && result.districtList && result.districtList[0] && result.districtList[0].districtList) {
+                    dList = result.districtList[0].districtList;
+                }
+                parentH.$apply(function() {
+                    var areas = [];
+                    if (dList) {
+                        for(var i=0;i<dList.length;i++) {
+                            var data = dList[i];
+                            var location = [data.center.lng, data.center.lat];
+                            areas.push({"areacode":data.areacode, "name":data.name, "location": location});
+                        }
+                    }
+                    areas.push({"areacode": -1, "name":"无", "location": []});
+                    parentH.hotel.areas = areas;
+                    // parentH.hotel.lockOrUnlockMapAddr();
+                });
+            }
+        }); 
+    });
+}
+</script>
+</html>						

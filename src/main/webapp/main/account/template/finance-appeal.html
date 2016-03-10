@@ -1,0 +1,25 @@
+<!--我的申诉-->
+<div ng-controller="FinanceAppealController">
+    <div class="col-md-2">
+        <div class="list-group">
+            <a ng-repeat="(key, item) in FinanceAppeal.nav.items" ng-click="FinanceAppeal.nav.selected=key" class="list-group-item" ng-class="{'active':FinanceAppeal.nav.selected==key}">{{item.displayName}}</a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <table class="table hms-table border-top">
+            <thead>
+                <tr>
+                    <th class="text-center" width="5%">序号</th>
+                    <th class="{{column.class}}" ng-repeat="column in FinanceAppeal.columns" width="{{column.width}}">{{column.displayName}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in FinanceAppeal.data">
+                    <td class="text-center">{{(FinanceAppeal.pagination.currentPage-1)*FinanceAppeal.pagination.pageCount + $index+1}}</td>
+                    <td class="{{column.class}}" ng-repeat="column in FinanceAppeal.columns" width="{{column.width}}">{{row[column.field]}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="FinanceAppeal.pagination.totalItems" ng-model="FinanceAppeal.pagination.currentPage" items-per-page="FinanceAppeal.pagination.pageCount" max-size="FinanceAppeal.pagination.maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="FinanceAppeal.pagination.pageChanged()"></pagination>
+    </div>
+</div>

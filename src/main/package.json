@@ -1,0 +1,18 @@
+{
+  "name": "hms",
+  "version": "2.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-jshint": "~0.11.2",
+    "grunt-contrib-csslint": "~0.5.0",
+    "grunt-angular-templates": "~0.5.7",
+    "grunt-contrib-cssmin": "~0.13.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-contrib-imagemin": "~0.9.4",
+    "grunt-string-replace": "~1.2.0",
+    "grunt-cache-breaker": "~2.0.1"
+  }
+}

@@ -1,0 +1,13 @@
+/target/
+.settings/
+.idea/
+logs/
+.classpath
+.project
+.mymetadata
+hms-mvc.iml
+src/main/dist/
+src/main/node_modules/
+*.iml
+src/main/webapp/META-INF
+src/main/webapp/main/comment/template

@@ -1,0 +1,351 @@
+<div class="hms-jin-container" ng-controller="homeController">
+  <div ng-if="RULE_CODE=='B'" style="position:fixed;top:130px;right:20px;cursor:pointer;" ng-click="showQrCode();" title="打印二维码">
+      <img ng-src="{{qrCodeSrc}}" width="80" height="80">    
+  </div>
+  <div class="container-fluid hotel-home">
+<!-- first row -->
+    <div class="row">
+      <div class="col-md-9 hotel-home-col-md-left">
+        <div class="panel panel-default hotel-home-panel">
+          <div class="panel-body hotel-home-panel-body">
+            <div class="hotel-home-left">
+              <div class="hotel-home-row50 hotel-home-11">
+                <div>当日订单</div>
+                <div>
+                <li class="hotel-home-11-body" id="div_pmsddjys"></li>
+                <i class="glyphicon glyphicon-arrow-up hotel-home-icon-up" data-placement="top" id="i_yesterday_order_num" style="visibility: hidden;" title=""></i>
+              </div>
+              <div class="hotel-home-11-bottom">今日预定</div>
+            </div>
+            <div class="hotel-home-row50 hotel-home-11">
+              <div class="hotel-home-11-heading" id="div_dateInfo"></div>
+              <div>
+                <li class="hotel-home-11-body" id="div_pmsjys"></li>
+                <i class="glyphicon glyphicon-arrow-down hotel-home-icon-down" data-placement="top" id="i_yesterday_checkin_num" style="visibility: hidden;" title=""></i>
+              </div>
+              <div class="hotel-home-11-bottom">今日入住</div>
+            </div>
+          </div>
+          <div class="hotel-home-right hotel-home-11">
+            <div style="overflow: hidden;">
+              <div class="pull-left">出租率</div>
+              <div class="pull-right">
+                <div class="btn-group" data-toggle="buttons" id="radio_1">
+                  <label class="btn btn-primary active hotel-home-radio" id="l_day">
+                    <input autocomplete="off" checked id="option1" name="options" type="radio">天
+                  </label>
+                  <label class="btn btn-primary hotel-home-radio" id="l_week">
+                    <input autocomplete="off" id="option2" name="options" type="radio">周
+                  </label>
+                  <label class="btn btn-primary hotel-home-radio" id="l_month">
+                    <input autocomplete="off" id="option3" name="options" type="radio">月
+                  </label>
+                </div>
+              </div>
+            </div>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+            <div id="hotel_home_1" style="height:160px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 hotel-home-col-md-right">
+      <div class="panel panel-default hotel-home-panel">
+        <div class="panel-body hotel-home-panel12">
+          <div class="hotel_home_role_panel">
+            <i class="lx_loading fa fa-spinner fa-pulse fa-3x" style=" position: absolute; top: 50%; left: 50%; margin-top: -20px; margin-left: -20px; display:none; "></i>
+            <!--A规则-->
+            <div ng-if="RULE_CODE=='A'">
+              <div style="overflow: hidden;">
+                <div class="pull-left">“扫码优惠”活动奖励</div>
+                <div class="pull-right">
+                  <a href="javascript:void(0);" id="a_bz" onclick="homePortalBillWeek2(1)" style="color:orangered;text-decoration: blink;">本周</a>
+                  <a href="javascript:void(0);" id="a_sz" onclick="homePortalBillWeek2()" style="color: #ffffff;text-decoration: blink;">上周</a>
+                </div>
+                <div  ng-if="user.loginname != group.regphone" class="pull-right" style="position:absolute;top:175px;right:37px;">
+                  <a href="javascript:void(0);" onclick="hotelHomeShowMy2DBarCode();" style="color: #ffffff;">我的二维码</a>
+                </div>
+              </div>
+              <div class="hotel-home-panel12-body">
+                <div class="hotel-home-row50 hotel-home-panel12-left">
+                  <div class="hotel-home-panel12-left-heart glyphicon glyphicon-heart">
+                    <div class="hotel-home-panel12-left-body">
+                      <span>
+                        <i id="i_lxsl" style="font-size: 2.5em;">0</i>
+                      </span>
+                      <div>
+                        <b>成功订单数</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="hotel-home-row50 hotel-home-panel12-right">
+                  <div class="hotel-home-panel12-left-heart glyphicon glyphicon-piggy-bank">
+                    <div class="hotel-home-panel12-left-body">
+                      <span>¥
+                        <i id="i_zhlxsr" style="font-size: 2.5em;">0</i>
+                      </span>
+                      <div>
+                        <b>前台奖励金额</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--B规则-->
+            <div ng-if="RULE_CODE=='B'">
+              <div style="overflow: hidden;">
+                <div class="pull-right">
+                  <a href="javascript:void(0);" id="a_bz" onclick="homePortalBillWeek2(1)" style="color:orangered;text-decoration: blink;">本周</a>
+                  <a href="javascript:void(0);" id="a_sz" onclick="homePortalBillWeek2()" style="color: #ffffff;text-decoration: blink;">上周</a>
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col-md-6">
+                  <span>
+                    <i id="i_cgdds" style="font-size: 2.5em;">0</i>
+                  </span>
+                  <div>
+                    <b>成功订单数</b>
+                  </div>
+                </div>              
+                <div class="col-md-6">
+                  <span>¥
+                    <i id="i_kjzye" style="font-size: 2.5em;">0</i>
+                  </span>
+                  <div>
+                    <b>可结账余额</b>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <span>
+                    <i id="i_yfbtdds" style="font-size: 2.5em;">0</i>
+                  </span>
+                  <div>
+                    <b>预付补贴订单数</b>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <span>¥
+                    <i id="i_yfbtje" style="font-size: 2.5em;">0</i>
+                  </span>
+                  <div>
+                    <b>预付补贴金额</b>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <span>
+                    <i id="i_dfbtdds" style="font-size: 2.5em;">0</i>
+                  </span>
+                  <div>
+                    <b>到付补贴订单数</b>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <span>¥
+                    <i id="i_dfbtje" style="font-size: 2.5em;">0</i>
+                  </span>
+                  <div>
+                    <b>到付补贴金额</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- 第二行 -->
+  <div class="row" id="hotel_home_last_row">
+    <div class="col-md-9 hotel-home-col-md-left" id="hotel_home_last_row_hei">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default hotel-home-panel">
+            <div class="panel-heading hotel-home-panel-heading">酒店经营业绩</div>
+            <div class="panel-body" style="padding: 0;">
+              <div class="hotel-home-row30" style="padding-top: 20px; padding-left: 5px;">
+                <div id="hotel_home_2" style="height: 260px">暂无“昨日营业收入”数据</div>
+              </div>
+              <div class="hotel-home-row70" id="p_hotel_home_3" style="padding-top: 20px; padding-right: 5px;">
+                <div style="overflow: hidden;">
+                  <div style="float: right;">
+                    <label style="display: inline-flex; margin-right: 20px;margin-bottom: 0;">
+                      环比&nbsp;&nbsp;<input  checked class="ios-switch green tinyswitch" id="chk_jdjyyj" type="checkbox"/>
+                      <div style="margin: 0; padding: 0;">
+                        <div></div>
+                      </div>
+                    </label>
+                    <div class="btn-group" data-toggle="buttons" id="radio_2">
+                      <label class="btn btn-primary active hotel-home-radio" id="l_jdjyyj_week">
+                        <input autocomplete="off" id="option2" name="options" type="radio">周
+                      </label>
+                      <label class="btn btn-primary hotel-home-radio" id="l_jdjyyj_month">
+                        <input autocomplete="off" id="option3" name="options" type="radio">月
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div id="hotel_home_3" style="height: 260px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default hotel-home-panel">
+            <div class="panel-heading hotel-home-panel-heading">眯客经营信息</div>
+            <div class="panel-body" style="padding: 0;">
+              <div class="hotel-home-row30" style="padding-top: 20px; padding-left: 5px;">
+                <div id="hotel_home_4" style="height: 260px">暂无“订单”数据</div>
+              </div>
+              <div class="hotel-home-row70" id="p_hotel_home_5" style="padding-top: 20px; padding-right: 5px;">
+                <div style="overflow: hidden;">
+                  <div style="float: right;">
+                    <label style="display: inline-flex; margin-right: 20px;margin-bottom: 0;">
+                      环比&nbsp;&nbsp;<input  checked class="ios-switch green tinyswitch" id="chk_ota_dds_hb" type="checkbox"/>
+                      <div style="margin: 0; padding: 0;">
+                        <div></div>
+                      </div>
+                    </label>
+                    <div class="btn-group" data-toggle="buttons" id="radio_3">
+                      <label class="btn btn-primary active hotel-home-radio" id="l_ota_dds_week">
+                        <input autocomplete="off" id="option2" name="options" type="radio">周
+                      </label>
+                      <label class="btn btn-primary hotel-home-radio" id="l_ota_dds_month">
+                        <input autocomplete="off" id="option3" name="options" type="radio">月
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div id="hotel_home_5" style="height: 260px;"></div>
+              </div>
+            </div>
+            <hr class="hotel-home-line">
+            <div class="panel-body" style="padding: 0;">
+              <div class="hotel-home-row30" style="padding-top: 20px; padding-left: 5px;">
+                <div id="hotel_home_6" style="height: 260px">暂无“交易”数据</div>
+              </div>
+              <div class="hotel-home-row70" id="p_hotel_home_7" style="padding-top: 20px; padding-right: 5px;">
+                <div style="overflow: hidden;">
+                  <div style="float: right;">
+                    <label style="display: inline-flex; margin-right: 20px; margin-bottom: 0;">
+                      环比&nbsp;&nbsp;<input  checked class="ios-switch green tinyswitch" id="chk_ota_jye_hb" type="checkbox"/>
+                      <div style="margin: 0; padding: 0;">
+                        <div></div>
+                      </div>
+                    </label>
+                    <div class="btn-group" data-toggle="buttons" id="radio_4">
+                      <label class="btn btn-primary hotel-home-radio" id="l_ota_jye_week">
+                        <input autocomplete="off" id="option2" name="options" type="radio">周
+                      </label>
+                      <label class="btn btn-primary active hotel-home-radio" id="l_ota_jye_month">
+                        <input autocomplete="off" id="option3" name="options" type="radio">月
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div id="hotel_home_7" style="height: 260px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 hotel-home-col-md-right">
+      <div class="panel panel-default hotel-home-panel">
+        <div class="panel-body" id="hotel_home_last_row_right" style="background-color: #35b4b1; padding: 0;">
+          <div class="hotel-home-col25">
+            <span>昨日汇总</span>
+            <ul class="hotel-home-col25-list">
+              <li>昨日预定
+                <b id="b_zryd"></b>
+              </li>
+              <li>昨日入住
+                <b id="b_zrrz"></b>
+              </li>
+              <!-- <li>会员共享收益
+                <b id="hygxsy"></b>
+              </li> -->
+            </ul>
+          </div>
+          <div class="hotel-home-col25-bor" style="height:20%;">
+            <span>通知</span>
+            <ul class="hotel-home-col25-bor-list" style="display:none;">
+              <li>
+                <span>
+                  <i class="glyphicon glyphicon-envelope faa-flash animated"></i>
+                </span>
+                <a href="#" title="2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！">2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！</a>
+              </li>
+              <li>
+                <span>
+                  <i class="glyphicon glyphicon-envelope faa-flash animated"></i>
+                </span>
+                <a href="#" title="2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！">2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！</a>
+              </li>
+              <li>
+                <a href="#" title="2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！">2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！</a>
+              </li>
+              <li>
+                <a href="#" title="2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！">2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！</a>
+              </li>
+              <li>
+                <a href="#" title="2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！">2015-03-23日促销活动，由当日上午09:30开始，请大家做好准备！</a>
+              </li>
+            </ul>
+          </div>
+          <div class="hotel-home-col50">
+            <span>活动快速入口</span>
+            <div class="hotel-home-col50-list">
+              <div class="btn btn-info btn-lg hotel-home-btn-info faa-parent animated-hover">今日特价&nbsp;&nbsp;
+                <i class="glyphicon glyphicon-shopping-cart faa-ring"></i>
+              </div>
+            </div>
+            <div class="hotel-home-col50-list">
+              <div class="btn btn-info btn-lg hotel-home-btn-info faa-parent animated-hover">限时特价&nbsp;&nbsp;
+                <i class="glyphicon glyphicon-dashboard faa-burst"></i>
+              </div>
+            </div>
+            <div class="hotel-home-col50-list">
+              <div class="btn btn-info btn-lg hotel-home-btn-info faa-parent animated-hover">夜宵房&nbsp;&nbsp;
+                <i class="glyphicon glyphicon-cutlery faa-pulse"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="hmsHomePortalI2DimCodesModalLabel" class="modal fade" id="hmsHomePortalI2DimCodesModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="hmsHomePortalI2DimCodesModalLabel">{{thisHotel.hotelName}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" id="hmsHomePortalContain">
+          <div class="hms-message-i2dimcode text-center">
+            <img style="border: 1px solid #cccccc;border-radius: 5px;padding: 3px;">
+            <div>
+              <a onclick="hotelHomePrintMyI2DimCode();">打印二维码</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" code="#hmsHomePortalI2DimCodesModal" id="hmsHomePortalI2DimCodesModalOk" onclick="hotelHomePrintMyI2DimCode()" type="button">
+          <i class="glyphicon glyphicon-print"></i>打印全部</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

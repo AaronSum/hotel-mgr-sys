@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mk.hms.mapper.HotelRuleMapper" >
+	<!-- 获取需要执行转规则的酒店 -->
+	<select id="getHMSHotelRuleList" parameterType="map" resultType ="HMSHotelRuleModel">
+		<![CDATA[ 
+		SELECT id,hotelid,rulecode,isthreshold,state FROM h_hotel_rule WHERE effectdate > #{curDate} AND effectdate < #{nextDate} AND state = #{state}
+		]]>
+	</select>
+	<!-- 插入数据 -->
+	<insert id="insertHotelRule" parameterType="map">
+		INSERT INTO h_hotel_rule(hotelid, rulecode, isthreshold, effectdate, state, createtime)
+		VALUES (#{hotelId}, #{rulecode}, #{isthreshold}, #{effectdate}, 0, NOW())
+	</insert>
+	<!-- 更新数据执行状态 -->
+	<update id="updateState" parameterType="map">
+		UPDATE h_hotel_rule SET state = #{state},updatetime = NOW()  WHERE hotelid = #{hotelId} AND state = #{preState} AND effectdate IS NOT NULL
+	</update>
+	<!-- 更新T表 -->
+	<update id="updateThotel">
+		UPDATE t_hotel SET rulecode= #{rulecode},isthreshold= #{isthreshold} WHERE id= #{hotelId}
+	</update>
+	<!-- 更新E表 -->
+	<update id="updateEhotel">
+		UPDATE e_hotel SET rulecode= #{rulecode},isthreshold= #{isthreshold} WHERE id= #{hotelId}
+	</update>
+</mapper>

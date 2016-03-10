@@ -1,0 +1,30 @@
+<div ng-controller="FinanceMonthController">
+	<div class="col-md-2">
+		<div class="list-group">
+			<a ng-repeat="(key, item) in MonthFniance.nav.items" ng-click="MonthFniance.nav.selected=key" class="list-group-item" ng-class="{'active':MonthFniance.nav.selected==key}">{{item.displayName}}</a>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<!--月度结算-->
+		<table class="table hms-table border-top">
+			<thead>
+				<tr>
+					<th class="{{column.class}}" ng-repeat="column in MonthFniance.columns"  width="{{column.width}}">{{column.displayName}}</th>
+					<th class="text-center">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in MonthFniance.data">
+					<td class="{{column.class}}" ng-repeat="column in MonthFniance.columns"  width="{{column.width}}">{{row[column.field]}}</td>
+					<td class="text-center">
+						<button class="btn btn-info btn-xs" ng-show="row.checkstatus == 1" ng-click="confirmBill(clone(row))">确认金额</button>
+						<button class="btn btn-danger btn-xs" ng-show="row.checkstatus == 1" ng-click="verifyBill(clone(row))">有异议</button>
+						<button class="btn btn-default btn-xs" ng-show="row.checkstatus > 1" ng-click="showReadCheck(clone(row))">审核详情</button>
+						<button class="btn btn-default btn-xs" ng-click="showOrderDetail(clone(row))">账期明细</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="MonthFniance.pagination.totalItems" ng-model="MonthFniance.pagination.currentPage" items-per-page="MonthFniance.pagination.pageCount" max-size="MonthFniance.pagination.maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="MonthFniance.pagination.pageChanged()"></pagination>
+	</div>
+</div>

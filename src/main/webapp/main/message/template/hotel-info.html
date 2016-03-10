@@ -1,0 +1,165 @@
+<div ng-controller="hotelInfoController">
+	<div class="memo-contrainer-bottom" hms-Affix>
+		<div class="row">
+			<div class="col-md-6">
+				<h3 class="title">酒店描述</h3>
+			</div>
+			<div class="col-md-offset-3 col-md-3 text-center">
+				<p>
+				<a ng-click="printI2DimCodes()">打印二维码</a>
+				<!-- <a ng-click="refreshRoomOnlineState()">更新房态</a> -->
+				</p>
+				<div class="btn btn-success btn-danger" ng-show="!readOnly" ng-click="saveBussinesszones()">
+					<i class="glyphicon glyphicon-save"></i>
+					保存
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+		<form name="hotelInfoForm">
+			<div class="col-md-offset-1 col-md-11 memo-contrainer">
+				<div class="row">
+					<div class="col-md-6">
+						<p class="memo">酒店名称(必填<strong class="text-danger">*</strong>)</p>
+					    <input type="text" class="form-control hms-input" ng-model="saveBussinesszonesData.hotelName" maxlength="20">
+					</div>
+					<div class="col-md-6">
+						<p class="memo">酒店联系电话(必填<strong class="text-danger">*</strong>)</p>
+					    <input type="text" class="form-control hms-input" ng-model="saveBussinesszonesData.hotelphone"  maxlength="200">
+					</div>
+					<div class="col-md-6">
+						<p class="memo">前台联系电话(必填<strong class="text-danger">*</strong>)</p>
+					    <input type="text" class="form-control hms-input" ng-model="saveBussinesszonesData.qtphone"  maxlength="200">
+					</div>
+					<div class="col-md-6">
+					<!--
+						<p class="memo">销售联系电话</p>
+					    <input type="text" class="form-control hms-input" ng-model="saveBussinesszonesData.pmsUser"  maxlength="20" ng-disabled="!pmsUserEdit">
+					-->
+					</div>
+				</div>
+				<p class="memo">详细地址(必填<strong class="text-danger">*</strong>)</p>
+
+				<div hms-position data="saveBussinesszonesData"></div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<p class="memo">开业时间(必填<strong class="text-danger">*</strong>)</p>
+	    				<input type="text" class="form-control hms-input" ng-model="saveBussinesszonesData.openTime" data-date-format="yyyy-MM-dd" data-date-type="string" data-autoclose="1" bs-datepicker />
+					</div>
+					<div class="col-md-6">
+						<p class="memo">最近装修时间(必填<strong class="text-danger">*</strong>)</p>
+	    				<input type="text" class="form-control hms-input" ng-model="saveBussinesszonesData.repairTime" data-date-format="yyyy-MM-dd" data-date-type="string" data-autoclose="1" bs-datepicker />
+					</div>
+					<div class="col-md-6">
+						<p class="memo">最晚保留时间(必填<strong class="text-danger">*</strong>)</p>
+						<button type="button" class="btn btn-success hms-select select" ng-model="saveBussinesszonesData.begintime" data-animation="am-flip-x" bs-options="node as node for node in timeList" bs-select placeholder="请选择" max-length-html="个被选中" allText="全部" noneText="无">
+					    </button>
+					</div>
+					<div class="col-md-6">
+						<p class="memo">默认离店时间(必填<strong class="text-danger">*</strong>)</p>
+						<button type="button" class="btn btn-success hms-select select" ng-model="saveBussinesszonesData.endtime" data-animation="am-flip-x" bs-options="node as node for node in timeList" bs-select placeholder="请选择" max-length-html="个被选中" allText="全部" noneText="无">
+					    </button>
+					</div>
+				</div>
+				<div class="hotel-bussinesszone-container">
+					<!-- <p class="memo">商圈信息</p>
+					<div class="row">
+						<div class="col-md-12">
+							<p class="memo" ng-show="circleList.length <= 0">---暂无商圈信息---</p>
+							<div class="row">
+								<div class="col-md-3" ng-repeat="circle in circleList">
+									<div class="btn btn-success" ng-class="{true: 'active'}[circle.isExit]" ng-click="clickCircleItem(circle.id)">
+										{{circle.name}}
+										<i class="glyphicon glyphicon-ok" ng-show="circle.isExit"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+					<!-- <p class="memo">地铁沿线</p>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-6">
+									<button type="button" class="btn btn-success hms-select select" ng-model="saveBussinesszonesData.subwayLineArray" data-animation="am-flip-x" bs-options="node.id as node.name for node in subwayLineList" multiple="true" bs-select placeholder="暂无数据" max-length-html="个被选中" allText="全部" noneText="无">
+								    </button>
+								</div>
+							</div>
+							<div class="row" ng-repeat="subwayLine in subwayLineList">
+								<div class="col-md-12" ng-show="subwayLine.isShow">
+									<div class="row">
+										<div class="col-md-12">
+											<br/>
+											<p class="memo">{{subwayLine.name}}</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-3" ng-repeat="subway in subwayList" ng-if="subwayLine.id == subway.fatherid">
+											<div class="btn btn-success" ng-class="{true: 'active'}[subway.isExit]" ng-click="clickSubwayItem(subway.id, subway.fatherid)">
+												{{subway.name}}
+												<i class="glyphicon glyphicon-ok" ng-show="subway.isExit"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p class="memo">大学周边</p>
+					<div class="row">
+						<div class="col-md-12">
+							<p class="memo" ng-show="universityList.length <= 0">---暂无周边大学信息---</p>
+							<div class="row">
+								<div class="col-md-3" ng-repeat="university in universityList">
+								<div class="btn btn-success" ng-class="{true: 'active'}[university.isExit]" ng-click="clickUniversityItem(university.id)">
+									{{university.name}}
+									<i class="glyphicon glyphicon-ok" ng-show="university.isExit"></i>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div> -->
+					<p class="memo">酒店类型(必填<strong class="text-danger">*</strong>)</p>
+					<div class="row">
+						<div class="col-md-6">
+						    <button type="button" class="btn btn-success hms-select select" ng-model="saveBussinesszonesData.hoteltype" data-animation="am-flip-x" bs-options="d.id as d.name for d in hotelTypeDicts" bs-select placeholder="酒店类型" max-length-html="个被选中" allText="全部" noneText="酒店类型">
+						    </button>
+						</div>
+					</div>
+					<p class="memo">酒店描述<small style="color:red;">(不超过500字)</small></p>
+					<div class="row">
+						<div class="col-md-12">
+							<textarea rows="6" placeholder="酒店简介" class="form-control info-textarea" ng-model="saveBussinesszonesData.introduction" maxlength="500"></textarea>
+						</div>
+					</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" id="hmsI2DimCodesModal" tabindex="-1" role="dialog" aria-labelledby="hmsI2DimCodesModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="hmsI2DimCodesModalLabel">{{thisHotel.hotelName}}</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="row" id="hmsI2DimCodesContain">
+	      		<div class="hms-message-i2dimcode pull-left" ng-repeat="i2dimCode in printI2dimCodes">
+	      			<img ng-src="{{getPrintI2dimCodeUrl(i2dimCode.content, i2dimCode.tag)}}">
+	      			<a ng-click="goToPrintPage(i2dimCode.content, i2dimCode.tag)">打印二维码</a>
+	      		</div>
+	      	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary btn-lg" code="#hmsI2DimCodesModal" id="hmsI2DimCodesModalOk" ng-click="goToPrintPage()"><i class="glyphicon glyphicon-print"></i>打印全部</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+</div>

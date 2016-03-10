@@ -1,0 +1,12 @@
+<div ng-app="userApp" ng-controller="userController">
+	<ul class="nav nav-tabs hms-body-nav">
+	  <li role="presentation" class="active"><a href="#">用户信息</a></li>
+	</ul>
+	<div class="hms-user-view">
+		<div class="col-md-12">
+			<div class="btn btn-success pull-right" ng-click="addUser()" ng-show="isHotelManager()"><i class="glyphicon glyphicon-user"></i>新增用户</div>
+		</div>
+		<div ui-view="list" ng-show="{1: true}[isActive]"></div>
+		<div ui-view="add" ng-show="{2: true}[isActive]"></div>
+	</div>
+</div>

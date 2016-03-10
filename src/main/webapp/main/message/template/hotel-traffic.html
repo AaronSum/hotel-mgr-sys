@@ -1,0 +1,51 @@
+<div ng-controller="hotelTrafficController">
+	<div class="memo-contrainer-bottom" hms-Affix>
+		<div class="row">
+			<div class="col-md-6">
+				<h3 class="title">交通</h3>
+			</div>
+			<div class="col-md-offset-3 col-md-3">
+				<div class="btn btn-success  btn-danger" ng-show="!readOnly" ng-click="saveTraffic()">
+					<i class="glyphicon glyphicon-save"></i>
+					保存
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+		<form name="hotelTrafficForm">
+			<div class="col-md-offset-1 col-md-11 memo-contrainer">
+				<h4 class="memo">如果你的酒店位置比较隐秘，可能地图无法顺利帮助用户找到酒店，我们需要手动添加至少一种到店方式</h4>
+				<p class="memo">从最近的地铁站如何找到酒店:</p>
+				<div class="row">
+					<div class="col-md-12">
+						<textarea rows="6" placeholder="地铁酒店路线" class="form-control info-textarea" ng-model="trafficObj.metro" maxlength="500"></textarea>
+					</div>
+				</div>
+				<p class="memo">从机场如何找到酒店:</p>
+				<div class="row">
+					<div class="col-md-12">
+						<textarea rows="6" placeholder="机场酒店路线" class="form-control info-textarea" ng-model="trafficObj.airport" maxlength="500"></textarea>
+					</div>
+				</div>
+				<p class="memo">从最近公交车站如何找到酒店:</p>
+				<div class="row">
+					<div class="col-md-12">
+						<textarea rows="6" placeholder="公交车酒店路线" class="form-control info-textarea" ng-model="trafficObj.bus" maxlength="500"></textarea>
+					</div>
+				</div>
+				<p class="memo">搭乘出租车应该如何向司机描述:</p>
+				<div class="row">
+					<div class="col-md-12">
+						<textarea rows="6" placeholder="" class="form-control info-textarea" ng-model="trafficObj.taxi" maxlength="500"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<div id="traffic-map-con">
+		<iframe id="traffic-map" ng-src="{{trafficMapUrl}}"></iframe>
+	</div>
+</div>

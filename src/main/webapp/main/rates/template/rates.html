@@ -1,0 +1,47 @@
+<div ng-app="ratesApp" ng-controller="ratesController">
+	<div ng-show="!showModify">
+		<div class="hms-rates-view container-fluid">
+			<div class="row">
+				<div class="pull-left">
+					<h4>房价维护</h4>
+				</div>
+				<div class="input-group pull-right hms-datepicker">
+					<span class="input-group-btn">
+					 	<button class="btn btn-hms" type="button" ng-click="next()" >后十天</button>
+					</span>
+	    			<input type="text" class="form-control" ng-model="beginTime" data-date-format="yyyy-MM-dd" data-date-type="string" data-autoclose="1" bs-datepicker />
+					<span class="input-group-btn">
+					 	<button class="btn btn-hms" type="button" ng-click="prev()">前十天</button>
+					</span>
+				</div>
+			</div>
+			<div class="row table-responsive">
+				 <table class="table hms-table border-top">
+				 	<thead>
+				 		<tr>
+				 			<th width="120">房型日期</th>
+				 			<th  class="text-center" ng-repeat="item in columns">{{item.showDate}}</br>{{item.week}}</th>
+				 			<th width="50">&nbsp;</th>
+				 		</tr>
+				 	</thead>
+				 	<tbody>
+				 		<tr ng-repeat="rt in roomTypes">
+				 			<th>
+				 				{{rt.name}}
+				 				<br>
+				 				<b>(门市价/眯客价)</b>
+				 			</th>
+				 			<td class="text-center" ng-repeat="item in columns">
+				 				{{rt.cost | currency : '&yen;'}}
+				 				&nbsp;/&nbsp;
+				 				{{priceData[rt.id][item.date] | currency : '&yen;'}}			 				
+				 			</td>
+				 			<td class="text-center"><a href="#" ng-click="doModify(rt)">修改</a></td>
+				 		</tr>
+				 	</tbody>
+				 </table>
+			</div>
+		</div>
+	</div>
+	<div ui-view="modify" ng-if="showModify"></div>
+</div>

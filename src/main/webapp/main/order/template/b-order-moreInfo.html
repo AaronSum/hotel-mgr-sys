@@ -1,0 +1,32 @@
+<div ng-controller="BOrderMoreInfoController">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" ng-click="cancel()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">订单号：{{orderId}}更多信息</h4>
+    </div>
+    <div class="modal-body">	 
+		<div class="table-responsive">
+			 <table class="table hms-table border-top">
+			 	<thead>
+			 		<tr>
+			 			<th class="text-center" ng-repeat="item in moreInfo_columns" width="{{item.width}}">{{item.displayName}}</th>
+			 		</tr>
+			 	</thead>
+			 	<tbody>
+			 		<tr ng-if="moreInfo">
+			 			<td class="text-center" ng-repeat="item in moreInfo_columns" width="{{item.width}}">{{moreInfo[item.field]}}</td>
+			 		</tr>
+			 		<tr ng-if="!moreInfo">
+			 			<td class="text-center" colspan="{{moreInfo_columns.length}}">
+			 				暂无更多信息
+			 			</td>
+			 		</tr>
+			 	</tbody>
+			 </table>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="cancel()">关闭</button>
+    </div>
+</div>

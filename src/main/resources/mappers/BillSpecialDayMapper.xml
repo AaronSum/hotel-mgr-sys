@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mk.hms.mapper.BillSpecialDayMapper" >
+  <resultMap id="BaseResultMap" type="com.mk.hms.model.BillSpecialDay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="promoType" property="promotype" jdbcType="INTEGER" />
+    <result column="hotelId" property="hotelid" jdbcType="BIGINT" />
+    <result column="beginTime" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="orderId" property="orderid" jdbcType="INTEGER" />
+    <result column="onlinePaied" property="onlinepaied" jdbcType="DECIMAL" />
+    <result column="aliPaied" property="alipaied" jdbcType="DECIMAL" />
+    <result column="wechatPaied" property="wechatpaied" jdbcType="DECIMAL" />
+    <result column="billCost" property="billcost" jdbcType="DECIMAL" />
+    <result column="changeCost" property="changecost" jdbcType="DECIMAL" />
+    <result column="finalCost" property="finalcost" jdbcType="DECIMAL" />
+    <result column="income" property="income" jdbcType="DECIMAL" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="financeStatus" property="financestatus" jdbcType="INTEGER" />
+    <result column="availableMoney" property="availablemoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, promoType, hotelId, beginTime, endTime, orderId, onlinePaied, aliPaied, wechatPaied, 
+    billCost, changeCost, finalCost, income, createTime, financeStatus, availableMoney
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_bill_special_day
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from b_bill_special_day
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mk.hms.model.BillSpecialDay" >
+    insert into b_bill_special_day (id, promoType, hotelId, 
+      beginTime, endTime, orderId, 
+      onlinePaied, aliPaied, wechatPaied, 
+      billCost, changeCost, finalCost, 
+      income, createTime, financeStatus, 
+      availableMoney)
+    values (#{id,jdbcType=BIGINT}, #{promotype,jdbcType=INTEGER}, #{hotelid,jdbcType=BIGINT}, 
+      #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{orderid,jdbcType=INTEGER}, 
+      #{onlinepaied,jdbcType=DECIMAL}, #{alipaied,jdbcType=DECIMAL}, #{wechatpaied,jdbcType=DECIMAL}, 
+      #{billcost,jdbcType=DECIMAL}, #{changecost,jdbcType=DECIMAL}, #{finalcost,jdbcType=DECIMAL}, 
+      #{income,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, #{financestatus,jdbcType=INTEGER}, 
+      #{availablemoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mk.hms.model.BillSpecialDay" >
+    insert into b_bill_special_day
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="promotype != null" >
+        promoType,
+      </if>
+      <if test="hotelid != null" >
+        hotelId,
+      </if>
+      <if test="begintime != null" >
+        beginTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="onlinepaied != null" >
+        onlinePaied,
+      </if>
+      <if test="alipaied != null" >
+        aliPaied,
+      </if>
+      <if test="wechatpaied != null" >
+        wechatPaied,
+      </if>
+      <if test="billcost != null" >
+        billCost,
+      </if>
+      <if test="changecost != null" >
+        changeCost,
+      </if>
+      <if test="finalcost != null" >
+        finalCost,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="financestatus != null" >
+        financeStatus,
+      </if>
+      <if test="availablemoney != null" >
+        availableMoney,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="promotype != null" >
+        #{promotype,jdbcType=INTEGER},
+      </if>
+      <if test="hotelid != null" >
+        #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="onlinepaied != null" >
+        #{onlinepaied,jdbcType=DECIMAL},
+      </if>
+      <if test="alipaied != null" >
+        #{alipaied,jdbcType=DECIMAL},
+      </if>
+      <if test="wechatpaied != null" >
+        #{wechatpaied,jdbcType=DECIMAL},
+      </if>
+      <if test="billcost != null" >
+        #{billcost,jdbcType=DECIMAL},
+      </if>
+      <if test="changecost != null" >
+        #{changecost,jdbcType=DECIMAL},
+      </if>
+      <if test="finalcost != null" >
+        #{finalcost,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financestatus != null" >
+        #{financestatus,jdbcType=INTEGER},
+      </if>
+      <if test="availablemoney != null" >
+        #{availablemoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.hms.model.BillSpecialDay" >
+    update b_bill_special_day
+    <set >
+      <if test="promotype != null" >
+        promoType = #{promotype,jdbcType=INTEGER},
+      </if>
+      <if test="hotelid != null" >
+        hotelId = #{hotelid,jdbcType=BIGINT},
+      </if>
+      <if test="begintime != null" >
+        beginTime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="onlinepaied != null" >
+        onlinePaied = #{onlinepaied,jdbcType=DECIMAL},
+      </if>
+      <if test="alipaied != null" >
+        aliPaied = #{alipaied,jdbcType=DECIMAL},
+      </if>
+      <if test="wechatpaied != null" >
+        wechatPaied = #{wechatpaied,jdbcType=DECIMAL},
+      </if>
+      <if test="billcost != null" >
+        billCost = #{billcost,jdbcType=DECIMAL},
+      </if>
+      <if test="changecost != null" >
+        changeCost = #{changecost,jdbcType=DECIMAL},
+      </if>
+      <if test="finalcost != null" >
+        finalCost = #{finalcost,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="financestatus != null" >
+        financeStatus = #{financestatus,jdbcType=INTEGER},
+      </if>
+      <if test="availablemoney != null" >
+        availableMoney = #{availablemoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.hms.model.BillSpecialDay" >
+    update b_bill_special_day
+    set promoType = #{promotype,jdbcType=INTEGER},
+      hotelId = #{hotelid,jdbcType=BIGINT},
+      beginTime = #{begintime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      orderId = #{orderid,jdbcType=INTEGER},
+      onlinePaied = #{onlinepaied,jdbcType=DECIMAL},
+      aliPaied = #{alipaied,jdbcType=DECIMAL},
+      wechatPaied = #{wechatpaied,jdbcType=DECIMAL},
+      billCost = #{billcost,jdbcType=DECIMAL},
+      changeCost = #{changecost,jdbcType=DECIMAL},
+      finalCost = #{finalcost,jdbcType=DECIMAL},
+      income = #{income,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      financeStatus = #{financestatus,jdbcType=INTEGER},
+      availableMoney = #{availablemoney,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

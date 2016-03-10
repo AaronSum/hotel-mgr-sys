@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.hms.mapper.BillOrderWeekMapper">
+	<resultMap id="billOrderWeek" type="com.mk.hms.model.BillOrderWeek">
+	    <result property="id" column="id" />
+        <result property="hotelId" column="hotel_id" />
+        <result property="checkStatus" column="check_status" />
+        <result property="beginTime" column="begin_time" />
+        <result property="endTime" column="end_time" />
+        <result property="orderNum" column="order_num" />
+        <result property="cityCode" column="city_code" />
+        <result property="cityName" column="city_name" />
+        <result property="billCost" column="bill_cost" />
+        <result property="hotelCost" column="hotel_cost" />
+        <result property="changeCost" column="change_cost" />
+        <result property="serviceCost" column="service_cost" />
+        <result property="prepaymentDiscount" column="prepayment_discount" />
+        <result property="toPayDiscount" column="to_pay_discount" />
+        <result property="settlementPrice" column="settlement_price" />
+        <result property="userCost" column="user_cost" />
+        <result property="availableMoney" column="available_money" />
+        <result property="ticketMoney" column="ticket_money" />
+        <result property="wechatPayMoney" column="wechat_pay_money" />
+        <result property="aliPayMoney" column="ali_pay_money" />
+        <result property="isFreeze" column="is_freeze" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+	</resultMap>
+
+    <sql id="Base_Column_List" >
+        id,hotel_id,check_status,begin_time,end_time,order_num,city_code,city_name,
+        bill_cost,hotel_cost,change_cost,service_cost,prepayment_discount,
+        to_pay_discount,settlement_price,user_cost,available_money,ticket_money,wechat_pay_money,ali_pay_money,
+        is_freeze, create_time,update_time
+    </sql>
+
+    <select id="query" resultMap="billOrderWeek" parameterType="java.util.HashMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+         FROM  b_bill_order_week
+        where hotel_id =${hotelId} and is_freeze = 0
+        <if test="status == null">
+            and check_status in (5,6)
+        </if>
+        <if test="status != null">
+            and check_status = ${status}
+        </if>
+        order by begin_time desc
+        <if test="limitStart != null and limitStart&gt;-1">
+            limit ${limitStart} , ${limitSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        SELECT COUNT(*)
+        FROM  b_bill_order_week
+        where hotel_id =${hotelId} and is_freeze = 0
+        <if test="status == null">
+            and check_status in (4,5)
+        </if>
+        <if test="status != null">
+            and check_status = ${status}
+        </if>
+    </select>
+
+    <select id="queryById" resultMap="billOrderWeek" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM  b_bill_order_week
+        where id = ${id}
+    </select>
+
+</mapper>

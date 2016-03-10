@@ -1,0 +1,18 @@
+<!--周结算-->
+<div ng-controller="FinanceWeekController" class="col-md-12">
+	<table class="table hms-table border-top">
+		<thead>
+			<tr>
+				<th class="text-center" width="5%">序号</th>
+				<th class="{{column.class}}" ng-repeat="column in WeekFinance.columns"  width="{{column.width}}">{{column.displayName}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in WeekFinance.data">
+				<td class="text-center">{{(WeekFinance.pagination.currentPage-1)*WeekFinance.pagination.pageCount + $index+1}}</td>
+				<td class="{{column.class}}" ng-repeat="column in WeekFinance.columns"  width="{{column.width}}">{{row[column.field]}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="WeekFinance.pagination.totalItems" ng-model="WeekFinance.pagination.currentPage" items-per-page="WeekFinance.pagination.pageCount" max-size="WeekFinance.pagination.maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="WeekFinance.pagination.pageChanged()"></pagination>
+</div>

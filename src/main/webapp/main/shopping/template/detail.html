@@ -1,0 +1,85 @@
+<div class="shopping-goods-detail container-fluid" ng-controller="goodsDetailController">
+	<!--CONTENT-->
+	<div class="goods-detail-content row">
+		<div class="detail-image">
+			<div class="detail-image-big">
+				<img ng-src="{{detail.imageurllarge}}" />
+				<div class="detail-image-zoomer"></div>
+			</div>
+			<div class="detail-image-slider slider_con">
+					<div ng-class="{disvisible:shouldHide(item)}" class="slider_item {{item.pos}}" ng-click="slider.stop()" ng-repeat="item in slider.roller">
+						<img ng-src="{{item.data.imageurl3}}" lsrc="{{item.data.imageurl1}}" />
+					</div>
+			</div>
+			<div class="detail-image-zoom">
+				<img class="detail-image-zoom-img" ng-src="{{detail.imageurllarge}}" />
+			</div>
+			<span class="detail-image-last" ng-click="slider.decre()" ng-hide="statrIndex <= 0">
+				<i class="fa fa-chevron-left"></i>
+			</span>
+			<span class="detail-image-next" ng-click="slider.incre()" ng-hide="slider.roller.length <=5 || (statrIndex + 5) >= slider.roller.length">
+				<i class="fa fa-chevron-right"></i>
+			</span>
+		</div>
+		<div class="detail-memo" ng-bind="detail.name"></div>
+		<div class="detail-advertise" ng-bind="detail.adlanguage"></div>
+		<div class="detail-price">
+			<div class="detail-price-origin">
+				<span class="price-origin-label">市<span class="txt-half"></span>场<span class="txt-half"></span>价：</span>
+				<s><span class="price-origin-value" ng-bind="detail.priceStr"></span></s>
+			</div>
+			<div class="detail-price-current">
+				<span class="price-current-label">眯<span class="txt-half"></span>客<span class="txt-half"></span>价：</span>
+				<span class="price-current-value" ng-bind="detail.currPriceStr"></span>
+				<span class="ware-promotion-digest" ng-show="detail.promotionadlanguage != null && detail.promotionadlanguage != ''" ng-bind="detail.promotionadlanguage"></span>
+			</div>
+		</div>
+		<div class="goods-detail-content-promotion">
+			<div class="detail-price-current"  ng-if="promotion.success==true">
+				<span class="price-current-label" style="vertical-align:top;padding:0px;">促销信息</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				<span ng-repeat="info in promotion.attribute" style="display:inline-block;">
+					<i ng-repeat-start="singleInfo in info.promotiondescList"></i>
+						<span class="ware-promotion-info" ng-bind="singleInfo"></span><br/>
+					<i ng-repeat-end></i>
+				</span>
+			</div>
+			<div>--------------------------------------------------------------------------------</div>
+			<div class="price-current-label"> 配送&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{thisHotel.detailAddr}}
+			 	<span class="price-ferry-label"><strong ng-bind="detail.isYH"></strong></span>
+			</div>
+			<div class="price-current-label"> 运费&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span class="price-ferry-value"><s>￥15元</s></span>
+				<span class="price-ferry-label"><strong>推广期间免运费</strong></span>
+			</div>
+			<div class="price-current-label"> 
+				<div class="goods-detail-num">
+					数量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+				<!--
+ 				<div class="detail-choose-amount"> 
+					<div class="number-wrap-input">
+		                <a class="number-btn-reduce" ng-click="reduceAmount()">-</a>
+		                <a class="number-btn-add" ng-click="addAmount()">+</a>
+		                <input class="number-text" ng-model="amount">
+		            </div>
+            	</div>
+            	-->
+            	
+            	<div class="tb-stock">
+					 <a class="tb-reduce" ng-click="reduceAmount()">-</a>
+					 <input type="text" class="tb-text" value="1" maxlength="8" ng-keyup="ckeckAmount()" ng-blur="amountIsNull()" ng-model="amount" title="请输入购买量">
+					 <a class="tb-reduce"  ng-click="addAmount()">+</a>
+				 </div>
+			</div>
+<!-- 			<div class="price-current-label">配送时间：下单确认后5天内送达</div> -->
+		</div>
+	 	<div class="detail-operation">
+			<button class="btn btn-danger btn-danger-shopping detail-operation-cart" ng-click="addToCart()" ng-disabled="detail.isDisabled=='Y'">
+				<i class="fa fa-cart-arrow-down"></i>
+				<span>加入购物车</span>
+			</button>
+		</div>
+	</div>
+	<!--MORE-->
+	<div class="row" ng-controller="detailMoreController" ng-include="detailMoreUrl"></div>
+</div>

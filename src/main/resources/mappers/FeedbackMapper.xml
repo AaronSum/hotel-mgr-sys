@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.hms.mapper.FeedbackMapper">
+	<resultMap id="billFeedback" type="com.mk.hms.model.BillFeedback">
+	    <result property="id" column="id" />
+        <result property="status" column="status" />
+        <result property="type" column="type" />
+        <result property="fromBill" column="from_bill" />
+        <result property="toBill" column="to_bill" />
+        <result property="hotelId" column="hotel_id" />
+        <result property="hotelName" column="hotel_name" />
+        <result property="hotelChange" column="hotel_change" />
+        <result property="hotelReason" column="hotel_reason" />
+        <result property="mkChange" column="mk_change" />
+        <result property="mkReason" column="mk_reason" />
+        <result property="createTime" column="create_time" />
+        <result property="createBy" column="create_by" />
+        <result property="updateBy" column="update_by" />
+	</resultMap>
+
+    <sql id="Base_Column_List" >
+        id,status,type,from_bill,to_bill,hotel_id,hotel_name,hotel_change,hotel_reason,
+        mk_change,mk_reason,create_time,create_by,update_by
+    </sql>
+
+    <insert id="save"  parameterType="com.mk.hms.model.BillFeedback" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO t_bill_feedback
+        (<include refid="Base_Column_List"/>)
+        VALUE
+        (
+        #{id},#{status},#{type},#{fromBill},#{toBill},#{hotelId},#{hotelName},
+        #{hotelChange},#{hotelReason},#{mkChange},#{mkReason},#{createTime},#{createBy},#{updateBy}
+        )
+    </insert>
+
+    <select id="query" resultMap="billFeedback" parameterType="java.util.HashMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+         FROM  t_bill_feedback
+        where hotel_id =${hotelId}
+        <if test="type != null">
+            and type = ${type}
+        </if>
+        <if test="fromBill != null">
+            and from_Bill = ${fromBill}
+        </if>
+
+        <if test="status != null">
+            and status in (${status})
+        </if>
+        order by create_time desc
+        <if test="limitStart != null and limitStart&gt;-1">
+            limit ${limitStart} , ${limitSize}
+        </if>
+    </select>
+
+    <select id="count" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        SELECT COUNT(*)
+        FROM  t_bill_feedback
+        where hotel_id =${hotelId}
+        <if test="type != null">
+            and type = ${type}
+        </if>
+        <if test="status != null">
+            and status in (${status})
+        </if>
+    </select>
+</mapper>

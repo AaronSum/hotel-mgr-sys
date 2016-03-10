@@ -1,0 +1,59 @@
+<!-- Third Step -->
+<div class="container-fluid">
+	<!-- Head -->
+	<div class="row">
+		<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+			<img src="{{photo.MIKE_PNG}}" />
+			<a ng-click="photo.logout()" style="position:absolute;top:10px;right:50px">安全退出</a>
+			<a ng-click="photo.enterHome()" style="position:absolute;top:10px;right:120px">主页</a>
+		</div>
+	</div>
+	<!-- Content -->
+	<div class="row content">
+		<!-- left -->
+		<div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+			<!-- Tabs -->
+			<div bs-active-pane="tabs.activeTab" bs-tabs>
+				<!--营业执照-->
+				<div title="营业执照" bs-pane>
+					<hms-upload image="yyzzImg"></hms-upload>
+					<label style="display:block;margin-left:10px;">预览</label>
+					<div class="img-preview-1" ng-repeat="preview in ['']">
+						<img id="img_yyzzImg" ng-src="{{yyzzImg.previews[0]}}" hms-imgload/>
+						<div class="fileUpload_delete_btn">
+							<button class="btn btn-success radius-3" ng-show="yyzzImg.previews[0]" ng-click="delImg(yyzzImg, 'img_yyzzImg')">删除</button>
+						</div>
+					</div>
+				</div>
+
+				<!--身份证-->
+				<div title="身份证" bs-pane>
+					<hms-upload image="sfzzmImg"></hms-upload>
+					<hms-upload image="sfzfmImg"></hms-upload>
+					<label style="display:block;margin-left:10px;">预览</label>
+					<div class="img-preview-2" ng-repeat="preview in ['']">
+						<img id="img_sfzzmImg" ng-src="{{sfzzmImg.previews[0]}}" hms-imgload/>
+						<div class="fileUpload_delete_btn">
+							<button class="btn btn-success radius-3" ng-show="sfzzmImg.previews[0]" ng-click="delImg(sfzzmImg, 'img_sfzzmImg')">删除</button>
+						</div>
+					</div>
+					<div class="img-preview-2" ng-repeat="preview in ['']">
+						<img id="img_sfzfmImg" ng-src="{{sfzfmImg.previews[0]}}" hms-imgload/>
+						<div class="fileUpload_delete_btn">
+							<button class="btn btn-success radius-3" ng-show="sfzfmImg.previews[0]" ng-click="delImg(sfzfmImg, 'img_sfzfmImg')">删除</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Submit Button -->
+			<div class="button submit-btn-con" style="margin-top: 20px;">
+				<button type="submit" check="completeButton" class="btn btn-success radius-3" style="background-color: #2cd593;" ng-disabled="photo.canSubmit()" ng-click="photo.submit()">完成咪客店家</button>
+			</div>
+		</div>
+		<!-- right -->
+		<!-- Image:phone -->
+		<div class="col-lg-5 col-lg-offset-1 col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-0 hidden-xs">
+			<img class="reg-phone" src="{{photo.PHONE}}" />
+		</div>
+	</div>
+</div>

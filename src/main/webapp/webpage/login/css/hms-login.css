@@ -1,0 +1,103 @@
+@media (max-width: 767px) {
+	.content{
+		/*background-color: #B916DB;*/
+	}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	.content{
+		/*background-color: #0F7;*/
+	}
+	
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+	.content{
+		/*background-color: #F9CD30;*/
+	}
+	.hms-pms-login {
+		right: 300px;
+	}
+}
+@media (min-width: 1200px) {
+	.content{
+		/*background-color: #FFFFFF;*/
+	}
+	.hms-pms-login {
+		right: 150px;
+	}
+}
+
+body {
+	width:100%;
+	overflow: hidden;
+    background-color: #F8F8F8;
+}
+
+/**hms login css*/
+.hms-login-container{
+    width: 1398px;
+    margin: 0 auto;
+    height: 674px;
+    overflow: hidden;
+    background-color: #F7F8FA;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.hms-login-container>.left{
+	background: url(../../../images/log_01.png);
+	background-repeat: no-repeat;
+	position: relative;
+	width: 755px;
+  	height: 674px;
+}
+.hms-login-container>.right{
+	background: url(../../../images/log_02.png);
+	background-repeat: no-repeat;
+	position: relative;
+	width: 644px;
+  	height: 674px;
+  	left:754px;
+  	top: -674px;
+}
+.hms-login-container .hms-login-form{
+	  position: relative;
+	  top: 230px;
+	  left: 103px;
+	  width: 297px;
+	  padding: 0 20px;
+}
+.hms-login-container .hms-login-form .title{
+	color: #96999C;
+	font-size: 15px;
+}
+.hms-login-container .msg{
+	font-size: 15px;
+	margin: 0;
+	height: 20px;
+}
+.hms-login-container .error-msg{
+	color: #ED2C21;
+}
+.hms-login-container .success-msg{
+	color: #5CB85C;
+}
+.hms-login-container .hms-login-form .submit-btn .btn-success,
+.hms-login-container .hms-login-form .submit-btn .btn-primary{
+	width: 100%;
+	font-size: 15px;
+}
+.hms-login-container .hms-login-form .bottom a{
+	color: #96999C;
+	font-size: 15px;
+}
+
+.hms-pms-login{
+	text-align: right;
+	padding-top: 20px;
+	font-size: 16px;
+	cursor: pointer;
+	position: absolute;
+}
+
+
+
+
+

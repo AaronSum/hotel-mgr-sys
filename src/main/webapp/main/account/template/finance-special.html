@@ -1,0 +1,32 @@
+<!--周结算-->
+<div ng-controller="FinanceSpecialController">
+    <div class="col-md-2">
+        <div class="list-group">
+            <a ng-repeat="(key, item) in SpecialFinance.nav.items" ng-click="SpecialFinance.nav.selected=key" class="list-group-item" ng-class="{'active':SpecialFinance.nav.selected==key}">{{item.displayName}}</a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <table class="table hms-table border-top">
+            <thead>
+                <tr>
+                    <th class="text-center" width="5%">序号</th>
+                    <th class="{{column.class}}" ng-repeat="column in SpecialFinance.columns" width="{{column.width}}">{{column.displayName}}</th>
+                    <th class="text-center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in SpecialFinance.data">
+                    <td class="text-center">{{(SpecialFinance.pagination.currentPage-1)*SpecialFinance.pagination.pageCount + $index+1}}</td>
+                    <td class="{{column.class}}" ng-repeat="column in SpecialFinance.columns" width="{{column.width}}">{{row[column.field]}}</td>
+                    <td class="text-center">
+                        <!--<button class="btn btn-info btn-xs" ng-show="row.checkstatus == 1" ng-click="confirmSpecialBill(clone(row))">确认金额</button>-->
+                        <button class="btn btn-danger btn-xs" ng-show="row.financestatus == 2 && !row.feedbackIng" ng-click="verifySpecialBill(clone(row))">申诉</button>
+                        <!--<button class="btn btn-default btn-xs" ng-show="row.checkstatus > 1" ng-click="showReadCheck(clone(row))">审核详情</button>-->
+                        <button class="btn btn-default btn-xs" ng-click="showSpecialBillDetail(clone(row))">账期明细</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="SpecialFinance.pagination.totalItems" ng-model="SpecialFinance.pagination.currentPage" items-per-page="SpecialFinance.pagination.pageCount" max-size="SpecialFinance.pagination.maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="SpecialFinance.pagination.pageChanged()"></pagination>
+    </div>
+</div>

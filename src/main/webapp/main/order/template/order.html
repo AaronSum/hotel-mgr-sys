@@ -1,0 +1,32 @@
+<div ng-app="orderApp" ng-controller="orderController">
+	<ul class="nav nav-tabs hms-body-nav">
+	  <li role="presentation" ng-repeat="(key, item) in navOrders" ng-class="{'active':active==key}"><a  ng-click="setActive(key)">{{item.displayName}}</a></li>
+	</ul>	<!-- sub view -->
+	 <div class="hms-order-view">	 
+		<div class="table-responsive">
+			 <table class="table hms-table">
+			 	<thead>
+			 		<tr>
+			 			<th class="text-center" ng-repeat="item in columns" width="{{item.width}}">{{item.displayName}}</th>
+			 			<th class="text-center">操作</th>
+			 		</tr>
+			 	</thead>
+			 	<tbody>
+			 		<tr ng-repeat="row in rowsData">
+			 			<td class="text-center" ng-repeat="item in columns" width="{{item.width}}">{{row[item.field]}}</td>
+			 			<td class="text-center">
+			 				<button class="btn btn-primary btn-xs" ng-click="showMoreInfo(row.otaOrderId)" title="更多订单信息">更多</button>
+			 				<button class="btn btn-danger btn-xs" ng-if="row.orderStatus == 120 && row.spreadUser == user.id" ng-click="doModify(row)">修改</button>
+			 			</td>
+			 		</tr>
+			 		<tr ng-if="!rowsData || rowsData.length==0">
+			 			<td class="text-center" colspan="{{columns.length+1}}">
+			 				暂无订单数据
+			 			</td>
+			 		</tr>
+			 	</tbody>
+			 </table>
+		</div>
+		<pagination class="pull-right" previous-text="前一页" next-text="后一页" first-text="首页" last-text="尾页" total-items="totalItems" ng-model="currentPage" items-per-page="pageCount" max-size="maxSize" class="pagination-md" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()"></pagination>
+	</div>
+</div>

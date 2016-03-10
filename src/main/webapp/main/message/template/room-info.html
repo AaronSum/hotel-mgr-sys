@@ -1,0 +1,135 @@
+<div ng-controller="roomInfoController">
+	<div class="memo-contrainer-bottom" hms-Affix>
+		<div class="row">
+			<div class="col-md-6">
+			<h3 class="title">{{roomType.name}}房型设置</h3>
+			</div>
+			<div class="col-md-offset-3 col-md-3">
+				<div class="btn btn-success  btn-danger" ng-show="!readOnly" ng-click="save()">
+					<i class="glyphicon glyphicon-save"></i>
+					保存
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+		<form name="roomInfoForm">
+			<div class="col-md-offset-1 col-md-11 memo-contrainer">
+				<p class="memo">房间大概面积(必填<b style="color:red">*</b>)</p>
+				<div class="row">
+					<div class="col-md-3">
+					    <input type="type" class="form-control hms-input" id="maxarea" ng-model="roomTypeInfo.maxArea" maxlength="5">
+					</div>
+					<div class="col-md-2"><small>平方米</small></div>
+				</div>
+				<br/>
+				<p class="memo">床型(必填<b style="color:red">*</b>)</p>
+				<div class="row">
+					<div class="col-md-3">
+						<button type="button" class="btn btn-success hms-select select" ng-model="roomTypeInfo.bedType" data-animation="am-flip-x" bs-options="node.id as node.name for node in bedTypes" bs-select placeholder="请选择" max-length-html="个被选中" allText="全部" noneText="无">
+					    </button>
+					</div>
+					<div class="col-md-1">
+						<small>尺寸</small>
+					</div>
+					<div class="col-md-2" ng-repeat="item in bedSize">
+						<button type="button" class="btn btn-success hms-select select" ng-model="item.id" data-animation="am-flip-x" bs-options="node.id as node.name for node in sizeTypes" bs-select placeholder="请选择" max-length-html="个被选中" allText="全部" noneText="无">
+					    </button>
+					</div>
+				</div>
+				<br/>
+				<p class="memo">客房普通配套设施:</p>
+				<div class="row memo-contrainer">
+					<div class="col-md-3" ng-repeat="facility in roomTypeNormalFacilities">
+						<label class="btn btn-success" for="roomTypeNormalFacilities_{{$index}}" ng-class="{true: 'active'}[facility.isExit]">
+							{{facility.facName}}
+							<input type="checkbox" id="roomTypeNormalFacilities_{{$index}}" ng-model="facility.isExit" style="display:none;"/>
+							<i class="glyphicon glyphicon-ok" ng-show="facility.isExit"></i>
+						</label>
+					</div>
+				</div>
+				<br/>
+				<p class="memo">卫浴类型(必填<b style="color:red">*</b>):</p>
+				<div class="row memo-contrainer">
+					<div class="col-md-3" ng-repeat="facility in roomTypeBathroomFacilities">
+						<label class="btn btn-success" for="roomTypeBathroomFacilities_{{$index}}" ng-class="{true: 'active'}[facility.isExit]">
+							{{facility.facName}}
+							<input type="checkbox" id="roomTypeBathroomFacilities_{{$index}}"  ng-change="selectedBathroomFacilities(facility.id)" ng-model="facility.isExit" style="display:none;"/>
+							<i class="glyphicon glyphicon-ok" ng-show="facility.isExit"></i>
+						</label>
+					</div>
+				</div>
+				<br/>
+				<p class="memo">客房增值配套设施:</p>
+				<div class="row memo-contrainer">
+					<div class="col-md-3" ng-repeat="facility in roomTypeOtherFacilities">
+						<label class="btn btn-success" for="roomTypeOtherFacilities_{{$index}}" ng-class="{true: 'active'}[facility.isExit]">
+							{{facility.facName}}
+							<input type="checkbox" id="roomTypeOtherFacilities_{{$index}}" ng-model="facility.isExit" style="display:none;"/>
+							<i class="glyphicon glyphicon-ok" ng-show="facility.isExit"></i>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-offset-1 col-md-11 memo-contrainer">
+				<div>
+					<p class="memo">照片</p>
+					<p class="memo">主展图(必填<b style="color:red">*</b>)</p>
+					<div class="row">
+						<div class="col-md-4">
+							<hms-upload image="defImg"></hms-upload>
+						</div>
+					</div>
+					<div class="row">
+						<div class="pull-left col-md-4" ng-repeat=" preview in defImg.previews track by $index">
+							<div class="img-preview-hotel">
+								<img ng-show="preview" ng-src="{{preview}}" hms-imgload/>
+								<div class="fileUpload_delete_btn">
+									<button class="btn btn-success radius-3" ng-show="preview" ng-click="delHotelInfoPic(defImg, defImg.keys[$index])">删除</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p class="memo">床(最多上传三张图片)</p>
+					<div class="row">
+						<div class="col-md-4">
+							<hms-upload image="bedImg"></hms-upload>
+						</div>
+					</div>
+					<div class="row">
+						<div class="pull-left col-md-4" ng-repeat="preview in bedImg.previews track by $index">
+							<div class="img-preview-hotel">
+								<img ng-show="preview" ng-src="{{preview}}" hms-imgload/>
+								<div class="fileUpload_delete_btn">
+									<button class="btn btn-success radius-3" ng-show="preview" ng-click="delHotelInfoPic(bedImg, bedImg.keys[$index])">删除</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p class="memo">卫生间(最多上传三张图片)</p>
+					<div class="row">
+						<div class="col-md-4">
+							<hms-upload image="toiletImg"></hms-upload>
+						</div>
+					</div>
+					<div class="row">
+						<div class="pull-left col-md-4" ng-repeat=" preview in toiletImg.previews track by $index">
+							<div class="img-preview-hotel">
+								<img ng-show="preview" ng-src="{{preview}}" hms-imgload/>
+								<div class="fileUpload_delete_btn">
+									<button class="btn btn-success radius-3" ng-show="preview" ng-click="delHotelInfoPic(toiletImg, toiletImg.keys[$index])">删除</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		</div>
+	</div>
+</div>

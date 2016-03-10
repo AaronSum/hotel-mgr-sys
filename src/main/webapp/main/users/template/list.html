@@ -1,0 +1,138 @@
+<div class="container-fluid user-i2dimcode" ng-hide="modifyPwdObj.isModifyFlag">
+	<div class="col-md-4 i2dimcode" ng-repeat="user in userList">
+		<div class="panel panel-default i2dimcode-panel">
+			<div class="panel-body hms-user-i2dimcode">
+				<div class="i2dimcode-container">
+					<div class="pull-left i2dimcode-img" ng-if="RULE_CODE=='A'">
+						<img alt="{{user.tag}}" user-i2dimcode code="{{user.content}}" tag="{{user.tag}}">
+					</div>
+					<div ng-if="RULE_CODE=='A'">
+						<div class="pull-left i2dimcode-info">
+							<div class="i2dimcode-info-name">{{user.name || "无昵称"}}</div>
+							<hr/>
+							<div class="i2dimcode-info-loginname">{{user.loginname}}</div>
+							<div class="i2dimcode-event">
+								<div>
+									<a ng-click="modifyPwdObj.changeModifyFlag(user.loginname)">修改密码</a>
+								</div>
+								<a ng-click="goToPrintPage(user.content, user.tag)">打印二维码</a>
+								<div ng-if="user.loginname!=group.regphone" >
+									<a ng-click="unbindPhone(user)">删除用户</a>
+								</div>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="i2dimcode-edit" ng-click="modifyHotelUser.showModifyHotelUserPanel(user.name, user.loginname, user.tag)"></div>
+						</div>
+					</div>
+					<div ng-if="RULE_CODE=='B'">
+						<div class="pull-left i2dimcode-info">
+							<div class="i2dimcode-info-name">&nbsp</div>
+							<div>{{user.loginname}}</div>
+							<div class="i2dimcode-event">
+								<div>
+									<a ng-click="modifyPwdObj.changeModifyFlag(user.loginname)">修改密码</a>
+								</div>
+								<div ng-if="user.loginname!=group.regphone" >
+									<a ng-click="unbindPhone(user)">删除用户</a>
+								</div>
+							</div>
+						</div>
+						<div class="pull-right">
+							<div class="i2dimcode-edit-b"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid" ng-show="modifyPwdObj.isModifyFlag && !modifyHotelUser.showModifyHotelUserPanelFlag">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row" ng-show="modifyPwdObj.isModifyHotelManager">
+						<label for="oldPwd" class="col-md-2 control-label">旧密码：</label>
+					    <div class="col-md-10">
+					      <input type="password" id="oldPwd" class="form-control" placeholder="旧密码" required ng-model="modifyPwdObj.oldPwd">
+					    </div>
+					</div>
+					<br/>
+					<div class="row">
+						<label for="newPwd" class="col-md-2 control-label">新密码：</label>
+					    <div class="col-md-10">
+					      <input type="text" id="newPwd" class="form-control" placeholder="新密码" required ng-model="modifyPwdObj.newPwd">
+					    </div>
+					</div>
+					<br/>
+					<div class="row">
+					<div class="col-md-offset-4  col-md-2">
+						<div class="btn btn-default" ng-click="modifyPwdObj.cancel()">
+							<i class="glyphicon glyphicon-share-alt"></i>
+							取消
+						</div>
+						</div>
+						<div class="col-md-2" ng-click="modifyPwdObj.modifyPwd()">
+							<div class="btn btn-success">
+								<i class="glyphicon glyphicon-save"></i>
+								保存
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid" ng-show="modifyHotelUser.showModifyHotelUserPanelFlag">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<label for="name" class="col-md-2 control-label">昵称：</label>
+					    <div class="col-md-10">
+					      <input type="text" id="name" class="form-control" placeholder="昵称" required ng-model="modifyHotelUser.modifyObj.name">
+					    </div>
+					</div>
+					<br/>
+					<div class="row" ng-if="RULE_CODE=='A'">
+						<label class="col-md-2 control-label" >解绑二维码：</label>
+					    <div class="col-md-10">
+						    <div class="btn-group hms-modify-user-radio">
+						        <label class="btn btn-success" ng-model="modifyHotelUser.modifyObj.isUnbindFlag" btn-radio="true" uncheckable>是</label>
+						        <label class="btn btn-success" ng-model="modifyHotelUser.modifyObj.isUnbindFlag" btn-radio="false" uncheckable>否</label>
+						    </div>
+					    </div>
+					</div>
+					<br/>
+					<div class="row" ng-if="user.loginname === group.regphone && RULE_CODE=='A'" ng-show="!modifyHotelUser.modifyObj.isUnbindFlag">
+					  <div class="form-group">
+				  		<label for="hms_modify_user_qrcode_select" class="col-md-2 control-label">绑定二维码：</label>
+					    <div class="col-md-10">
+						    <button type="button" class="btn btn-success hms-select select modify-select" ng-model="modifyHotelUser.modifyObj.qrcode" data-animation="am-flip-x" bs-options="qrcode.tag as qrcode.tag for qrcode in modifyHotelUser.availableQrcodeList" bs-select placeholder="---请选择---" max-length-html="个被选中" allText="全部" noneText="无">
+						    </button>
+					    </div>
+					  </div>
+					</div>
+					<br/>
+					<div class="row">
+					<div class="col-md-offset-4  col-md-2">
+						<div class="btn btn-default" ng-click="modifyHotelUser.cancel()">
+							<i class="glyphicon glyphicon-share-alt"></i>
+							取消
+						</div>
+						</div>
+						<div class="col-md-2" ng-click="modifyHotelUser.saveModifyData()">
+							<div class="btn btn-success">
+								<i class="glyphicon glyphicon-save"></i>
+								保存
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
